@@ -1,0 +1,13 @@
+- General
+	- both web and mobile
+	- Reset filters/view
+	- Start zoomed out view
+- Filters
+	- Area
+	- Time (brush?, calendar?, last x?)
+- Map
+	- Similar to crimemap
+	- Heatmap layer
+	- Tooltip highlight for event box
+- Summary (descriptives)
+- Chart: crime over time
