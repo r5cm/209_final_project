@@ -1,19 +1,22 @@
 body {
   text-align: center;
-}
+	}
 
 .grid {
 	display: grid;
 	grid-template-columns: 15% auto;
 	grid-template-rows: 15% 1fr 1fr 15%;
-	grid-gap: 0.5em;
 	width: 100vw;
-	height: 100vh;
+	height: 100vh; 
 }
 
 header, .filter, .summary, .map, .sum_chart, .t_series {
-	background: #ccc;
-	padding: 0.5em;
+	background: #003262; /* #ed5, #0072b9 */ 
+  padding: 0.5em;
+  color: #fff;
+  font-family: Georgia;
+  border-bottom: 0.1em solid white;
+  border-left: 0.1em solid white;
 }
 
 header {
@@ -46,18 +49,11 @@ header {
 	grid-column: 2;
 }
 
+rect:hover {
+  fill: orange;
+}
 
-/* #map { */
-	/* border-top: 1px solid black; */
-	/* border-left: 1px solid black; */
-	/* border-bottom: 1px solid black; */
-	/* border-right: 1px solid black; */
-	/* width: 100%; */
-	/* height: 100%; */
-	
-	/* position: relative; */
-	/* overflow: hidden; */
-	/* margin: 0; */
-	/* padding: 0; */
-/* } */
-
+svg {
+  width:auto;
+  height: auto;
+}
