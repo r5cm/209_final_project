@@ -19,11 +19,37 @@ var gunIcon = L.icon({
             popupAnchor:  [-3, -76]
         });
 
-// miscellaneous functions
+// Capitalize first letter function
 function capitalizeFirstLetter(string) {
   var first = string.charAt(0).toUpperCase();
   var rest = string.slice(1).toLowerCase();
   return first + rest
+}
+
+// Draw markers function
+var draw_markers = function(data) {
+  markersGroup = L.layerGroup().addTo(map);
+  for(var i=0; i < data.length; i++) {
+    // Get vars
+    var coords = data[i]['LatLng'].replace('(', '').replace(')', '').split(', ');
+    var lat = parseFloat(coords[0]);
+    var long = parseFloat(coords[1]);
+    var date = '<b>Date: </b>' + data[i]['Date']
+    
+    // Create points
+    if (i % 2 == 0) {
+      var point = L.marker([lat, long], {icon: burglarIcon});  
+    } else {
+      var point = L.marker([lat, long], {icon: gunIcon, rotationAngle: 45});  
+    }        
+    
+    //Create popup
+    var cat = '<b>Category: </b>' + capitalizeFirstLetter(data[i]['Category'])
+    var disp = '<b>Disposition: </b>' + capitalizeFirstLetter(data[i]['Disposition'])
+    var pu_content = '<p>'+date+'<br />'+cat+'<br />'+disp+'</p>'
+    point.bindPopup(pu_content)
+          .addTo(markersGroup);
+  }
 }
 
 // View without data
@@ -36,59 +62,59 @@ initializePage();
 
 // Add data
 d3.csv(mm_geodata, function(data) {
-    console.log(data);
-  
-    // Get unique crime categories
-    var categories = ['All'];
-    for (var i=0; i < data.length; i++) {
-        var category = data[i]['Category'];
-        if(categories.indexOf(category) < 0) {
-            categories.push(category);
-        };
+  console.log("Data:");
+  console.log(data);
+  draw_markers(data);
+
+  // Get unique crime categories
+  var categories = ['All'];
+  for (var i=0; i < data.length; i++) {
+    var category = data[i]['Category'];
+    if(categories.indexOf(category) < 0) {
+        categories.push(category);
     };
-    console.log("Categories:");
-    console.log(categories);
-  
-    // Add crime category menu
-    d3.select("body")
-      .append("select")
+  };
+  console.log("Categories:");
+  console.log(categories);
+
+  // Add crime category menu
+  d3.select("#divfilter")
+    .append("p")
+      .text("Category")
+      .attr("align", "left")
+    .append("select")
       .attr("id", "crimeSelector")
       .selectAll("option")
       .data(categories)
       .enter()
       .append("option")
-      .text(d => d)
-      .attr("value", d => d);
-//     var crimeFilter = function(d, selected) {
-        
-//     }
-//     d3.select("#crimeSelector")
-//       .on("change", function(d) {
-//           selected = this['value'];
-//           dateMenuFilter(data, selected);
-//           // main(dataFiltered);
-//         });
+        .attr("class", "cat_option")
+        .text(d => capitalizeFirstLetter(d))
+        .attr("value", d => d)
+        .attr("color", "black");
+
+  // Filter data based on crime category
+  var filter_cat = function() {
+    if (map.hasLayer(markersGroup)) {
+      markersGroup.clearLayers();
+    };
+    var selected = d3.select(this).property('value');
+    console.log(selected);
+  };
+  d3.select('#crimeSelector')
+    .on("change", filter_cat);
   
-    // Draw markers
-    for(var i=0; i < data.length; i++) {
-        // Get vars
-        var coords = data[i]['LatLng'].replace('(', '').replace(')', '').split(', ');
-        var lat = parseFloat(coords[0]);
-        var long = parseFloat(coords[1]);
-        var date = '<b>Date: </b>' + data[i]['Date']
-        
-        // Create points
-        if (i % 2 == 0) {
-          var point = L.marker([lat, long], {icon: burglarIcon});  
-        } else {
-          var point = L.marker([lat, long], {icon: gunIcon, rotationAngle: 45});  
-        }        
-        
-        //Create popup
-        var cat = '<b>Category: </b>' + capitalizeFirstLetter(data[i]['Category'])
-        var disp = '<b>Disposition: </b>' + capitalizeFirstLetter(data[i]['Disposition'])
-        var pu_content = '<p>'+date+'<br />'+cat+'<br />'+disp+'</p>'
-        point.bindPopup(pu_content)
-             .addTo(map);
-    } 
+
+
+  //     var crimeFilter = function(d, selected) {
+          
+  //     }
+  //     d3.select("#crimeSelector")
+  //       .on("change", function(d) {
+  //           selected = this['value'];
+  //           dateMenuFilter(data, selected);
+  //           // main(dataFiltered);
+  //         });
+  
+     
 });

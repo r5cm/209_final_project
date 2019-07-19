@@ -19,6 +19,10 @@ header, .filter, .summary, .map, .sum_chart, .t_series {
   border-left: 0.1em solid white;
 }
 
+#crimeSelector {
+	color: black;
+}
+
 header {
 	grid-row: 1;
 	grid-column: 1 / 3;
