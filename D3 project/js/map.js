@@ -69,6 +69,7 @@ initializePage();
 
 // Add data
 d3.csv(mm_geodata, function(data) {
+  
   // Parse data
   var extract_time = function(date) {
     var time = date.match(/ .*/gm);
@@ -84,6 +85,24 @@ d3.csv(mm_geodata, function(data) {
   
   // Draw markers
   draw_markers(data);
+
+  //--------------
+  // Date filter
+  //--------------
+
+  // Add input menu
+  d3.select('#divfilter')
+    .append('input')
+      .attr('type', 'text')
+      .attr('name', 'datetimes')
+  $('#divfilter').daterangepicker({
+    "timePicker24Hour": true,
+    "timePickerIncrement": 30,
+    "startDate": "07/14/2019",
+    "endDate": "07/20/2019"
+  }, function(start, end, label) {
+    console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+  });
 
   //--------------
   // Crime filter
@@ -141,13 +160,5 @@ d3.csv(mm_geodata, function(data) {
 
   d3.select('#crimeSelector')
     .on("change", filter_cat);
-  
-  // -----------
-  // Date filter
-  // -----------
 
-  // Date ranges
-  
-  
-     
 });
