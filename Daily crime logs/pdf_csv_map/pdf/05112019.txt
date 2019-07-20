@@ -1,0 +1,112 @@
+                                                                                         DAILY CRIME LOG
+
+                                                                                  05/11/2019     to      05/11/2019
+
+Date/Time         Case #     Category            Incident Description   Location                      Synopsis                                                       Disposition
+
+5/11/19   0:18               TRAFFIC STOP        TRAFFIC STOP           2516 WARRING ST                                                                              WARNING ISSUED
+
+5/11/19   0:35               LARCENY/THEFT       PETTY THEFT -REPORT    EVANS HALL                                                                                   CLOSED
+
+5/11/19   0:41    19-01270   FIRE                FIRE OF UNKNOWN TYPE   CLARK KERR CAMPUS             (MW-23-S) REPORTS FIRE TO HIS TEAL 1974 VOLKSWAGEN BUS         UNDER
+                                                                                                      170JVO, N/W PARKING LOT CKC. BFD RESPONDED AND                 INVESTIGATION
+                                                                                                      EXTINGUISHED.
+
+
+5/11/19   0:50               TRAFFIC STOP        TRAFFIC STOP           BANCROFT/LANE                                                                                WARNING ISSUED
+
+5/11/19   0:56    19-01271   LARCENY/THEFT       PETTY THEFT -BIKE      BIRGE HALL                    OCC 05/10/2019 1410 15/11/2019 0045                            UNDER
+                                                 REPORT                                               (MW-23-S) REPORTS THEFT OF HIS GRAY CANNON DALE F400 MENS      INVESTIGATION
+                                                                                                      HYBRYD BICYCLE, BIRGE HALL.
+                                                                                                      LOSS OF $120
+
+5/11/19   1:42               SUSPICIOUS EVENT    SUSPICIOUS PERSON      405 RED OAK AVE                                                                              CLOSED
+
+
+5/11/19   2:50    19-01272   DRIVING UNDER THE   MISDEMEANOR DRUNK      2495 BANCROFT WAY             SURRELL, BRYANT (MB-38-O) ARRESTED FOR MISDEMEANOR             CLOSED BY ARREST
+                             INFLUENCE           DRIVING                                              DRUNK DRIVING AND DRIVING WITH A BAC GREATER THAN .O8%,
+                                                                                                      2495 BANCROFT AVE. TOT BPD JAIL.
+
+                                                                                                      RED 1995 NISSAN SENTRA, 5AZL492, TOW FOR INCIDENT TO ARREST.
+                                                                                                      EAST BAY TOW.
+
+
+5/11/19   5:19               WELFARE CHECK       CHECK WELFARE- 911     FOOTHILL-4                                                                                   CLOSED
+                                                 CALL
+
+5/11/19   7:06    19-01273   MISC. SERVICE       PROPERTY DAMAGE        UPPER SPROUL PLAZA            OCCURRED: 05/11/19 0701 HOURS                                  UNDER
+                                                                                                      (MB-54-E) REPORTS PROPERTY DAMAGE TO N/E HAND RAIL, UPPER      INVESTIGATION
+                                                                                                      SPROUL PLAZA.
+
+5/11/19   8:27               SUSPICIOUS EVENT    SUSPICIOUS PERSON      RFS-201                                                                                      CLOSED
+
+
+5/11/19   9:13               WELFARE CHECK       CHECK WELFARE- 911     BARROWS HALL                                                                                 CLOSED
+                                                 CALL
+
+5/11/19   11:04   19-01274   LARCENY/THEFT       PETTY THEFT -REPORT    605 OHLONE AVE                OCCD 5/10/19 1830 - 5/11/19 0730 HRS                           UNDER
+                                                                                                      (MW-42-E) REPORTS THE THEFT OF HIS STROLLER, 605 OHLONE AVE-   INVESTIGATION
+                                                                                                      UVA. RECOVERED DAMAGED AT SCENE.
+
+
+
+
+                                                                                                                                              1
+Date/Time         Case #     Category            Incident Description   Location                 Synopsis                                                         Disposition
+
+5/11/19   11:15              OTHER ASSAULTS      BATTERY                MLK                                                                                       CLOSED
+
+
+5/11/19   13:43              OUTSIDE ASSIST      OUTSIDE ASSIST - BPD   2450 BLK TELEGRAPH                                                                        CLOSED
+
+5/11/19   14:03              ALL OTHER           RULE VIOLATION         HAAS BUSINESS SCHOOL                                                                      CLOSED
+                             OFFENSES
+
+5/11/19   14:09   19-01275   MEDICAL EVENT       INJURY OR ILLNESS      PEOPLES PARK             OCCD 5/11/19, 1409 HRS                                           CLOSED
+                                                                                                 (MW-27-O) VICTIM OF DRUG RELATED ILLNESS, PEOPLES PARK. TO
+                                                                                                 ABH VIA BFD.
+
+5/11/19   14:45              WELFARE CHECK       CHECK WELFARE- 911     EVANS HALL                                                                                CLOSED
+                                                 CALL
+
+5/11/19   14:50   19-01276   MEDICAL EVENT       INJURY OR ILLNESS      REC SPRT FAC             OCCD 5/11/19, 1450 HRS                                           CLOSED
+                                                                                                 (FA-22-S) VICTIM OF ILLNESS, RSF. BFD RESPONDED, VICTIM SOUGHT
+                                                                                                 OWN MEDICAL AT TANG CENTER.
+
+5/11/19   14:59   19-01277   MEDICAL EVENT       INJURY OR ILLNESS      PEOPLES PARK             OCCD 5/11/19, 1459 HRS                                           CLOSED
+                                                                                                 (MW-37-O) VICTIM OF ILLNESS, PEOPLES PARK. TO ABH VIA BFD.
+
+5/11/19   15:10              PEDESTRIAN STOP     SUSPECT STOP           PEOPLES PARK                                                                              FIELD
+                                                                                                                                                                  IDENTIFICATION
+                                                                                                                                                                  CARD
+
+5/11/19   15:14   19-01278   PENAL CODE          PENAL CODE VIOLATION   PEOPLES PARK             OCCD 5/11/19, 1514 HRS                                           CLOSED BY ARREST
+                             VIOLATION                                                           TIMMS, JESSE (MW-36-O) ARRESTED FOR DIGGING ON PRIVATE
+                                                                                                 LANDS, BATTERY AGAINST A PEACE OFFICER AND RESISTING
+                                                                                                 ARREST, PEOPLES PARK. TO ABH VIA PPLUS FOR PSYCHIATRIC
+                                                                                                 EVALUATION WITH A CRIMINAL HOLD.
+
+
+5/11/19   15:37              WELFARE CHECK       WELFARE CHECK          STRUCTURE C                                                                               CLOSED
+
+5/11/19   16:31              WELFARE CHECK       WELFARE CHECK          UNKNOWN                                                                                   CLOSED
+
+5/11/19   20:38              PEDESTRIAN STOP     SUSPECT STOP           DWINELLE HALL                                                                             CLOSED
+
+5/11/19   21:01   19-01279   LARCENY/THEFT       AUTO BURGLARY          GOLDEN BEAR REC CENTER   OCCURED: 05/11/19 1820-2100.                                     UNDER
+                                                 -REPORT                                         (FW-43-E) REPORTS AUTO BURGLARY VIA WINDOW SMASH TO HER          INVESTIGATION
+                                                                                                 WHITE 2013 INFINITI JX35, 7BZP646, GOLDEN BEAR REC CENTER, NO
+                                                                                                 LOSS.
+
+5/11/19   21:25   19-01280   FIRE                FIRE OF UNKNOWN TYPE   CORY HALL                OCCURED: 05/11/19 2120                                           UNDER
+                                                                                                 FIRE CAUSED BY LITHIUM BATTERY, CORY HALL ROOM 337D. BFD,        INVESTIGATION
+                                                                                                 AND FIRE MARSHAL RESPONDED.
+
+5/11/19   21:59              MAINTENANCE ISSUE   CAMPUS CONDITION       NORTHGATE HALL                                                                            CLOSED
+                                                 -SECURITY
+
+
+
+
+                                                                                                                                          2
+

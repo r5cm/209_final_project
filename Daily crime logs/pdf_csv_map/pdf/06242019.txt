@@ -1,0 +1,173 @@
+                                                                                        DAILY CRIME LOG
+
+                                                                                  06/24/2019      to      06/24/2019
+
+Date/Time         Case #     Category            Incident Description   Location                       Synopsis                                              Disposition
+
+6/24/19   0:36               SUSPICIOUS EVENT    SUSPICIOUS VEHICLE     SIGNPOST-20                                                                          WARNING ISSUED
+
+
+6/24/19   0:43               SUSPICIOUS EVENT    SUSPICIOUS VEHICLE     SIGNPOST-16                                                                          CLOSED
+
+
+6/24/19   0:56               SUSPICIOUS EVENT    SUSPICIOUS VEHICLE     LHS VISTA LOT                                                                        WARNING ISSUED
+
+
+6/24/19   3:48               MAINTENANCE ISSUE   CAMPUS CONDITION       CLARK KERR CAMPUS                                                                    CLOSED
+                                                 -GROUNDS
+
+6/24/19   3:53               MAINTENANCE ISSUE   CAMPUS CONDITION       CKC-25                                                                               CLOSED
+                                                 -GROUNDS
+
+6/24/19   7:53               DISORDERLY          LODGING                1951 OXFORD LOT                                                                      CLOSED
+                             CONDUCT
+
+6/24/19   8:01               TRAFFIC STOP        TRAFFIC STOP           BANCROFT/ESHLEMAN                                                                    CLOSED BY CITATION
+                                                                        HALL
+
+6/24/19   9:00               VEHICLE CODE        VEHICLE CODE           UVA-138                                                                              CLOSED
+                             VIOLATION           VIOLATION
+
+6/24/19   9:06               ALARM               AUTO ALARM             UNIVERSITY VILLAGE                                                                   CLOSED
+                                                                        ALBANY
+
+6/24/19   9:32    19-01653   MISC. SERVICE       FOUND PROPERTY         ESHLEMAN HALL                  OCCD 06/24/2019 0932 HRS                              UNDER
+                                                                                                       FOUND STEAK KNIFE, ESHLEMAN HALL. TAKEN TO UCPD FOR   INVESTIGATION
+                                                                                                       DESTRUCTION.
+
+6/24/19   9:50               LARCENY/THEFT       PETTY THEFT -BIKE      REC SPRT FAC                                                                         CLOSED
+                                                 REPORT
+
+6/24/19   10:15              PEDESTRIAN STOP     PEDESTRIAN STOP        S/W CORNER PEOPLES PARK                                                              FIELD
+                                                                                                                                                             IDENTIFICATION
+                                                                                                                                                             CARD
+
+6/24/19   10:57              SUSPICIOUS EVENT    SUSPICIOUS             DWINELLE HALL                                                                        CLOSED
+                                                 CIRCUMSTANCE -
+                                                 REPORT
+
+
+
+
+                                                                                                                                            1
+Date/Time         Case #     Category            Incident Description   Location                 Synopsis                                                          Disposition
+
+6/24/19   11:18              ALL OTHER           RULE VIOLATION         WHEELER HALL                                                                               CLOSED
+                             OFFENSES
+
+6/24/19   12:04              TRAFFIC STOP        TRAFFIC STOP           BANCROFT/BARROWS                                                                           WARNING ISSUED
+
+6/24/19   12:13              TRAFFIC STOP        TRAFFIC STOP           DURANT/TELEGRAPH                                                                           CLOSED BY CITATION
+
+
+6/24/19   12:19   19-01654   MISC. SERVICE       FOUND PROPERTY         DWIGHT IFO PEOPLE PARK   OCCURRED: 06/24/19 1219 HOURS                                     UNDER
+                                                                                                 FOUND GREEN BIANCHI BICYCLE, DWIGHT IFO PEOPLE`S PARK. TO         INVESTIGATION
+                                                                                                 UCPD FOR SAFEKEEPING
+
+6/24/19   12:18   19-01655   LARCENY/THEFT       PETTY THEFT -BIKE      REC SPRT FAC             OCCD 06/24/2019 0948 HRS                                          UNDER
+                                                 REPORT                                          (MA-35-O) REPORTS THE THEFT OF HIS DARK BLUE LINUS MENS           INVESTIGATION
+                                                                                                 BICYCLE WITH A CHROME METAL BASKET, HORN AND LIGHT BRO
+                                                                                                 LEATHER SADDLE. LOSS $800.
+
+                                                                                                 SUSPECT - MH, 30`S, DARK LONG HAIR BEARD, BLK JACKET
+                                                                                                 W/SILVER BUTTONS, BLK TSHIRT, JEANS, LEATHER BOOTS
+
+6/24/19   12:20              TRAFFIC STOP        TRAFFIC STOP           DWI TELE                                                                                   WARNING ISSUED
+
+
+6/24/19   12:53              VEHICLE CODE        VEHICLE CODE           DONNER LAB                                                                                 CLOSED
+                             VIOLATION           VIOLATION
+
+6/24/19   13:23              PEDESTRIAN STOP     PEDESTRIAN STOP        CESAR CAHVEZ BREEZEWAY                                                                     FIELD
+                                                                                                                                                                   IDENTIFICATION
+                                                                                                                                                                   CARD
+
+6/24/19   13:41              PEDESTRIAN STOP     PEDESTRIAN STOP        DWINELLE                                                                                   CANCELLED
+
+6/24/19   13:41              PEDESTRIAN STOP     SUSPECT STOP           DWINELLE HALL                                                                              CLOSED
+
+6/24/19   14:37   19-01656   MISC. SERVICE       CIVIL ADVICE           CAMPUS                   OCCURRED: 2014-2018                                               UNDER
+                                                                                                 (FW-27-E) GIVEN CIVIL ADVICE REGARDING FAEBOOK POSTING            INVESTIGATION
+
+
+6/24/19   15:06   19-01657   FORGERY AND         FRAUDULENT USE OF      EAST ASIAN LIBRARY       OCCD 06/17/2019 1200 HRS                                          UNDER
+                             COUNTERFEITING      CREDIT CARD                                     (FO-A-E) REPORTS FRAUDULENT USE OF HER UC BLU CARD, EAST          INVESTIGATION
+                                                                                                 ASIAN LIBRARY. NO LOSS.
+
+6/24/19   16:18   19-01658   ANIMAL CASE         ANIMAL BITE            UNIVERSITY VILLAGE       OCCURRED: 1533 HOURS                                              UNDER
+                                                                        ALBANY                   (FH-45-E) VICTIM OF DOG BITE, IFO UVA-154, APT 301. VICTIM WILL   INVESTIGATION
+                                                                                                 SEEK OWN MEDIAL TREATMENT.
+
+6/24/19   16:29   19-01659   DISORDERLY          LODGING                UVA-119                  OCC: 06/11/19 - 06/24/19                                          UNDER
+                             CONDUCT                                                             (FWA-E) REPORTS ILLEGAL LODGING, UVA-119, APT 416                 INVESTIGATION
+
+6/24/19   16:37              MAINTENANCE ISSUE   CAMPUS CONDITION       ANNA HEAD BLDG C                                                                           CLOSED
+                                                 -SECURITY
+
+6/24/19   16:47   19-01660   MISC. SERVICE       CIVIL ADVICE           CAMPUS                   OCCD 06/24/2019 1647 HRS                                          UNDER
+                                                                                                 (FW-43-O) PROVIDED CIVIL ADVICE REGARDING HER HUSBAND             INVESTIGATION
+                                                                                                 LEAVING WITH THEIR CHILDREN, ORANGE COUNTY.
+
+
+
+
+                                                                                                                                            2
+Date/Time         Case #     Category            Incident Description   Location                 Synopsis                                                        Disposition
+
+6/24/19   17:17              PEDESTRIAN STOP     PEDESTRIAN STOP        LBNL BLACKBERRY GATE                                                                     FIELD
+                                                                                                                                                                 IDENTIFICATION
+                                                                                                                                                                 CARD
+
+6/24/19   17:28              BIKE STOP           BIKE STOP              HIGHLAND PLACE/RIDGE                                                                     CLOSED BY CITATION
+
+
+6/24/19   18:08              SUSPICIOUS EVENT    SUSPICIOUS PERSON      2120 OXFORD                                                                              FIELD
+                                                                                                                                                                 IDENTIFICATION
+                                                                                                                                                                 CARD
+
+
+6/24/19   18:24   19-01661   ALL OTHER           EXCLUSION FROM         MLK                      OCCURRED: 06/24/19 1847 HOURS                                   CLOSED BY ARREST
+                             OFFENSES            CAMPUS                                          FALLIAS, DELVYN (MW-46-O) ARRESTED FOR VIOLATION OF CAMPUS
+                                                                                                 EXCLUSION ORDER, MLK. TO BPD JAIL.
+
+
+
+6/24/19   18:40              TRAFFIC             ACCIDENT / UNKNOWN     SP-18                                                                                    CLOSED
+                                                 INJURIES
+
+6/24/19   19:18              TRAFFIC STOP        TRAFFIC STOP           PIEDMONT HASTE                                                                           WARNING ISSUED
+
+6/24/19   19:45              WELFARE CHECK       CHECK WELFARE- 911     660 KINKEAD WAY                                                                          CLOSED
+                                                 CALL
+
+
+6/24/19   21:14              MAINTENANCE ISSUE   CAMPUS CONDITION       KROEBER PLAZA                                                                            CLOSED
+                                                 -GROUNDS
+
+6/24/19   21:29              WELFARE CHECK       CHECK WELFARE- 911     UNIT-1 CHRISTIAN                                                                         CLOSED
+                                                 CALL
+
+6/24/19   21:52              OUTSIDE ASSIST      OUTSDE ASSIST BPD      BANCROFT DANA                                                                            CLOSED
+                                                 COVER
+
+6/24/19   22:24   19-01662   MEDICAL EVENT       INJURY OR ILLNESS      REC SPRT FAC             (FZ-29-S) VICTIM OF INJURY, RSF. BFD RESPONDED VICTIM REFUSED   CLOSED
+                                                                                                 TRANSPORT
+
+6/24/19   23:10              MAINTENANCE ISSUE   CAMPUS CONDITION       UNDERHILL LOT                                                                            CLOSED
+                                                 -GROUNDS
+
+
+6/24/19   23:27              PEDESTRIAN STOP     SUSPECT STOP           MEMORIAL STADIUM                                                                         CLOSED
+
+
+6/24/19   23:39              SUSPICIOUS EVENT    SUSPICIOUS             RICHMOND FIELD STATION                                                                   CLOSED
+                                                 CIRCUMSTANCE
+
+
+6/24/19   23:41              MISC. SERVICE       PROPERTY DAMAGE        PEOPLES PARK                                                                             CLOSED
+
+
+
+
+                                                                                                                                          3
+
