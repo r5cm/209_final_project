@@ -95,13 +95,16 @@ d3.csv(mm_geodata, function(data) {
     .append('input')
       .attr('type', 'text')
       .attr('name', 'datetimes')
-  $('#divfilter').daterangepicker({
+      .attr('id', 'datetimes')
+  $('#datetimes').daterangepicker({
+    "timePicker": true,
     "timePicker24Hour": true,
-    "timePickerIncrement": 30,
+    "timePickerIncrement": 15,
     "startDate": "07/14/2019",
     "endDate": "07/20/2019"
   }, function(start, end, label) {
     console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+
   });
 
   //--------------
@@ -136,26 +139,27 @@ d3.csv(mm_geodata, function(data) {
         .attr("color", "black");
 
   // Filter data based on crime category
+  var filter_cat_val;
   var filter_cat = function() {
     // remove markers
     if (map.hasLayer(markersGroup)) {
       markersGroup.clearLayers();
     };
     // create filtered markers
-    var selected = d3.select(this).property('value');
-    console.log("Category selected:")
-    console.log(selected);
-    data_cat = []
-    if (selected == "All") {
+    filter_cat_val = d3.select(this).property('value');
+    console.log("Category selected:");
+    console.log(filter_cat_val);
+    data_cat = [];
+    if (filter_cat_val == "All") {
       draw_markers(data)
     } else {
       for (var i=0; i<data.length; i++) {
-        if (data[i]['Category'] == selected) data_cat.push(data[i]);
-      }
+        if (data[i]['Category'] == filter_cat_val) data_cat.push(data[i]);
+      };
       console.log("Data filtered by category:")
       console.log(data_cat)
       draw_markers(data_cat)
-    }
+    };
   };
 
   d3.select('#crimeSelector')
