@@ -26,6 +26,9 @@ function capitalizeFirstLetter(string) {
   return first + rest
 }
 
+// date-time parser
+
+
 // Draw markers function
 var draw_markers = function(data) {
   markersGroup = L.layerGroup().addTo(map);
@@ -60,11 +63,31 @@ function initializePage() {
 }
 initializePage();
 
+//-------------------------
+// Build view
+//-------------------------
+
 // Add data
 d3.csv(mm_geodata, function(data) {
+  // Parse data
+  var extract_time = function(date) {
+    var time = date.match(/ .*/gm);
+    return time[0].slice(1);
+  }
+  data.forEach(function(d) {
+    d['DateTime'] = d['Date'];
+    d['Date'] = d['Date'].slice(0, 8)
+    d['Time'] = extract_time(d['DateTime'])
+  })
   console.log("Data:");
   console.log(data);
+  
+  // Draw markers
   draw_markers(data);
+
+  //--------------
+  // Crime filter
+  //--------------
 
   // Get unique crime categories
   var categories = ['All'];
@@ -95,26 +118,36 @@ d3.csv(mm_geodata, function(data) {
 
   // Filter data based on crime category
   var filter_cat = function() {
+    // remove markers
     if (map.hasLayer(markersGroup)) {
       markersGroup.clearLayers();
     };
+    // create filtered markers
     var selected = d3.select(this).property('value');
+    console.log("Category selected:")
     console.log(selected);
+    data_cat = []
+    if (selected == "All") {
+      draw_markers(data)
+    } else {
+      for (var i=0; i<data.length; i++) {
+        if (data[i]['Category'] == selected) data_cat.push(data[i]);
+      }
+      console.log("Data filtered by category:")
+      console.log(data_cat)
+      draw_markers(data_cat)
+    }
   };
+
   d3.select('#crimeSelector')
     .on("change", filter_cat);
   
+  // -----------
+  // Date filter
+  // -----------
 
-
-  //     var crimeFilter = function(d, selected) {
-          
-  //     }
-  //     d3.select("#crimeSelector")
-  //       .on("change", function(d) {
-  //           selected = this['value'];
-  //           dateMenuFilter(data, selected);
-  //           // main(dataFiltered);
-  //         });
+  // Date ranges
+  
   
      
 });
