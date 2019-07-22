@@ -3,20 +3,25 @@
   <head>
     <meta charset="utf-8">
     <title>Berkeley Security Advice</title>	
-	
+    <!-- css -->
   	<link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <!-- Leaflet -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
   crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
   integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
   crossorigin=""></script>
-
+    <!-- Others -->
     <script src="js/jquery-1.11.0.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/d3.v4.js"></script>    
-    <script src="js/my-viz.js"></script>
+    <!-- Date range picker -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
   
   </head>
   <body>
@@ -24,7 +29,8 @@
     <div class="grid">
 
       <header>
-        Header
+        <img src="images/Seal.png" class="seal_responsive">
+		UC Berkeley Security Advice
       </header>
 
       <div class="filter", id="divfilter">
@@ -35,21 +41,19 @@
       </div>
 
       <div class="map" id="divmap">
-        Map
       </div>
       <script src="js/map.js"></script>
 
       <div class="sum_chart">
         Summary chart
       </div>
-
+	  <script src="js/summary_table.js"></script>
+	  
       <div class="t_series">
         Time series
       </div>
 
     </div> 
-    
-	<script src="js/my-viz.js"></script>
-	
+    	
   </body>
 </html>

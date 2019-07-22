@@ -10,13 +10,13 @@ var burglarIcon = L.icon({
             iconUrl: burglar_url,
             iconSize:     [14, 30],
             iconAnchor:   [7, 30],
-            popupAnchor:  [-3, -76]
+            popupAnchor:  [-3, -35]
         });
 var gunIcon = L.icon({
             iconUrl: gun_url,
             iconSize:     [14, 30],
             iconAnchor:   [7, 30],
-            popupAnchor:  [-3, -76]
+            popupAnchor:  [-3, -35]
         });
 
 // Capitalize first letter function
@@ -26,6 +26,9 @@ function capitalizeFirstLetter(string) {
   return first + rest
 }
 
+// date-time parser
+
+
 // Draw markers function
 var draw_markers = function(data) {
   markersGroup = L.layerGroup().addTo(map);
@@ -33,14 +36,14 @@ var draw_markers = function(data) {
     // Get vars
     var coords = data[i]['LatLng'].replace('(', '').replace(')', '').split(', ');
     var lat = parseFloat(coords[0]);
-    var long = parseFloat(coords[1]);
+    var lon = parseFloat(coords[1]);
     var date = '<b>Date: </b>' + data[i]['Date']
     
     // Create points
     if (i % 2 == 0) {
-      var point = L.marker([lat, long], {icon: burglarIcon});  
+      var point = L.marker([lat, lon], {icon: burglarIcon});  
     } else {
-      var point = L.marker([lat, long], {icon: gunIcon, rotationAngle: 45});  
+      var point = L.marker([lat, lon], {icon: gunIcon, rotationAngle: 45});  
     }        
     
     //Create popup
@@ -60,11 +63,103 @@ function initializePage() {
 }
 initializePage();
 
+//-------------------------
+// Build view
+//-------------------------
+
 // Add data
 d3.csv(mm_geodata, function(data) {
+  
+  // Parse data
+  var extract_time = function(date) {
+    var time = date.match(/ .*/gm);
+    return time[0].slice(1);
+  }
+  data.forEach(function(d) {
+    d['DateTime'] = d['Date'];
+    d['Date'] = d['Date'].slice(0, 8)
+    d['Time'] = extract_time(d['DateTime'])
+  })
   console.log("Data:");
   console.log(data);
+  
+  // Draw markers
   draw_markers(data);
+
+  // Filter function
+  var category_filter = false;
+  var start_date_filter = false;
+  var end_date_filter = false;
+  var filter_data = function(value, type) {
+    // remove all markers
+    if (map.hasLayer(markersGroup)) {
+      markersGroup.clearLayers();
+    };
+    data_filtered_1 = [];
+    // Set filter values
+    if (type == 'category') {
+		category_filter = value;
+	}
+    if (type == 'date') {
+      start_date_filter = value[0];
+      end_date_filter = value[1];
+    } 
+    // Filter category
+    if (category_filter == "All" || !category_filter) {
+        data_filtered = data;
+    } else {
+      for (var i=0; i<data.length; i++) {
+        if (data[i]['Category'] == value) data_filtered.push(data[i]);
+      };
+    };
+    // Filter date
+    data_filtered_2 = []
+    if (start_date_filter) {
+      console.log("Start date: " + start_date_filter);
+      console.log("End date: " + end_date_filter);
+      for (var i=0; i < data_filtered_1.length; i++) {
+
+      }
+    };
+    
+    // Add filtered markers
+    console.log(data_filtered);
+    draw_markers(data_filtered)
+  };
+
+  //--------------
+  // Date filter
+  //--------------
+
+  // Add input menu
+  d3.select('#divfilter')
+    .append('p')
+    .text("Date-time")
+    .attr('align', 'left')
+  d3.select('#divfilter')
+    .append('input')
+      .attr('type', 'text')
+      .attr('align', 'right')
+      .attr('name', 'datetimes')
+      .attr('id', 'datetimes')
+
+
+  $('#datetimes').daterangepicker({
+    "timePicker": true,
+    "timePicker24Hour": true,
+    "timePickerIncrement": 15,
+    "startDate": "07/14/2019",
+    "endDate": "07/20/2019"
+  }, function(start, end, label) {
+    console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+    start_date = start.format('YYYY-MM-DD');
+    end_date = end.format('YYYY-MM-DD');
+    filter_data([start_date, end_date], 'date');
+  });
+
+  //--------------
+  // Crime filter
+  //--------------
 
   // Get unique crime categories
   var categories = ['All'];
@@ -92,29 +187,16 @@ d3.csv(mm_geodata, function(data) {
         .text(d => capitalizeFirstLetter(d))
         .attr("value", d => d)
         .attr("color", "black");
-
+  
   // Filter data based on crime category
+  var filter_cat_val = "All";
   var filter_cat = function() {
-    if (map.hasLayer(markersGroup)) {
-      markersGroup.clearLayers();
-    };
-    var selected = d3.select(this).property('value');
-    console.log(selected);
+    filter_cat_val = d3.select(this).property('value');
+    console.log("Category selected:");
+    console.log(filter_cat_val);
+    filter_data(filter_cat_val, 'category');
   };
   d3.select('#crimeSelector')
     .on("change", filter_cat);
-  
 
-
-  //     var crimeFilter = function(d, selected) {
-          
-  //     }
-  //     d3.select("#crimeSelector")
-  //       .on("change", function(d) {
-  //           selected = this['value'];
-  //           dateMenuFilter(data, selected);
-  //           // main(dataFiltered);
-  //         });
-  
-     
 });
