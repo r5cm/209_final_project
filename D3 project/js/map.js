@@ -1,7 +1,6 @@
 // Data sources
 var map_link = "https://api.tiles.mapbox.com/v4/mapbox.streets/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw";
 var attribution_text = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' + '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' + 'Imagery © <a href="http://mapbox.com">Mapbox</a>';
-var mm_geodata = "https://raw.githubusercontent.com/r5cm/209_final_project/master/D3%20project/data/test_data.csv"
 var burglar_url = 'https://github.com/r5cm/209_final_project/blob/master/D3%20project/images/bandit-icon-529521.png?raw=true'
 var gun_url = 'https://github.com/r5cm/209_final_project/blob/master/D3%20project/images/icon_gun.png?raw=true'
 
@@ -27,7 +26,10 @@ function capitalizeFirstLetter(string) {
 }
 
 // date-time parser
-
+var parseDate = function(string) {
+  splitted = string.split('/');
+  return Date(splitted[2], splitted[0] - 1, splitted[1]);
+};
 
 // Draw markers function
 var draw_markers = function(data) {
@@ -37,7 +39,7 @@ var draw_markers = function(data) {
     var coords = data[i]['LatLng'].replace('(', '').replace(')', '').split(', ');
     var lat = parseFloat(coords[0]);
     var long = parseFloat(coords[1]);
-    var date = '<b>Date: </b>' + data[i]['Date']
+    var date = '<b>Date: </b>' + data[i]['DateTime'].format("DD-MM-YYYY")
     
     // Create points
     if (i % 2 == 0) {
@@ -49,7 +51,7 @@ var draw_markers = function(data) {
     //Create popup
     var cat = '<b>Category: </b>' + capitalizeFirstLetter(data[i]['Category'])
     var disp = '<b>Disposition: </b>' + capitalizeFirstLetter(data[i]['Disposition'])
-    var pu_content = '<p>'+date+'<br />'+cat+'<br />'+disp+'</p>'
+    var pu_content = '<p>'+ date +'<br />'+cat+'<br />'+disp+'</p>'
     point.bindPopup(pu_content)
           .addTo(markersGroup);
   }
@@ -68,17 +70,11 @@ initializePage();
 //-------------------------
 
 // Add data
-d3.csv(mm_geodata, function(data) {
+d3.csv("/data/test_data_2.csv", function(data) {
   
-  // Parse data
-  var extract_time = function(date) {
-    var time = date.match(/ .*/gm);
-    return time[0].slice(1);
-  }
   data.forEach(function(d) {
-    d['DateTime'] = d['Date'];
-    d['Date'] = d['Date'].slice(0, 8)
-    d['Time'] = extract_time(d['DateTime'])
+    d['DateTime'] = moment(d['Date']).utcOffset(-480);
+    d['Date'] = d['Date'].slice(0, 8);
   })
   console.log("Data:");
   console.log(data);
@@ -95,39 +91,60 @@ d3.csv(mm_geodata, function(data) {
     if (map.hasLayer(markersGroup)) {
       markersGroup.clearLayers();
     };
-    data_filtered_1 = [];
     // Set filter values
-    if (type == 'category') category_filter = value;
+    if (type == 'category') {
+      category_filter = value;
+    } 
     if (type == 'date') {
       start_date_filter = value[0];
       end_date_filter = value[1];
     } 
     // Filter category
+    data_filtered_1 = [];
     if (category_filter == "All" || !category_filter) {
-        data_filtered = data;
+        data_filtered_1 = data;
     } else {
       for (var i=0; i<data.length; i++) {
-        if (data[i]['Category'] == value) data_filtered.push(data[i]);
+        if (data[i]['Category'] == value) data_filtered_1.push(data[i]);
       };
     };
     // Filter date
-    data_filtered_2 = []
     if (start_date_filter) {
-      console.log("Start date: " + start_date_filter);
-      console.log("End date: " + end_date_filter);
+      data_filtered_2 = [];
+      console.log("Start date: " + start_date_filter.format("YYYY-MM-DD"));
+      console.log("End date: " + end_date_filter.format("YYYY-MM-DD"));
       for (var i=0; i < data_filtered_1.length; i++) {
-
-      }
+        var record = data_filtered_1[i];
+        if (start_date_filter <= record['DateTime'] && record['DateTime'] <= end_date_filter) {
+          data_filtered_2.push(record);
+        }; 
+      };
+      // Add filtered markers
+      console.log(data_filtered_2);
+      draw_markers(data_filtered_2);
+    } else {
+      // Add filtered markers
+      console.log(data_filtered_1);
+      draw_markers(data_filtered_1);
     };
     
-    // Add filtered markers
-    console.log(data_filtered);
-    draw_markers(data_filtered)
   };
 
   //--------------
   // Date filter
   //--------------
+
+  // Get date range
+  var min_date = moment();
+  var max_date = moment().subtract(100, 'years');
+  for (var i = 0; i < data.length; i++) {
+    var date = data[i]['DateTime'];
+    if (date < min_date) min_date = date;
+    if (date > max_date) max_date = date;
+  }
+  // min_date = min_date.format("MM/DD/YYYY")
+  // max_date = max_date.format("MM/DD/YYYY")
+  console.log("Min date = " + min_date + " Max date: " + max_date);
 
   // Add input menu
   d3.select('#divfilter')
@@ -142,16 +159,26 @@ d3.csv(mm_geodata, function(data) {
       .attr('id', 'datetimes')
 
   $('#datetimes').daterangepicker({
+    ranges: {
+      'All dates': [moment().subtract(5, 'years', moment())],
+      'Today': [moment(), moment().add(1, 'days')],
+      'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+      'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+      'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+      'This Month': [moment().startOf('month'), moment().endOf('month')],
+      'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+      'This year': [moment().startOf('year'), moment()]
+    },
+
+    "alwaysShowCalendars": true,
     "timePicker": true,
     "timePicker24Hour": true,
     "timePickerIncrement": 15,
-    "startDate": "07/14/2019",
-    "endDate": "07/20/2019"
+    "startDate": moment().subtract(6, 'days'),
+    "endDate": moment(),
   }, function(start, end, label) {
     console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
-    start_date = start.format('YYYY-MM-DD');
-    end_format = end.format('YYYY-MM-DD');
-    filter_data([start_date, end_date], 'date');
+    filter_data([start, end], 'date');
   });
 
   //--------------
@@ -189,8 +216,7 @@ d3.csv(mm_geodata, function(data) {
   var filter_cat_val = "All";
   var filter_cat = function() {
     filter_cat_val = d3.select(this).property('value');
-    console.log("Category selected:");
-    console.log(filter_cat_val);
+    console.log("Category selected: " + filter_cat_val);
     filter_data(filter_cat_val, 'category');
   };
   d3.select('#crimeSelector')
