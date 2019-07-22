@@ -43,9 +43,9 @@ var draw_markers = function(data) {
     
     // Create points
     if (i % 2 == 0) {
-      var point = L.marker([lat, long], {icon: burglarIcon});  
+      var point = L.marker([lat, lon], {icon: burglarIcon});  
     } else {
-      var point = L.marker([lat, long], {icon: gunIcon, rotationAngle: 45});  
+      var point = L.marker([lat, lon], {icon: gunIcon, rotationAngle: 45});  
     }        
     
     //Create popup
@@ -154,9 +154,10 @@ d3.csv("/data/test_data_2.csv", function(data) {
   d3.select('#divfilter')
     .append('input')
       .attr('type', 'text')
-      .attr('align', 'left')
+      .attr('align', 'right')
       .attr('name', 'datetimes')
       .attr('id', 'datetimes')
+
 
   $('#datetimes').daterangepicker({
     ranges: {
