@@ -38,7 +38,7 @@ var draw_markers = function(data) {
     // Get vars
     var coords = data[i]['LatLng'].replace('(', '').replace(')', '').split(', ');
     var lat = parseFloat(coords[0]);
-    var long = parseFloat(coords[1]);
+    var lon = parseFloat(coords[1]);
     var date = '<b>Date: </b>' + data[i]['DateTime'].format("DD-MM-YYYY")
     
     // Create points
