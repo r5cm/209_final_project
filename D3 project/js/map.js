@@ -36,14 +36,14 @@ var draw_markers = function(data) {
     // Get vars
     var coords = data[i]['LatLng'].replace('(', '').replace(')', '').split(', ');
     var lat = parseFloat(coords[0]);
-    var long = parseFloat(coords[1]);
+    var lon = parseFloat(coords[1]);
     var date = '<b>Date: </b>' + data[i]['Date']
     
     // Create points
     if (i % 2 == 0) {
-      var point = L.marker([lat, long], {icon: burglarIcon});  
+      var point = L.marker([lat, lon], {icon: burglarIcon});  
     } else {
-      var point = L.marker([lat, long], {icon: gunIcon, rotationAngle: 45});  
+      var point = L.marker([lat, lon], {icon: gunIcon, rotationAngle: 45});  
     }        
     
     //Create popup
@@ -97,7 +97,9 @@ d3.csv(mm_geodata, function(data) {
     };
     data_filtered_1 = [];
     // Set filter values
-    if (type == 'category') category_filter = value;
+    if (type == 'category') {
+		category_filter = value;
+	}
     if (type == 'date') {
       start_date_filter = value[0];
       end_date_filter = value[1];
@@ -137,9 +139,10 @@ d3.csv(mm_geodata, function(data) {
   d3.select('#divfilter')
     .append('input')
       .attr('type', 'text')
-      .attr('align', 'left')
+      .attr('align', 'right')
       .attr('name', 'datetimes')
       .attr('id', 'datetimes')
+
 
   $('#datetimes').daterangepicker({
     "timePicker": true,
@@ -150,7 +153,7 @@ d3.csv(mm_geodata, function(data) {
   }, function(start, end, label) {
     console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
     start_date = start.format('YYYY-MM-DD');
-    end_format = end.format('YYYY-MM-DD');
+    end_date = end.format('YYYY-MM-DD');
     filter_data([start_date, end_date], 'date');
   });
 
