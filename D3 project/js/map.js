@@ -68,7 +68,7 @@ var draw_markers = function(data) {
             .addTo(markersGroup);
     }
     // After markers have been drawn we make the summary table.
-    console.log(get_visible_data_summary.call());
+    get_visible_data_summary.call();
 }
 
 // View without data
@@ -272,7 +272,7 @@ var draw_nix_markers = function(data) {
         point.bindPopup(pu_content)
             .addTo(markersGroup);
     }
-
+	get_visible_data_summary()
 }
 
 // Add Nix data
@@ -287,3 +287,6 @@ d3.csv("/data/n_latest.csv", function(data) {
     draw_nix_markers(data);
 
 });
+
+map.on("zoomend", get_visible_data_summary)
+map.on("moveend", get_visible_data_summary)
