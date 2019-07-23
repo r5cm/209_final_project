@@ -124,6 +124,7 @@ for i in range(count):
         case[i] = case[i] + line
         case_no = True
     else:
+        line = re.sub("\xa0", "", line)
         content_text[i].append(line)
     
     k = k + 1   
@@ -146,6 +147,6 @@ print(list_headline_text)
 
 with open('latest.csv', 'a') as csv_file:
   writer = csv.writer(csv_file)
-#  writer.writerow(['date' 'priority', 'headline', 'time_ago', 'link', 'title', 'address', 'clean_address', 'latlng', 'case', 'content' ])
+#  writer.writerow(['date', 'priority', 'headline', 'time_ago', 'link', 'title', 'address', 'clean_address', 'latlng', 'case', 'content' ])
   for i in range(count):
     writer.writerow([ date[i], list_priority_text[i], list_headline_text[i], list_time_text[i], list_headline_link[i], title[i], address[i], clean_address[i], latlng[i], case[i], content_text[i] ])
