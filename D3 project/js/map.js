@@ -3,6 +3,7 @@ var map_link = "https://api.tiles.mapbox.com/v4/mapbox.streets/{z}/{x}/{y}.png?a
 var attribution_text = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' + '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' + 'Imagery © <a href="http://mapbox.com">Mapbox</a>';
 var burglar_url = 'https://github.com/r5cm/209_final_project/blob/master/D3%20project/images/bandit-icon-529521.png?raw=true'
 var gun_url = 'https://github.com/r5cm/209_final_project/blob/master/D3%20project/images/icon_gun.png?raw=true'
+var nix_url = 'https://pbs.twimg.com/profile_images/791272375996125184/482Wokhd_400x400.jpg'
 
 // Icon variables
 var burglarIcon = L.icon({
@@ -13,6 +14,12 @@ var burglarIcon = L.icon({
 });
 var gunIcon = L.icon({
     iconUrl: gun_url,
+    iconSize: [14, 30],
+    iconAnchor: [7, 30],
+    popupAnchor: [-3, -35]
+});
+var nixIcon = L.icon({
+    iconUrl: nix_url,
     iconSize: [14, 30],
     iconAnchor: [7, 30],
     popupAnchor: [-3, -35]
@@ -244,37 +251,39 @@ var draw_nix_markers = function(data) {
     markersGroup = L.layerGroup().addTo(map);
     for (var i = 0; i < data.length; i++) {
         // Get vars
-        var coords = data[i]['LatLng'].replace('(', '').replace(')', '').split(', ');
+        var coords = data[i]['latlng'].replace('(', '').replace(')', '').split(', ');
         var lat = parseFloat(coords[0]);
         var lon = parseFloat(coords[1]);
         var date = '<b>Date: </b>' + data[i]['DateTime'].format("DD-MM-YYYY")
 
-        // Create points
-        if (i % 2 == 0) {
-            var point = L.marker([lat, lon], {
-                icon: burglarIcon
-            });
-        } else {
-            var point = L.marker([lat, lon], {
-                icon: gunIcon,
-                rotationAngle: 45
-            });
-        }
+        var point = L.marker([lat, lon], {
+            icon: nixIcon
+        });
 
         //Create popup
-        var cat = '<b>Category: </b>' + capitalizeFirstLetter(data[i]['Category'])
-        var disp = '<b>Disposition: </b>' + capitalizeFirstLetter(data[i]['Disposition'])
-        var pu_content = '<p>' + date + '<br />' + cat + '<br />' + disp + '</p>'
+        var cat = data[i]['priority'] + ': ' + data[i]['headline']
+        
+        if(data[i]['title'] == 'False') { data[i]['title'] = ''; }
+        if(data[i]['address'] == 'False') { data[i]['address'] = ''; }
+
+        disp = data[i]['title'] + '<br />' + data[i]['address'];
+
+        var pu_content = '<p>' + date + '<br /><b>' + cat + '</b><br />' + disp + '</p>'
         point.bindPopup(pu_content)
             .addTo(markersGroup);
     }
-    // After markers have been drawn we make the summary table.
-    console.log(get_visible_data_summary.call());
+
 }
 
 // Add Nix data
 d3.csv("/data/n_latest.csv", function(data) {
 
-    console.log(data);
+    data.forEach(function(d) {
+        d['DateTime'] = moment(d['Date']).utcOffset(-480);
+    })
+
+    //console.log(data);
+
+    draw_nix_markers(data);
 
 });
