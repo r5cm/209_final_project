@@ -84,7 +84,7 @@ initializePage();
 d3.csv("/data/test_data_2.csv", function(data) {
 
     data.forEach(function(d) {
-        d['DateTime'] = moment(d['Date']).utcOffset(-480);
+        d['DateTime'] = moment(d['Date'], "M/D/YYYY HH:mm").utcOffset(-480);
         d['Date'] = d['Date'].slice(0, 8);
     })
     console.log("Data:");
