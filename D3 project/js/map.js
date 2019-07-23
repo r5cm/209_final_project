@@ -55,6 +55,8 @@ var draw_markers = function(data) {
     point.bindPopup(pu_content)
           .addTo(markersGroup);
   }
+  // After markers have been drawn we make the summary table.
+  console.log(get_visible_data_summary.call());
 }
 
 // View without data
