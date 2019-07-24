@@ -3,27 +3,212 @@ var map_link = "https://api.tiles.mapbox.com/v4/mapbox.streets/{z}/{x}/{y}.png?a
 var attribution_text = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' + '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' + 'Imagery © <a href="http://mapbox.com">Mapbox</a>';
 var burglar_url = 'https://github.com/r5cm/209_final_project/blob/master/D3%20project/images/bandit-icon-529521.png?raw=true'
 var gun_url = 'https://github.com/r5cm/209_final_project/blob/master/D3%20project/images/icon_gun.png?raw=true'
+var icons = {
+    "TRAFFIC STOP": "../images/i_traffic_stop.png"
+}
 var nix_url = 'https://pbs.twimg.com/profile_images/791272375996125184/482Wokhd_400x400.jpg'
 
 // Icon variables
+var icon_size = [20, 30];
+var icon_anchor = [10, 30];
+var popup_anchor = [-3, 35]
+
 var burglarIcon = L.icon({
     iconUrl: burglar_url,
-    iconSize: [14, 30],
-    iconAnchor: [7, 30],
-    popupAnchor: [-3, -35]
+    iconSize: icon_size,
+    iconAnchor: icon_anchor,
+    popupAnchor: popup_anchor
 });
 var gunIcon = L.icon({
     iconUrl: gun_url,
-    iconSize: [14, 30],
-    iconAnchor: [7, 30],
-    popupAnchor: [-3, -35]
+    iconSize: icon_size,
+    iconAnchor: icon_anchor,
+    popupAnchor: popup_anchor
 });
 var nixIcon = L.icon({
     iconUrl: nix_url,
-    iconSize: [14, 30],
-    iconAnchor: [7, 30],
-    popupAnchor: [-3, -35]
+    iconSize: icon_size,
+    iconAnchor: icon_anchor,
+    popupAnchor: popup_anchor
 });
+var i_traffic_stop = L.icon({
+    iconUrl: "../images/i_traffic_stop.png",
+    iconSize: icon_size,
+    iconAnchor: icon_anchor,
+    popupAnchor: popup_anchor
+});
+var i_welfare_check = L.icon({
+    iconUrl: "../images/i_welfare_check.png",
+    iconSize: icon_size,
+    iconAnchor: icon_anchor,
+    popupAnchor: popup_anchor
+});
+var i_suspicious_event = L.icon({
+    iconUrl: "../images/i_suspicious_event.png",
+    iconSize: icon_size,
+    iconAnchor: icon_anchor,
+    popupAnchor: popup_anchor
+});
+var i_pedestrian_stop = L.icon({
+    iconUrl: "../images/i_pedestrian_stop.png",
+    iconSize: icon_size,
+    iconAnchor: icon_anchor,
+    popupAnchor: popup_anchor
+});
+var i_outside_assist = L.icon({
+    iconUrl: "../images/i_outside_assist.png",
+    iconSize: icon_size,
+    iconAnchor: icon_anchor,
+    popupAnchor: popup_anchor
+});
+var i_maintenance_issue = L.icon({
+    iconUrl: "../images/i_maintenance_issue.png",
+    iconSize: icon_size,
+    iconAnchor: icon_anchor,
+    popupAnchor: popup_anchor
+});
+var i_all_other_offenses = L.icon({
+    iconUrl: "../images/i_all_other_offenses.png",
+    iconSize: icon_size,
+    iconAnchor: icon_anchor,
+    popupAnchor: popup_anchor
+});
+var i_larceny_theft = L.icon({
+    iconUrl: "../images/i_larceny_theft.png",
+    iconSize: icon_size,
+    iconAnchor: icon_anchor,
+    popupAnchor: popup_anchor
+});
+var i_vehicle_code_violation = L.icon({
+    iconUrl: "../images/i_vehicle_code_violation.png",
+    iconSize: icon_size,
+    iconAnchor: icon_anchor,
+    popupAnchor: popup_anchor
+});
+var i_forgery_and_counterfeiting = L.icon({
+    iconUrl: "../images/i_forgery_and_counterfeiting.png",
+    iconSize: icon_size,
+    iconAnchor: icon_anchor,
+    popupAnchor: popup_anchor
+});
+var i_misc_service = L.icon({
+    iconUrl: "../images/i_misc_service.png",
+    iconSize: icon_size,
+    iconAnchor: icon_anchor,
+    popupAnchor: popup_anchor
+});
+var i_vandalism = L.icon({
+    iconUrl: "../images/i_vandalism.png",
+    iconSize: icon_size,
+    iconAnchor: icon_anchor,
+    popupAnchor: popup_anchor
+});
+var i_disorderly_conduct = L.icon({
+    iconUrl: "../images/i_disorderly_conduct.png",
+    iconSize: icon_size,
+    iconAnchor: icon_anchor,
+    popupAnchor: popup_anchor
+});
+var i_medical_event = L.icon({
+    iconUrl: "../images/i_medical_event.png",
+    iconSize: icon_size,
+    iconAnchor: icon_anchor,
+    popupAnchor: popup_anchor
+});
+var i_missing_person = L.icon({
+    iconUrl: "../images/i_missing_person.png",
+    iconSize: icon_size,
+    iconAnchor: icon_anchor,
+    popupAnchor: popup_anchor
+});
+var i_other_assaults = L.icon({
+    iconUrl: "../images/i_other_assaults.png",
+    iconSize: icon_size,
+    iconAnchor: icon_anchor,
+    popupAnchor: popup_anchor
+});
+var i_animal_case = L.icon({
+    iconUrl: "../images/i_animal_case.png",
+    iconSize: icon_size,
+    iconAnchor: icon_anchor,
+    popupAnchor: popup_anchor
+});
+var i_aggravated_assault = L.icon({
+    iconUrl: "../images/i_aggravated_assault.png",
+    iconSize: icon_size,
+    iconAnchor: icon_anchor,
+    popupAnchor: popup_anchor
+});
+var i_supplement = L.icon({
+    iconUrl: "../images/i_supplement.png",
+    iconSize: icon_size,
+    iconAnchor: icon_anchor,
+    popupAnchor: popup_anchor
+});
+var i_fire = L.icon({
+    iconUrl: "../images/i_fire.png",
+    iconSize: icon_size,
+    iconAnchor: icon_anchor,
+    popupAnchor: popup_anchor
+});
+var i_driving_under_the_influence = L.icon({
+    iconUrl: "../images/i_driving_under_the_influence.png",
+    iconSize: icon_size,
+    iconAnchor: icon_anchor,
+    popupAnchor: popup_anchor
+});
+var i_penal_code_violation = L.icon({
+    iconUrl: "../images/i_penal_code_violation.png",
+    iconSize: icon_size,
+    iconAnchor: icon_anchor,
+    popupAnchor: popup_anchor
+});
+var i_california = L.icon({
+    iconUrl: "../images/i_california.png",
+    iconSize: icon_size,
+    iconAnchor: icon_anchor,
+    popupAnchor: popup_anchor
+});
+var i_weapons_violations = L.icon({
+    iconUrl: "../images/i_weapons_violations.png",
+    iconSize: icon_size,
+    iconAnchor: icon_anchor,
+    popupAnchor: popup_anchor
+});
+var i_tow = L.icon({
+    iconUrl: "../images/i_tow.png",
+    iconSize: icon_size,
+    iconAnchor: icon_anchor,
+    popupAnchor: popup_anchor
+});
+
+var icons = {
+    "Traffic stop": i_traffic_stop,
+    "Welfare check": i_welfare_check,
+    "Suspicious event": i_suspicious_event,
+    "Pedestrian stop": i_pedestrian_stop,
+    "Outside assist": i_outside_assist,
+    "Maintenance issue": i_maintenance_issue,
+    "All other offenses": i_all_other_offenses,
+    "Larceny/theft": i_larceny_theft,
+    "Vehicle code violation": i_vehicle_code_violation,
+    "Forgery and counterfeiting": i_forgery_and_counterfeiting,
+    "Misc. service": i_misc_service,
+    "Vandalism": i_vandalism,
+    "Disorderly conduct": i_disorderly_conduct,
+    "Medical event": i_medical_event,
+    "Missing person": i_missing_person,
+    "Other assaults": i_other_assaults,
+    "Animal case": i_animal_case,
+    "Aggravated assault": i_aggravated_assault,
+    "Supplement": i_supplement,
+    "Fire": i_fire,
+    "Driving under the influence": i_driving_under_the_influence,
+    "Penal code violation": i_penal_code_violation,
+    "California code of regulations violations": i_california,
+    "Weapons violations": i_weapons_violations,
+    "Tow": i_tow
+};
 
 // Capitalize first letter function
 function capitalizeFirstLetter(string) {
@@ -46,24 +231,16 @@ var draw_markers = function(data) {
         var coords = data[i]['LatLng'].replace('(', '').replace(')', '').split(', ');
         var lat = parseFloat(coords[0]);
         var lon = parseFloat(coords[1]);
-        var date = '<b>Date: </b>' + data[i]['DateTime'].format("DD-MM-YYYY")
+        var date = '<b>Date: </b>' + data[i]['DateTime'].format("DD-MM-YYYY");
+        var cat = capitalizeFirstLetter(data[i]['Category']);
 
         // Create points
-        if (i % 2 == 0) {
-            var point = L.marker([lat, lon], {
-                icon: burglarIcon
-            });
-        } else {
-            var point = L.marker([lat, lon], {
-                icon: gunIcon,
-                rotationAngle: 45
-            });
-        }
-
+        var point = L.marker([lat, lon], {icon: icons[cat]});
+        
         //Create popup
-        var cat = '<b>Category: </b>' + capitalizeFirstLetter(data[i]['Category'])
-        var disp = '<b>Disposition: </b>' + capitalizeFirstLetter(data[i]['Disposition'])
-        var pu_content = '<p>' + date + '<br />' + cat + '<br />' + disp + '</p>'
+        var cat_pu = '<b>Category: </b>' + cat;
+        var disp_pu = '<b>Disposition: </b>' + capitalizeFirstLetter(data[i]['Disposition'])
+        var pu_content = '<p>' + date + '<br />' + cat_pu + '<br />' + disp_pu + '</p>'
         point.bindPopup(pu_content)
             .addTo(markersGroup);
     }
@@ -92,10 +269,7 @@ d3.csv("/data/test_data_2.csv", function(data) {
 
     data.forEach(function(d) {
         d['DateTime'] = moment(d['Date'], "M/D/YYYY HH:mm").utcOffset(-480);
-        //d['Date'] = d['Date'].slice(0, 8);
     })
-    //console.log("Data:");
-    //console.log(data);
 
     // Draw markers
     draw_markers(data);
@@ -129,8 +303,6 @@ d3.csv("/data/test_data_2.csv", function(data) {
         // Filter date
         if (start_date_filter) {
             data_filtered_2 = [];
-            console.log("Start date: " + start_date_filter.format("YYYY-MM-DD"));
-            console.log("End date: " + end_date_filter.format("YYYY-MM-DD"));
             for (var i = 0; i < data_filtered_1.length; i++) {
                 var record = data_filtered_1[i];
                 if (start_date_filter <= record['DateTime'] && record['DateTime'] <= end_date_filter) {
@@ -138,7 +310,6 @@ d3.csv("/data/test_data_2.csv", function(data) {
                 };
             };
             // Add filtered markers
-            //console.log(data_filtered_2);
             draw_markers(data_filtered_2);
         } else {
             // Add filtered markers
@@ -147,8 +318,6 @@ d3.csv("/data/test_data_2.csv", function(data) {
         };
 
     };
-
-
 
     //--------------
     // Date filter
@@ -162,8 +331,6 @@ d3.csv("/data/test_data_2.csv", function(data) {
         if (date < min_date) min_date = date;
         if (date > max_date) max_date = date;
     }
-    // min_date = min_date.format("MM/DD/YYYY")
-    // max_date = max_date.format("MM/DD/YYYY")
     console.log("Min date = " + min_date + " Max date: " + max_date);
 
     // Add input menu
@@ -214,8 +381,8 @@ d3.csv("/data/test_data_2.csv", function(data) {
             categories.push(category);
         };
     };
-    //console.log("Categories:");
-    //console.log(categories);
+    console.log("Categories:");
+    console.log(categories);
 
     // Add crime category menu
     d3.select("#divfilter")
