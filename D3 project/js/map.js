@@ -92,10 +92,10 @@ d3.csv("/data/test_data_2.csv", function(data) {
 
     data.forEach(function(d) {
         d['DateTime'] = moment(d['Date'], "M/D/YYYY HH:mm").utcOffset(-480);
-        d['Date'] = d['Date'].slice(0, 8);
+        //d['Date'] = d['Date'].slice(0, 8);
     })
-    console.log("Data:");
-    console.log(data);
+    //console.log("Data:");
+    //console.log(data);
 
     // Draw markers
     draw_markers(data);
@@ -138,7 +138,7 @@ d3.csv("/data/test_data_2.csv", function(data) {
                 };
             };
             // Add filtered markers
-            console.log(data_filtered_2);
+            //console.log(data_filtered_2);
             draw_markers(data_filtered_2);
         } else {
             // Add filtered markers
@@ -214,8 +214,8 @@ d3.csv("/data/test_data_2.csv", function(data) {
             categories.push(category);
         };
     };
-    console.log("Categories:");
-    console.log(categories);
+    //console.log("Categories:");
+    //console.log(categories);
 
     // Add crime category menu
     d3.select("#divfilter")
@@ -243,6 +243,10 @@ d3.csv("/data/test_data_2.csv", function(data) {
     d3.select('#crimeSelector')
         .on("change", filter_cat);
 
+    var timeSeries = hist();
+    timeSeries.data(data);
+    timeSeries.plot();
+
 });
 
 
@@ -254,7 +258,7 @@ var draw_nix_markers = function(data) {
         var coords = data[i]['latlng'].replace('(', '').replace(')', '').split(', ');
         var lat = parseFloat(coords[0]);
         var lon = parseFloat(coords[1]);
-        var date = '<b>Date: </b>' + data[i]['DateTime'].format("DD-MM-YYYY")
+        var date = '<b>Date: </b>' + data[i]['DateTime'].format("DD-MM-YYYY HH:MM")
 
         var point = L.marker([lat, lon], {
             icon: nixIcon
@@ -268,7 +272,9 @@ var draw_nix_markers = function(data) {
 
         disp = data[i]['title'] + '<br />' + data[i]['address'];
 
-        var pu_content = '<p>' + date + '<br /><b>' + cat + '</b><br />' + disp + '</p>'
+        link = 'https://local.nixle.com/' + data[i]['link'];
+
+        var pu_content = '<p>' + date + '<br /><b>' + cat + '</b><br />' + disp + '</p><a target="_blank" href="' + link + '">Read more...</a>'
         point.bindPopup(pu_content)
             .addTo(markersGroup);
     }
@@ -287,6 +293,167 @@ d3.csv("/data/n_latest.csv", function(data) {
     draw_nix_markers(data);
 
 });
+
+
+var hist = function() {
+
+    var parentDiv = document.getElementById("t_series");
+
+    // Set geometry.
+    var height = parentDiv.clientHeight - 40;
+    var width = parentDiv.clientWidth - 50;
+    var margin = {
+        "left": 20,
+        "top": 5,
+        "bottom": 30,
+        "right": 20
+    };
+
+    // Initialise data structures.
+    var data = [];
+    var avg = 0;
+    var data_ = function(_) {
+        var that = this;
+        if (!arguments.length) return data;
+        data = _;
+        return that;
+    }
+
+    // Create canvas and scales.
+    hist = d3.select(".t_series")
+        .append("svg")
+        .attr("class", "viz")
+        .attr("width", width)
+        .attr("height", height)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    var x = d3.scaleTime()
+        .range([0, width - margin.left - margin.right]);
+
+    var y = d3.scaleLinear()
+        .range([height - margin.bottom, 0]);
+
+    // Create the binned histogram data and configure scales. 
+    var setup_ = function(_) {
+
+        var dayExtent = d3.extent(data, function(d) { return d.DateTime; });
+
+        var dayBins = d3.timeDays(d3.timeDay.offset(dayExtent[0],-1),
+		                                 d3.timeDay.offset(dayExtent[1],1));
+
+        x.domain(d3.extent(dayBins));
+
+        var histogram = d3.histogram()
+            .value(function(d) {
+                return d.DateTime;
+            })
+            .thresholds(dayBins);
+
+        var bins, use_data;
+
+        // Filter if argument supplied.
+        if (!arguments.length || (!_)) {
+            use_data = data;
+        } else {
+            var bounds = _;
+            use_data = data.filter(function(d) {
+                return (d.dt < bounds[1] && d.dt > bounds[0]);
+            });
+        }
+
+
+        bins = histogram(use_data);
+
+        console.log(bins);
+
+        y.domain([0, d3.max(bins, function(d) { return d.length; })]);
+
+        return bins;
+
+    }
+
+    // (Re)plot the axes.
+    var axis_ = function() {
+
+        hist.selectAll(".axis").remove();
+
+        //hist.append("g")
+        //    .attr("class", "axis")
+        //    .call(d3.axisLeft(y));
+
+        hist.append("g")
+            .attr("class", "axis")
+            .attr("transform", "translate(0," + String(height - margin.bottom) + ")")
+            .call(d3.axisBottom(x));
+
+    }
+
+    // Initialise the bar chart and plot data.
+    var plot_ = function() {
+
+        bins = setup_();
+        axis_();
+
+        bar = hist.selectAll(".bar")
+            .data(bins)
+            .enter()
+            .append("g")
+            .attr("class", "bar")
+            .attr("transform", function(d) {
+                return "translate(" + x(d.x0) + "," + y(d.length) + ")";
+            });
+        bar.append("rect")
+            .attr("x", 1)
+            .attr("width", function(d) {
+                return x(d.x1) - x(d.x0) - 1;
+            })
+            .attr("height", function(d) {
+                return height - margin.bottom - y(d.length);
+            })
+            .attr("fill", function(d, i) {
+                // Bar colours.
+                return d3.hsl(50, 0.8, 0.5).toString();
+            });
+
+    }
+
+
+    // Update the histogram to use filtered data.
+    var refilter_ = function(bounds) {
+
+        bins = setup_(bounds);
+        axis_();
+
+        bar.data(bins)
+            .transition()
+            .duration(1000)
+            .attr("transform", function(d) {
+                return "translate(" + x(d.x0) + "," + y(d.length) + ")";
+            })
+            .select("rect")
+            .attr("x", 1)
+            .attr("width", function(d) {
+                return x(d.x1) - x(d.x0) - 1;
+            })
+            .attr("height", function(d) {
+                return height - margin.bottom - y(d.length);
+            })
+            .attr("fill", function(d, i) {
+                return d3.hsl(50).toString();
+            });
+
+    }
+
+    var public = {
+        "plot": plot_,
+        "data": data_,
+        "refilter": refilter_,
+    };
+
+    return public;
+
+}
 
 map.on("zoomend", get_visible_data_summary)
 map.on("moveend", get_visible_data_summary)

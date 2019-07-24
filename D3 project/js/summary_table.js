@@ -19,7 +19,7 @@ function get_visible_data_summary(){
 	});
 	var dict = {}, prev;
 	visible_data.sort();
-	console.log(visible_data);
+	//console.log(visible_data);
 	for(var i = 0; i < visible_data.length; i++){
 		if(visible_data[i] !== prev){
 			dict[visible_data[i]] = 1;
@@ -31,7 +31,7 @@ function get_visible_data_summary(){
 	var ordered_tuples = Object.keys(dict).map(function(key){
 		return [key,dict[key]]
 	});
-	console.log(ordered_tuples)
+	//console.log(ordered_tuples)
 	ordered_tuples.sort((a,b) => a[1] < b [1]);
 	
 	var html = "<table><tr>";
