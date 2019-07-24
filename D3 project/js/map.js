@@ -9,9 +9,9 @@ var icons = {
 var nix_url = 'https://pbs.twimg.com/profile_images/791272375996125184/482Wokhd_400x400.jpg'
 
 // Icon variables
-var icon_size = [20, 30];
-var icon_anchor = [10, 30];
-var popup_anchor = [-3, 35]
+var icon_size = [30, 30];
+var icon_anchor = [15, 30];
+var popup_anchor = [-3, -30]
 
 var burglarIcon = L.icon({
     iconUrl: burglar_url,
@@ -234,15 +234,19 @@ var draw_markers = function(data) {
         var date = '<b>Date: </b>' + data[i]['DateTime'].format("DD-MM-YYYY");
         var cat = capitalizeFirstLetter(data[i]['Category']);
 
-        // Create points
-        var point = L.marker([lat, lon], {icon: icons[cat]});
-        
-        //Create popup
-        var cat_pu = '<b>Category: </b>' + cat;
-        var disp_pu = '<b>Disposition: </b>' + capitalizeFirstLetter(data[i]['Disposition'])
-        var pu_content = '<p>' + date + '<br />' + cat_pu + '<br />' + disp_pu + '</p>'
-        point.bindPopup(pu_content)
-            .addTo(markersGroup);
+        // Create points and popups
+        try {
+            var point = L.marker([lat, lon], {icon: icons[cat]});
+            var cat_pu = '<b>Category: </b>' + cat;
+            var disp_pu = '<b>Disposition: </b>' + capitalizeFirstLetter(data[i]['Disposition'])
+            var pu_content = '<p>' + date + '<br />' + cat_pu + '<br />' + disp_pu + '</p>'
+            point.bindPopup(pu_content)
+                .addTo(markersGroup);
+        }
+        catch(error) {
+            console.log("Error drawing marker:" + error);
+            console.log(data[i]);
+        };
     }
     // After markers have been drawn we make the summary table.
     get_visible_data_summary.call();
