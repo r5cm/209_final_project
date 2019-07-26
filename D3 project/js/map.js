@@ -13,18 +13,6 @@ var icon_size = [30, 30];
 var icon_anchor = [15, 30];
 var popup_anchor = [-3, -30]
 
-var burglarIcon = L.icon({
-    iconUrl: burglar_url,
-    iconSize: icon_size,
-    iconAnchor: icon_anchor,
-    popupAnchor: popup_anchor
-});
-var gunIcon = L.icon({
-    iconUrl: gun_url,
-    iconSize: icon_size,
-    iconAnchor: icon_anchor,
-    popupAnchor: popup_anchor
-});
 var nixIcon = L.icon({
     iconUrl: nix_url,
     iconSize: icon_size,
@@ -133,7 +121,7 @@ var i_animal_case = L.icon({
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
-var i_aggravated_assault = L.icon({
+var i_aggravated_assaults = L.icon({
     iconUrl: "../images/i_aggravated_assault.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
@@ -200,7 +188,7 @@ var icons = {
     "Missing person": i_missing_person,
     "Other assaults": i_other_assaults,
     "Animal case": i_animal_case,
-    "Aggravated assault": i_aggravated_assault,
+    "Aggravated assaults": i_aggravated_assaults,
     "Supplement": i_supplement,
     "Fire": i_fire,
     "Driving under the influence": i_driving_under_the_influence,
@@ -235,19 +223,14 @@ var draw_markers = function(data) {
         var cat = capitalizeFirstLetter(data[i]['Category']);
 
         // Create points and popups
-        try {
-            var point = L.marker([lat, lon], {icon: icons[cat]});
-            var cat_pu = '<b>Category: </b>' + cat;
-            var disp_pu = '<b>Disposition: </b>' + capitalizeFirstLetter(data[i]['Disposition'])
-            var pu_content = '<p>' + date + '<br />' + cat_pu + '<br />' + disp_pu + '</p>'
-            point.bindPopup(pu_content)
-                .addTo(markersGroup);
-        }
-        catch(error) {
-            console.log("Error drawing marker:" + error);
-            console.log(data[i]);
-        };
-    }
+        var point = L.marker([lat, lon], {icon: icons[cat]});
+        var cat_pu = '<b>Category: </b>' + cat;
+        var disp_pu = '<b>Disposition: </b>' + capitalizeFirstLetter(data[i]['Disposition'])
+        var pu_content = '<p>' + date + '<br />' + cat_pu + '<br />' + disp_pu + '</p>'
+        point.bindPopup(pu_content)
+            .addTo(markersGroup);
+        console.log(data[i]);
+    };
     // After markers have been drawn we make the summary table.
     get_visible_data_summary.call();
 }
@@ -270,7 +253,7 @@ initializePage();
 
 // Add data
 d3.csv("/data/test_data_2.csv", function(data) {
-
+    // Parse detetime
     data.forEach(function(d) {
         d['DateTime'] = moment(d['Date'], "M/D/YYYY HH:mm").utcOffset(-480);
     })
@@ -283,7 +266,6 @@ d3.csv("/data/test_data_2.csv", function(data) {
     var start_date_filter = false;
     var end_date_filter = false;
     var filter_data = function(value, type) {
-        // remove all markers
         if (map.hasLayer(markersGroup)) {
             markersGroup.clearLayers();
         };
@@ -295,6 +277,9 @@ d3.csv("/data/test_data_2.csv", function(data) {
             start_date_filter = value[0];
             end_date_filter = value[1];
         }
+        // remove all markers
+        // markersGroup.clearLayers();
+        // map.removeLayer(markersGroup);
         // Filter category
         data_filtered_1 = [];
         if (category_filter == "All" || !category_filter) {
@@ -391,18 +376,18 @@ d3.csv("/data/test_data_2.csv", function(data) {
     // Add crime category menu
     d3.select("#divfilter")
         .append("p")
-        .text("Category")
-        .attr("align", "left")
+            .text("Category")
+            .attr("align", "left")
         .append("select")
-        .attr("id", "crimeSelector")
-        .selectAll("option")
-        .data(categories)
-        .enter()
+            .attr("id", "crimeSelector")
+            .selectAll("option")
+            .data(categories)
+            .enter()
         .append("option")
-        .attr("class", "cat_option")
-        .text(d => capitalizeFirstLetter(d))
-        .attr("value", d => d)
-        .attr("color", "black");
+            .attr("class", "cat_option")
+            .text(d => capitalizeFirstLetter(d))
+            .attr("value", d => d)
+            .attr("color", "black");
 
     // Filter data based on crime category
     var filter_cat_val = "All";
@@ -420,10 +405,9 @@ d3.csv("/data/test_data_2.csv", function(data) {
 
 });
 
-
 // Draw Nix markers function
 var draw_nix_markers = function(data) {
-    markersGroup = L.layerGroup().addTo(map);
+    markersGroup2 = L.layerGroup().addTo(map);
     for (var i = 0; i < data.length; i++) {
         // Get vars
         var coords = data[i]['latlng'].replace('(', '').replace(')', '').split(', ');
@@ -447,7 +431,7 @@ var draw_nix_markers = function(data) {
 
         var pu_content = '<p>' + date + '<br /><b>' + cat + '</b><br />' + disp + '</p><a target="_blank" href="' + link + '">Read more...</a>'
         point.bindPopup(pu_content)
-            .addTo(markersGroup);
+            .addTo(markersGroup2);
     }
 	get_visible_data_summary()
 }
