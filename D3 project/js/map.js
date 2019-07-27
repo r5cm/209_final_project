@@ -211,6 +211,12 @@ var parseDate = function(string) {
     return Date(splitted[2], splitted[0] - 1, splitted[1]);
 };
 
+// LatLong parser
+var parseLatLng = function(string) {
+    split = string.slice(1, -1).split(', ');
+    return split;
+}
+
 // Draw markers function
 var draw_markers = function(data) {
     markersGroup = L.layerGroup().addTo(map);
@@ -251,10 +257,14 @@ initializePage();
 
 // Add data
 d3.csv("/data/test_data_2.csv", function(data) {
-    // Parse detetime
+
+    // Parse detetime and create data arrays
     data.forEach(function(d) {
         d['DateTime'] = moment(d['Date'], "M/D/YYYY HH:mm").utcOffset(-480);
+        d['LatLngArr'] = parseLatLng(d['LatLng']); 
     })
+    data_filtered_1 = data;
+    data_filtered_2 = data;
 
     // Draw markers
     draw_markers(data);
@@ -275,9 +285,6 @@ d3.csv("/data/test_data_2.csv", function(data) {
             start_date_filter = value[0];
             end_date_filter = value[1];
         }
-        // remove all markers
-        // markersGroup.clearLayers();
-        // map.removeLayer(markersGroup);
         // Filter category
         data_filtered_1 = [];
         if (category_filter == "All" || !category_filter) {
@@ -400,6 +407,24 @@ d3.csv("/data/test_data_2.csv", function(data) {
     var timeSeries = hist();
     timeSeries.data(data);
     timeSeries.plot();
+
+    //--------------
+    // Heatmap 
+    //--------------
+
+    var add_heatmap = function(_) {
+        console.log("entered add heatmap function")
+        hm_points = data_filtered_2.map(d => d['LatLngArr']);
+        console.log(hm_points);
+        var heat = L.heatLayer(hm_points).addTo(map);
+    }
+    var remove_heatmap = function(_) {
+        console.log("entered remove heatmap function")
+    }
+    d3.select('#btn_heatmap')
+        .on('click', add_heatmap);
+    d3.select('#btn_points')
+        .on('click', remove_heatmap);
 
 });
 
