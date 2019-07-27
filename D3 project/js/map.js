@@ -6,7 +6,7 @@ var gun_url = 'https://github.com/r5cm/209_final_project/blob/master/D3%20projec
 var icons = {
     "TRAFFIC STOP": "../images/i_traffic_stop.png"
 }
-var nix_url = 'https://pbs.twimg.com/profile_images/791272375996125184/482Wokhd_400x400.jpg'
+var nix_url = '/images/warning.png'
 
 // Icon variables
 var icon_size = [30, 30];
