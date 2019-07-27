@@ -229,10 +229,8 @@ var draw_markers = function(data) {
         var pu_content = '<p>' + date + '<br />' + cat_pu + '<br />' + disp_pu + '</p>'
         point.bindPopup(pu_content)
             .addTo(markersGroup);
-        console.log(data[i]);
+        //console.log(data[i]);
     };
-    // After markers have been drawn we make the summary table.
-    get_visible_data_summary.call();
 }
 
 // View without data
@@ -433,7 +431,8 @@ var draw_nix_markers = function(data) {
         point.bindPopup(pu_content)
             .addTo(markersGroup2);
     }
-	get_visible_data_summary()
+	// Get summary table for the first time.
+	get_visible_data_summary.call()
 }
 
 // Add Nix data
