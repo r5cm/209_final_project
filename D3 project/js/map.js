@@ -367,7 +367,7 @@ d3.csv("/data/test_data_2.csv", function(data) {
         // Add input menu
         d3.select('#divfilter')
             .append('p')
-            .text("Date-time")
+            .text("Date/Time")
             .attr('align', 'left')
         d3.select('#divfilter')
             .append('input')
@@ -444,6 +444,7 @@ d3.csv("/data/test_data_2.csv", function(data) {
         var timeSeries = hist();
         timeSeries.data(data);
         timeSeries.plot();
+
 
         //--------------
         // Heatmap 
@@ -688,6 +689,9 @@ var hist = function() {
     return public;
 
 }
+
+
+
 
 map.on("zoomend", get_visible_data_summary)
 map.on("moveend", get_visible_data_summary)
