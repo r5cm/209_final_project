@@ -253,6 +253,7 @@ initializePage();
 
 // Add data
 d3.csv("/data/test_data_2.csv", function(data) {
+
     // Parse detetime
     data.forEach(function(d) {
         d['DateTime'] = moment(d['Date'], "M/D/YYYY HH:mm").utcOffset(-480);
@@ -277,9 +278,6 @@ d3.csv("/data/test_data_2.csv", function(data) {
             start_date_filter = value[0];
             end_date_filter = value[1];
         }
-        // remove all markers
-        // markersGroup.clearLayers();
-        // map.removeLayer(markersGroup);
         // Filter category
         data_filtered_1 = [];
         if (category_filter == "All" || !category_filter) {
@@ -402,6 +400,17 @@ d3.csv("/data/test_data_2.csv", function(data) {
     var timeSeries = hist();
     timeSeries.data(data);
     timeSeries.plot();
+
+    // Heatmap
+    var heatmap = function(_) {
+        console.log("entered heatmap function")
+    }
+    d3.select('#divfilter')
+        .append('p')
+            .text("") 
+        .append('input')
+        .attr('type', 'checkbox')
+        .attr('onClick')
 
 });
 
