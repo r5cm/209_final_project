@@ -412,19 +412,32 @@ d3.csv("/data/test_data_2.csv", function(data) {
     // Heatmap 
     //--------------
 
-    var add_heatmap = function(_) {
+    var show_heatmap = function(_) {
         console.log("entered add heatmap function")
-        hm_points = data_filtered_2.map(d => d['LatLngArr']);
-        console.log(hm_points);
-        var heat = L.heatLayer(hm_points).addTo(map);
+        if (!heat_act) {
+            hm_points = data_filtered_2.map(d => d['LatLngArr']);
+            console.log(hm_points);
+            if (map.hasLayer(markersGroup)) {
+                markersGroup.clearLayers();
+            };
+            heat_act = true;
+            heat = L.heatLayer(hm_points);
+            heat.addTo(map)
+            }
     }
-    var remove_heatmap = function(_) {
-        console.log("entered remove heatmap function")
+    var heat_act = false; 
+    var show_points = function(_) {
+        console.log("entered remove heatmap function");
+        if (heat_act) {
+            heat.remove();
+            heat_act = false;
+            draw_markers(data_filtered_2);
+        };
     }
     d3.select('#btn_heatmap')
-        .on('click', add_heatmap);
+        .on('click', show_heatmap);
     d3.select('#btn_points')
-        .on('click', remove_heatmap);
+        .on('click', show_points);
 
 });
 
