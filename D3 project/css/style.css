@@ -6,7 +6,7 @@ body {
 .grid {
 	display: grid;
 	grid-template-columns: 15% auto;
-	grid-template-rows: 15% 1fr 1fr 15%;
+	grid-template-rows: 15% 1fr 3fr 1fr;
 	width: 100vw;
 	height: 100vh; 
 }
@@ -35,6 +35,7 @@ header {
 
 #crimeSelector {
 	color: black;
+	width: 90%;
 }
 
 header {
@@ -50,6 +51,26 @@ header {
 .summary {
 	grid-column: 1;
 	grid-row: 3;
+}
+
+caption {
+	font-size: calc(0.75em + 0.25vw);
+	font-weight: bold;
+	color: #ed5;
+}
+
+table {
+	text-align: left;
+	font-size: calc(0.5em + 0.5vw);
+	margin-left: calc(1em + 0.1vw);
+	margin-right: calc(1em + 0.1vw);
+	width: 80%;
+}
+
+.count {
+	text-align: center;
+	padding: calc(0.05em + 0.1vw);
+
 }
 
 .map {
