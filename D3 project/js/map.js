@@ -402,16 +402,16 @@ d3.csv("/data/test_data_2.csv", function(data) {
     timeSeries.plot();
 
     // Heatmap
-    var heatmap = function(_) {
-        console.log("entered heatmap function")
+    var add_heatmap = function(_) {
+        console.log("entered add heatmap function")
     }
-    d3.select('#divfilter')
-        .append('p')
-            .text("") 
-        .append('input')
-        .attr('type', 'checkbox')
-        .attr('onClick')
-
+    var remove_heatmap = function(_) {
+        console.log("entered remove heatmap function")
+    }
+    d3.select('#btn_heatmap')
+        .on('click', add_heatmap);
+    d3.select('#btn_points')
+        .on('click', remove_heatmap);
 });
 
 // Draw Nix markers function
