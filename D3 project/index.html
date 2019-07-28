@@ -20,6 +20,7 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/d3.v4.js"></script>    
 	<script src="js/summary_table.js"></script>
+	<script type='text/javascript' src='config.js'></script>
 	
 	<!-- jQuery UI library -->
 	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
@@ -27,7 +28,8 @@
 
 	<!-- Google javascript api -->
 	<script async defer
-		src="https://maps.googleapis.com/maps/api/js?key=">
+		var k = config.key_bsa;
+		src="https://maps.googleapis.com/maps/api/js?key=" + k>
 	</script>
 	
     <!-- Date range picker -->
