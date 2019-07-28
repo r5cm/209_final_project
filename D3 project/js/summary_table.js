@@ -41,7 +41,7 @@ function get_visible_data_summary(){
 	//console.log(ordered_tuples)
 	ordered_tuples.sort((a,b) => a[1] < b [1]);
 	
-	var html = "<table><caption>Most Frequent Events</caption><tr>";
+	var html = "<table><caption>Most frequent events in this area</caption><tr>";
 	for(var i = 0; i < Math.min(ordered_tuples.length,10); i++){
 		html += "<td>" + ordered_tuples[i][0] + '<td class="count">' + ordered_tuples[i][1] + "</td></tr><tr>";
 	}
