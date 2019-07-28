@@ -371,6 +371,7 @@ d3.csv("/data/test_data_2.csv", function(data) {
             .attr('align', 'left')
         d3.select('#divfilter')
             .append('input')
+            .attr('class', 'form-control')
             .attr('type', 'text')
             .attr('align', 'right')
             .attr('name', 'datetimes')
@@ -422,6 +423,7 @@ d3.csv("/data/test_data_2.csv", function(data) {
                 .attr("align", "left")
             .append("select")
                 .attr("id", "crimeSelector")
+                .attr('class', 'form-control')
                 .selectAll("option")
                 .data(categories)
                 .enter()
@@ -484,59 +486,11 @@ d3.csv("/data/test_data_2.csv", function(data) {
 
 });
 
-// // Draw Nix markers function
-// var draw_nix_markers = function(data) {
-//     markersGroup2 = L.layerGroup().addTo(map);
-//     for (var i = 0; i < data.length; i++) {
-//         // Get vars
-//         var coords = data[i]['latlng'].replace('(', '').replace(')', '').split(', ');
-//         var lat = parseFloat(coords[0]);
-//         var lon = parseFloat(coords[1]);
-//         var date = '<b>Date: </b>' + data[i]['DateTime'].format("DD-MM-YYYY HH:MM")
-
-//         var point = L.marker([lat, lon], {
-//             icon: nixIcon
-//         });
-
-//         //Create popup
-//         var cat = data[i]['priority'] + ': ' + data[i]['headline']
-        
-//         if(data[i]['title'] == 'False') { data[i]['title'] = ''; }
-//         if(data[i]['address'] == 'False') { data[i]['address'] = ''; }
-
-//         disp = data[i]['title'] + '<br />' + data[i]['address'];
-
-//         link = 'https://local.nixle.com/' + data[i]['link'];
-
-//         var pu_content = '<p>' + date + '<br /><b>' + cat + '</b><br />' + disp + '</p><a target="_blank" href="' + link + '">Read more...</a>'
-//         point.bindPopup(pu_content)
-//             .addTo(markersGroup2);
-//     }
-// 	// Get summary table for the first time.
-// 	get_visible_data_summary.call()
-// }
-
-// // Add Nix data
-// d3.csv("/data/n_latest.csv", function(data) {
-
-//     data.forEach(function(d) {
-//         d['DateTime'] = moment(d['Date']).utcOffset(-480);
-//     })
-
-//     //console.log(data);
-
-//     draw_nix_markers(data);
-
-// });
 
 
 var hist = function() {
 
-    var parentDiv = document.getElementById("t_series");
 
-    // Set geometry.
-    var height = parentDiv.clientHeight - 40;
-    var width = parentDiv.clientWidth - 50;
     var margin = {
         "left": 20,
         "top": 5,
@@ -554,23 +508,46 @@ var hist = function() {
         return that;
     }
 
-    // Create canvas and scales.
-    hist = d3.select(".t_series")
-        .append("svg")
-        .attr("class", "viz")
-        .attr("width", width)
-        .attr("height", height)
-        .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    var hist;
 
-    var x = d3.scaleTime()
-        .range([0, width - margin.left - margin.right]);
-
-    var y = d3.scaleLinear()
-        .range([height - margin.bottom, 0]);
+    var x, width;
+    var y, height;
 
     // Create the binned histogram data and configure scales. 
     var setup_ = function(_) {
+
+        d3.select(window).on('resize', refilter_); 
+
+        // Set geometry.
+        height = parseInt(d3.select('.t_series').style('height')) - 40;
+        width = parseInt(d3.select('.t_series').style('width')) - 20;
+
+
+        //console.log(width);
+
+        x = d3.scaleTime()
+            .range([0, width - margin.left - margin.right]);
+
+        y = d3.scaleLinear()
+            .range([height - margin.bottom, 0]);
+
+
+        if(hist) {
+            d3.select(hist.node().parentNode).style("width", width);
+            d3.select(hist.node().parentNode).style("height", height);
+        }
+        else {
+
+        // Create canvas and scales.
+        hist = d3.select(".t_series")
+            .append("svg")
+            .attr("class", "viz")
+            .attr("width", width)
+            .attr("height", height)
+            .append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+        }
 
         var dayExtent = d3.extent(data, function(d) { return d.DateTime; });
 
@@ -600,7 +577,7 @@ var hist = function() {
 
         bins = histogram(use_data);
 
-        console.log(bins);
+        //console.log(bins);
 
         y.domain([0, d3.max(bins, function(d) { return d.length; })]);
 
@@ -648,7 +625,7 @@ var hist = function() {
             })
             .attr("fill", function(d, i) {
                 // Bar colours.
-                return d3.hsl(50, 0.8, 0.5).toString();
+                return "#FDB515";
             });
 
     }
@@ -661,8 +638,6 @@ var hist = function() {
         axis_();
 
         bar.data(bins)
-            .transition()
-            .duration(1000)
             .attr("transform", function(d) {
                 return "translate(" + x(d.x0) + "," + y(d.length) + ")";
             })
@@ -675,7 +650,7 @@ var hist = function() {
                 return height - margin.bottom - y(d.length);
             })
             .attr("fill", function(d, i) {
-                return d3.hsl(50).toString();
+                return "#FDB515";
             });
 
     }
