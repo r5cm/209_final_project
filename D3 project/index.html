@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
   crossorigin=""/>
+	<link rel="stylesheet" href="css/leaflet-routing-machine.css" />
     <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
   integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
   crossorigin=""></script>
@@ -19,7 +20,16 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/d3.v4.js"></script>    
 	<script src="js/summary_table.js"></script>
+	
+	<!-- jQuery UI library -->
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> 
 
+	<!-- Google javascript api -->
+	<script async defer
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARyVcJ9bmjPNFOT_yRlEEex8-skoWTGXY">
+	</script>
+	
     <!-- Date range picker -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
@@ -54,13 +64,19 @@
       <div class="map" id="divmap">
       </div>
       <script src="js/map.js"></script>
-
-      <div id="sum_chart">
+	  
+      <script src="js/leaflet-routing-machine.js"></script>
+      <div id="address_box">
+		<!-- <input id="start-input" class="address_input" placeholder="Start point" autocomplete=off> -->
+		<!-- <input id="end-input" class="address_input" placeholder="End point" autocomplete=off> -->
+		<input id="start-input" class="address_input" placeholder="Start point">
+		<input id="end-input" class="address_input" placeholder="End point">
+		<button type="button" id="get-geometry" onclick="get_route()">Go!</button>
       </div>
+	  <script src="js/address_box.js"></script>
 	  
       <div class="t_series" id="t_series"></div>
-
-    </div> 
+	  </div> 
     	
   </body>
 </html>
