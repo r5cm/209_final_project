@@ -1,4 +1,3 @@
-var yek = 'AIzaSyARyVcJ9bmjPNFOT_yRlEEex8-skoWTGXY'
 // Create a state object to geocode.
 
 var GeocoderState = function() {
