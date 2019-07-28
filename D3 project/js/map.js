@@ -424,8 +424,8 @@ d3.csv("/data/test_data_2.csv", function(data) {
                 categories.push(category);
             };
         };
-        console.log("Categories:");
-        console.log(categories);
+        //console.log("Categories:");
+        //console.log(categories);
 
         // Add crime category menu
         d3.select("#divfilter")
@@ -455,6 +455,14 @@ d3.csv("/data/test_data_2.csv", function(data) {
             .on("change", filter_cat);
 
         var timeSeries = hist();
+
+        timeSeries.callback(function(bounds) {
+            //console.log(moment(bounds[0]));
+            $('#datetimes').data('daterangepicker').setStartDate(bounds[0]);
+            $('#datetimes').data('daterangepicker').setEndDate(bounds[1]);
+            filter_data([bounds[0], bounds[1]], 'date');
+        });
+
         timeSeries.data(data);
         timeSeries.plot();
 
@@ -501,7 +509,7 @@ d3.csv("/data/test_data_2.csv", function(data) {
 
 var hist = function() {
 
-
+    // Initialise data structures.s
     var margin = {
         "left": 20,
         "top": 5,
@@ -509,7 +517,14 @@ var hist = function() {
         "right": 20
     };
 
-    // Initialise data structures.
+    // Get/set functions.
+    var callback = function() {}
+    var callback_ = function(_) {
+        var that = this;
+        if (!arguments.length) return callback;
+        callback = _;
+        return that;
+    }
     var data = [];
     var avg = 0;
     var data_ = function(_) {
@@ -519,7 +534,7 @@ var hist = function() {
         return that;
     }
 
-    var hist;
+    var hist, brush;
 
     var x, width;
     var y, height;
@@ -610,6 +625,25 @@ var hist = function() {
             .attr("transform", "translate(0," + String(height - margin.bottom) + ")")
             .call(d3.axisBottom(x));
 
+        // Define the brush.
+        brush = d3.brushX()
+            .extent([
+                [2, 1],
+                [width - 49, height - 10]
+            ])
+            .on("end", function() {
+                // If a span is selected.
+                if (d3.event.selection) {
+                    start = d3.event.selection[0];
+                    end = d3.event.selection[1];
+                    // Convert bounds back to DateTime.
+                    callback([x.invert(start), x.invert(end)]);
+                } else {
+                    callback();
+                }
+            });
+
+
     }
 
     // Initialise the bar chart and plot data.
@@ -628,6 +662,7 @@ var hist = function() {
             });
         bar.append("rect")
             .attr("x", 1)
+            .attr("class", "bar")
             .attr("width", function(d) {
                 return x(d.x1) - x(d.x0) - 1;
             })
@@ -638,6 +673,10 @@ var hist = function() {
                 // Bar colours.
                 return "#FDB515";
             });
+
+        hist.append("g")
+            .attr("class", "brush")
+            .call(brush);
 
     }
 
@@ -670,6 +709,7 @@ var hist = function() {
         "plot": plot_,
         "data": data_,
         "refilter": refilter_,
+        "callback": callback_
     };
 
     return public;

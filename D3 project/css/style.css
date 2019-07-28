@@ -99,7 +99,7 @@ td {
 	grid-column: 2;
 }
 
-rect:hover {
+rect.bar:hover {
   fill: #E09E19;
 }
 
