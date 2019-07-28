@@ -23,6 +23,7 @@ header {
 .seal_responsive {
 	height: 13vh;
 	width:  auto;
+    padding-left: 5px;
 }
 
 
@@ -158,4 +159,21 @@ svg {
 
 .btn-group {
     padding: 10px 10px 10px 10px;
+}
+
+.latest_warning {
+
+    height: 75%;
+    float: right;
+    margin: 1% 1% 1% 1%;
+    background-color: #E09E19;
+    border-radius: 15px;
+
+    padding: 5px 5px 5px 10px;
+    overflow: hidden;
+
+    font-size: calc(0.5em + 0.4vw);
+    font-weight: normal;
+    color: white;
+
 }

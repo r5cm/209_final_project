@@ -266,7 +266,17 @@ var draw_nix_markers = function(data) {
         var pu_content = '<p>' + date + '<br /><b>' + cat + '</b><br />' + disp + '</p><a target="_blank" href="' + link + '">Read more...</a>'
         point.bindPopup(pu_content)
             .addTo(markersGroup2);
+    
+        if(i == 0) {
+
+                header_content = '<p><b>' + data[i]['DateTime'].format("DD-MM-YYYY HH:MM") + '&nbsp;&nbsp;' + cat + '</b><br />'
+                    + data[i]['title'] + ",&nbsp;" + data[i]['address'] + '<br /><a target="_blank" href="' + link + '">Read more...</a></p>';
+                document.getElementById("latest_warning").innerHTML = header_content;
+
+        }    
+
     }
+
 	// Get summary table for the first time.
 	get_visible_data_summary.call()
 }
@@ -305,6 +315,7 @@ d3.csv("/data/test_data_2.csv", function(data) {
         // Draw markers
         draw_markers(data);
         draw_nix_markers(data_nxl); 
+
 
         // Filter function
         var category_filter = false;
