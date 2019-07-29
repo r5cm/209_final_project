@@ -4,6 +4,7 @@ var GeocoderState = function() {
 	this.address = '';
 	// this.bounds = null;
 	this.country = 'US';
+	this.loc = null;
 	
 	GeocoderState.prototype.reset = function() {
 		this.query = '';
@@ -43,7 +44,6 @@ var GeocoderState = function() {
 					// '|' + request.bounds.getNorthEast().toUrlValue(6);
 			// };
 		};
-		console.log(url)
 		return url
 	};
 };
@@ -75,14 +75,13 @@ var GeocoderTool = function() {
 	GeocoderTool.prototype.handleGeocodingResponse = function(results, status) {
 		console.log(status)
 		if (status === "OK"){
-			console.log(results[0].geometry.location.lat());
+			state.loc = results[0].geometry.location;
 		};
 	};
 	// Send a request to geocode the global state. 
 	
 	GeocoderTool.prototype.geocodeState = function() {
 		var request = state.buildGeocodingRequest();
-		
 		console.log('Geocoding: ' + JSON.stringify(request));
 		geocoder.geocode(request, this.handleGeocodingResponse);
 	};
@@ -92,19 +91,62 @@ var GeocoderTool = function() {
 		state.address = document.getElementById(id).value;
 		// state.bounds = map.getBounds();
 		this.geocodeState();
+		promise = new Promise(function(resolve,reject) {
+			var wait = setInterval(function() {
+				if (state.loc !== null){
+					clearInterval(wait);
+					resolve(state.loc);
+				};
+			},50);
+		});		
+		return promise;
 	};
 };
 
+var waitForQueryOutput = function (id) {
+	var tool = new GeocoderTool();
+	promise = tool.updateStateFromSearchControl(id);
+	return promise 
+};
+	
 var get_route = function() {
 	if (document.getElementById('start-input').value.length > 0 && document.getElementById('end-input').value.length > 0) {
-		var tool = new GeocoderTool();
-		tool.updateStateFromSearchControl('start-input');
+		promise0 = waitForQueryOutput('start-input');
+		promise0.then(function(value) {
+			start_lat = value.lat();
+			start_long = value.lng();
+			promise1 = waitForQueryOutput('end-input');
+			promise1.then(function(values) {
+				end_lat = values.lat();
+				end_long = values.lng();
+				console.log(typeof(route))
+				if(typeof(route) === 'undefined') {
+					route = L.Routing.control({
+						waypoints:[L.latLng(start_lat,start_long)
+						,L.latLng(end_lat,end_long)],
+						fitSelectedRoutes: true
+					});
+					route.addTo(map);
+					route.hide();
+				}else{
+					route.setWaypoints([L.latLng(start_lat,start_long),L.latLng(end_lat,end_long)]);
+				};
+			});
+		});
 	};
 };
 
-const node = document.getElementById('end-input');
+const node0 = document.getElementById('start-input');
 
-node.addEventListener('keyup', function (event) {
+node0.addEventListener('keyup', function (event) {
+	if (event.key === "Enter") {
+		get_route();
+	};
+});
+
+const node1 = document.getElementById('end-input');
+
+node1.addEventListener('keyup', function (event) {
 	if (event.key === "Enter") {
 		get_route();
 	};

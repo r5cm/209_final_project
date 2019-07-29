@@ -20,17 +20,20 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/d3.v4.js"></script>    
 	<script src="js/summary_table.js"></script>
-	<script type='text/javascript' src='config.js'></script>
+	<script type='text/javascript' src='js/config.js'></script>
 	
 	<!-- jQuery UI library -->
 	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> 
 
 	<!-- Google javascript api -->
-	<script async defer
+	<script async defer id=javascript_maps_google></script>
+	<script>
 		var k = config.key_bsa;
-		src="https://maps.googleapis.com/maps/api/js?key=" + k>
+		url0 = 'https://maps.googleapis.com/maps/api/js?key=' + k;
+		document.getElementById('javascript_maps_google').src = url0;
 	</script>
+
 	
     <!-- Date range picker -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
@@ -75,10 +78,8 @@
 	  
       <script src="js/leaflet-routing-machine.js"></script>
       <div id="address_box">
-		<!-- <input id="start-input" class="address_input" placeholder="Start point" autocomplete=off> -->
-		<!-- <input id="end-input" class="address_input" placeholder="End point" autocomplete=off> -->
-		<input id="start-input" class="address_input" placeholder="Start point">
-		<input id="end-input" class="address_input" placeholder="End point">
+		<input id="start-input" class="address_input" placeholder="Start point" autocomplete=off>
+		<input id="end-input" class="address_input" placeholder="End point" autocomplete=off>
 		<button type="button" id="get-geometry" onclick="get_route()">Go!</button>
       </div>
 	  <script src="js/address_box.js"></script>

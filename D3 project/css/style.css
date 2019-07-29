@@ -105,6 +105,10 @@ button {
 	background-color:rgb(230, 195, 25) /*#ed5 #0072b9*/;
 }
 
+/* .leaflet-control-container .leaflet-routing-container-hide { */
+    /* display: none; */
+/* } */
+
 .t_series {
 	grid-row: 4;
 	grid-column: 2;

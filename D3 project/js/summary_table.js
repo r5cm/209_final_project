@@ -9,18 +9,21 @@ function get_visible_data_summary(){
 		if(layer instanceof L.Marker) {
 			if(map.getBounds().contains(layer.getLatLng())) {
 				//separate Logs from Nixle:
-				x = layer._popup._content 
-				if(/href/.test(x)){
-					split0 = x.split('<br />').slice(1,this.length-1) // First and last are no good.
-					if(split0[1].length > 0 && invalid_entries.includes(split0[1]) == false){
-						visible_data.push(split0[1]);
+				try {
+					x = layer._popup._content
+					if(/href/.test(x)){
+						split0 = x.split('<br />').slice(1,this.length-1) // First and last are no good.
+						if(split0[1].length > 0 && invalid_entries.includes(split0[1]) == false){
+							visible_data.push(split0[1]);
+						}else{
+							visible_data.push(split0[0].split(':').slice(-1)[0].replace(' </b>','').trim());
+						}
 					}else{
-						visible_data.push(split0[0].split(':').slice(-1)[0].replace(' </b>','').trim());
-					}
-				}else{
-					cat = layer._popup._content.match(/<br.*\/>/)[0].match(/\/b>.*</)[0].match(/>.*</)[0].replace(/[><]/g,'').replace(/br \//,'').trim(); //Regular expression to get the crime.
-					visible_data.push(cat);
-				}
+						cat = layer._popup._content.match(/<br.*\/>/)[0].match(/\/b>.*</)[0].match(/>.*</)[0].replace(/[><]/g,'').replace(/br \//,'').trim(); //Regular expression to get the crime.
+						visible_data.push(cat);
+					};
+				}catch (e){
+				};		
 			}
 		}
 	});
