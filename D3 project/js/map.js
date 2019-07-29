@@ -229,7 +229,9 @@ var draw_markers = function(data) {
         var cat = capitalizeFirstLetter(data[i]['Category']);
 
         // Create points and popups
-        var point = L.marker([lat, lon], {icon: icons[cat]});
+        var point = L.marker([lat, lon], {
+            icon: icons[cat]
+        });
         var cat_pu = '<b>Category: </b>' + cat;
         var disp_pu = '<b>Disposition: </b>' + capitalizeFirstLetter(data[i]['Disposition'])
         var pu_content = '<p>' + date + '<br />' + cat_pu + '<br />' + disp_pu + '</p>'
@@ -255,9 +257,13 @@ var draw_nix_markers = function(data) {
 
         //Create popup
         var cat = data[i]['priority'] + ': ' + data[i]['headline']
-        
-        if(data[i]['title'] == 'False') { data[i]['title'] = ''; }
-        if(data[i]['address'] == 'False') { data[i]['address'] = ''; }
+
+        if (data[i]['title'] == 'False') {
+            data[i]['title'] = '';
+        }
+        if (data[i]['address'] == 'False') {
+            data[i]['address'] = '';
+        }
 
         disp = data[i]['title'] + '<br />' + data[i]['address'];
 
@@ -266,19 +272,19 @@ var draw_nix_markers = function(data) {
         var pu_content = '<p>' + date + '<br /><b>' + cat + '</b><br />' + disp + '</p><a target="_blank" href="' + link + '">Read more...</a>'
         point.bindPopup(pu_content)
             .addTo(markersGroup2);
-    
-        if(i == 0) {
 
-                header_content = '<p><b>' + data[i]['DateTime'].format("DD-MM-YYYY HH:MM") + '&nbsp;&nbsp;' + cat + '</b><br />'
-                    + data[i]['title'] + ",&nbsp;" + data[i]['address'] + '<br /><a target="_blank" href="' + link + '">Read more...</a></p>';
-                document.getElementById("latest_warning").innerHTML = header_content;
+        if (i == 0) {
 
-        }    
+            header_content = '<p><b>' + data[i]['DateTime'].format("DD-MM-YYYY HH:MM") + '&nbsp;&nbsp;' + cat + '</b><br />' +
+                data[i]['title'] + ",&nbsp;" + data[i]['address'] + '<br /><a target="_blank" href="' + link + '">Read more...</a></p>';
+            document.getElementById("latest_warning").innerHTML = header_content;
+
+        }
 
     }
 
-	// Get summary table for the first time.
-	get_visible_data_summary.call()
+    // Get summary table for the first time.
+    get_visible_data_summary.call()
 }
 
 // View without data
@@ -304,7 +310,7 @@ d3.csv("/data/test_data_2.csv", function(data) {
         // Parse data and create data arrays
         data.forEach(function(d) {
             d['DateTime'] = moment(d['Date'], "M/D/YYYY HH:mm").utcOffset(-480);
-            d['LatLngArr'] = parseLatLng(d['LatLng']); 
+            d['LatLngArr'] = parseLatLng(d['LatLng']);
         })
         data_nxl.forEach(function(d) {
             d['DateTime'] = moment(d['Date']).utcOffset(-480);
@@ -314,7 +320,7 @@ d3.csv("/data/test_data_2.csv", function(data) {
 
         // Draw markers
         draw_markers(data);
-        draw_nix_markers(data_nxl); 
+        draw_nix_markers(data_nxl);
 
 
         // Filter function
@@ -430,19 +436,19 @@ d3.csv("/data/test_data_2.csv", function(data) {
         // Add crime category menu
         d3.select("#divfilter")
             .append("p")
-                .text("Category")
-                .attr("align", "left")
+            .text("Category")
+            .attr("align", "left")
             .append("select")
-                .attr("id", "crimeSelector")
-                .attr('class', 'form-control')
-                .selectAll("option")
-                .data(categories)
-                .enter()
+            .attr("id", "crimeSelector")
+            .attr('class', 'form-control')
+            .selectAll("option")
+            .data(categories)
+            .enter()
             .append("option")
-                .attr("class", "cat_option")
-                .text(d => capitalizeFirstLetter(d))
-                .attr("value", d => d)
-                .attr("color", "black");
+            .attr("class", "cat_option")
+            .text(d => capitalizeFirstLetter(d))
+            .attr("value", d => d)
+            .attr("color", "black");
 
         // Filter data based on crime category
         var filter_cat_val = "All";
@@ -471,37 +477,70 @@ d3.csv("/data/test_data_2.csv", function(data) {
         // Heatmap 
         //--------------
 
+
+
+
         var show_heatmap = function(_) {
-            console.log("entered add heatmap function")
-            if (!heat_act) {
+
+            if (!document.getElementById('btn_heatmap_inp').checked) {
+
                 hm_points = data_filtered_2.map(d => d['LatLngArr']);
-                console.log(hm_points);
+
+                heat = L.heatLayer(hm_points);
+                heat.addTo(map);
+
+            } else {
+                heat.remove();
+            }
+
+
+        }
+
+
+
+        var show_points = function(_) {
+
+            if (!document.getElementById('btn_points_inp').checked) {
+
+                draw_markers(data_filtered_2);
+
+
+            } else {
+
                 if (map.hasLayer(markersGroup)) {
                     markersGroup.clearLayers();
-                };
+                }
+
+
+            }
+
+        }
+
+        var show_warn = function(_) {
+
+            if (!document.getElementById('btn_warn_inp').checked) {
+
+                draw_nix_markers(data_nxl);
+
+            } else {
+
                 if (map.hasLayer(markersGroup2)) {
                     markersGroup2.clearLayers();
                 }
-                heat_act = true;
-                heat = L.heatLayer(hm_points);
-                heat.addTo(map)
-                }
+
+            }
+
         }
-        var heat_act = false; 
-        var show_points = function(_) {
-            console.log("entered remove heatmap function");
-            if (heat_act) {
-                heat.remove();
-                heat_act = false;
-                draw_markers(data_filtered_2);
-                draw_nix_markers(data_nxl);
-            };
-        }
+
+
+
         d3.select('#btn_heatmap')
             .on('click', show_heatmap);
         d3.select('#btn_points')
             .on('click', show_points);
-    }) 
+        d3.select('#btn_warn')
+            .on('click', show_warn);
+    })
 
 });
 
@@ -542,7 +581,7 @@ var hist = function() {
     // Create the binned histogram data and configure scales. 
     var setup_ = function(_) {
 
-        d3.select(window).on('resize', refilter_); 
+        d3.select(window).on('resize', refilter_);
 
         // Set geometry.
         height = parseInt(d3.select('.t_series').style('height')) - 40;
@@ -558,27 +597,28 @@ var hist = function() {
             .range([height - margin.bottom, 0]);
 
 
-        if(hist) {
+        if (hist) {
             d3.select(hist.node().parentNode).style("width", width);
             d3.select(hist.node().parentNode).style("height", height);
+        } else {
+
+            // Create canvas and scales.
+            hist = d3.select(".t_series")
+                .append("svg")
+                .attr("class", "viz")
+                .attr("width", width)
+                .attr("height", height)
+                .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
         }
-        else {
 
-        // Create canvas and scales.
-        hist = d3.select(".t_series")
-            .append("svg")
-            .attr("class", "viz")
-            .attr("width", width)
-            .attr("height", height)
-            .append("g")
-            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        var dayExtent = d3.extent(data, function(d) {
+            return d.DateTime;
+        });
 
-        }
-
-        var dayExtent = d3.extent(data, function(d) { return d.DateTime; });
-
-        var dayBins = d3.timeDays(d3.timeDay.offset(dayExtent[0],-1),
-		                                 d3.timeDay.offset(dayExtent[1],1));
+        var dayBins = d3.timeDays(d3.timeDay.offset(dayExtent[0], -1),
+            d3.timeDay.offset(dayExtent[1], 1));
 
         x.domain(d3.extent(dayBins));
 
@@ -605,7 +645,9 @@ var hist = function() {
 
         //console.log(bins);
 
-        y.domain([0, d3.max(bins, function(d) { return d.length; })]);
+        y.domain([0, d3.max(bins, function(d) {
+            return d.length;
+        })]);
 
         return bins;
 
