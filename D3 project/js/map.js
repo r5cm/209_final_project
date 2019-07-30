@@ -19,183 +19,144 @@ var nixIcon = L.icon({
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
-var i_traffic_stop = L.icon({
-    iconUrl: "../images/i_traffic_stop.png",
+var i2_other_4 = L.icon({
+    iconUrl: "../images/i2_other_4.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
-var i_welfare_check = L.icon({
-    iconUrl: "../images/i_welfare_check.png",
+
+var i2_other_3 = L.icon({
+    iconUrl: "../images/i2_other_3.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
-var i_suspicious_event = L.icon({
-    iconUrl: "../images/i_suspicious_event.png",
+
+var i2_other_2 = L.icon({
+    iconUrl: "../images/i2_other_2.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
-var i_pedestrian_stop = L.icon({
-    iconUrl: "../images/i_pedestrian_stop.png",
+var i2_property_theft_4 = L.icon({
+    iconUrl: "../images/i2_property_theft_4.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
-var i_outside_assist = L.icon({
-    iconUrl: "../images/i_outside_assist.png",
+var i2_property_theft_3 = L.icon({
+    iconUrl: "../images/i2_property_theft_3.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
-var i_maintenance_issue = L.icon({
-    iconUrl: "../images/i_maintenance_issue.png",
+var i2_vehicle_3 = L.icon({
+    iconUrl: "../images/i2_vehicle_3.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
-var i_all_other_offenses = L.icon({
-    iconUrl: "../images/i_all_other_offenses.png",
+var i2_vehicle_2 = L.icon({
+    iconUrl: "../images/i2_vehicle_2.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
-var i_larceny_theft = L.icon({
-    iconUrl: "../images/i_larceny_theft.png",
+var i2_vehicle_1 = L.icon({
+    iconUrl: "../images/i2_vehicle_1.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
-var i_vehicle_code_violation = L.icon({
-    iconUrl: "../images/i_vehicle_code_violation.png",
+var i2_local_state_2 = L.icon({
+    iconUrl: "../images/i2_local_state_2.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
-var i_forgery_and_counterfeiting = L.icon({
-    iconUrl: "../images/i_forgery_and_counterfeiting.png",
+var i2_sex_offense_4 = L.icon({
+    iconUrl: "../images/i2_sex_offense_4.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
-var i_misc_service = L.icon({
-    iconUrl: "../images/i_misc_service.png",
+var i2_police_stop_2 = L.icon({
+    iconUrl: "../images/i2_police_stop_2.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
-var i_vandalism = L.icon({
-    iconUrl: "../images/i_vandalism.png",
+var i2_hazard_4 = L.icon({
+    iconUrl: "../images/i2_hazard_4.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
-var i_disorderly_conduct = L.icon({
-    iconUrl: "../images/i_disorderly_conduct.png",
+var i2_hazard_3 = L.icon({
+    iconUrl: "../images/i2_hazard_3.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
-var i_medical_event = L.icon({
-    iconUrl: "../images/i_medical_event.png",
+var i2_hazard_2 = L.icon({
+    iconUrl: "../images/i2_hazard_2.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
-var i_missing_person = L.icon({
-    iconUrl: "../images/i_missing_person.png",
+var i2_non_crime_2 = L.icon({
+    iconUrl: "../images/i2_non_crime_2.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
-var i_other_assaults = L.icon({
-    iconUrl: "../images/i_other_assaults.png",
+var i2_non_crime_1 = L.icon({
+    iconUrl: "../images/i2_non_crime_1.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
-var i_animal_case = L.icon({
-    iconUrl: "../images/i_animal_case.png",
+var i2_animal_case_3 = L.icon({
+    iconUrl: "../images/i2_animal_case_3.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
-var i_aggravated_assaults = L.icon({
-    iconUrl: "../images/i_aggravated_assault.png",
+var i2_assault_4 = L.icon({
+    iconUrl: "../images/i2_assault_4.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
-var i_supplement = L.icon({
-    iconUrl: "../images/i_supplement.png",
-    iconSize: icon_size,
-    iconAnchor: icon_anchor,
-    popupAnchor: popup_anchor
-});
-var i_fire = L.icon({
-    iconUrl: "../images/i_fire.png",
-    iconSize: icon_size,
-    iconAnchor: icon_anchor,
-    popupAnchor: popup_anchor
-});
-var i_driving_under_the_influence = L.icon({
-    iconUrl: "../images/i_driving_under_the_influence.png",
-    iconSize: icon_size,
-    iconAnchor: icon_anchor,
-    popupAnchor: popup_anchor
-});
-var i_penal_code_violation = L.icon({
-    iconUrl: "../images/i_penal_code_violation.png",
-    iconSize: icon_size,
-    iconAnchor: icon_anchor,
-    popupAnchor: popup_anchor
-});
-var i_california = L.icon({
-    iconUrl: "../images/i_california.png",
-    iconSize: icon_size,
-    iconAnchor: icon_anchor,
-    popupAnchor: popup_anchor
-});
-var i_weapons_violations = L.icon({
-    iconUrl: "../images/i_weapons_violations.png",
-    iconSize: icon_size,
-    iconAnchor: icon_anchor,
-    popupAnchor: popup_anchor
-});
-var i_tow = L.icon({
-    iconUrl: "../images/i_tow.png",
+var i2_fraud_3 = L.icon({
+    iconUrl: "../images/i2_fraud_3.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
 
 var icons = {
-    "Traffic stop": i_traffic_stop,
-    "Welfare check": i_welfare_check,
-    "Suspicious event": i_suspicious_event,
-    "Pedestrian stop": i_pedestrian_stop,
-    "Outside assist": i_outside_assist,
-    "Maintenance issue": i_maintenance_issue,
-    "All other offenses": i_all_other_offenses,
-    "Larceny/theft": i_larceny_theft,
-    "Vehicle code violation": i_vehicle_code_violation,
-    "Forgery and counterfeiting": i_forgery_and_counterfeiting,
-    "Misc. service": i_misc_service,
-    "Vandalism": i_vandalism,
-    "Disorderly conduct": i_disorderly_conduct,
-    "Medical event": i_medical_event,
-    "Missing person": i_missing_person,
-    "Other assaults": i_other_assaults,
-    "Animal case": i_animal_case,
-    "Aggravated assaults": i_aggravated_assaults,
-    "Supplement": i_supplement,
-    "Fire": i_fire,
-    "Driving under the influence": i_driving_under_the_influence,
-    "Penal code violation": i_penal_code_violation,
-    "California code of regulations violations": i_california,
-    "Weapons violations": i_weapons_violations,
-    "Tow": i_tow
+    "i2_other_4": i2_other_4,
+    "i2_other_3": i2_other_3,
+    "i2_other_2": i2_other_2,
+    "i2_property_damage_theft_4": i2_property_theft_4,
+    "i2_property_damage_theft_3": i2_property_theft_3,
+    "i2_vehicle_3": i2_vehicle_3, 
+    "i2_vehicle_2": i2_vehicle_2, 
+    "i2_vehicle_1": i2_vehicle_1, 
+    "i2_local_state_law_2": i2_local_state_2,
+    "i2_sex_offense_4": i2_sex_offense_4,
+    "i2_police_stop_2": i2_police_stop_2,
+    "i2_hazard_4": i2_hazard_4,
+    "i2_hazard_3": i2_hazard_3,
+    "i2_hazard_2": i2_hazard_2,
+    "i2_non_crime_2": i2_non_crime_2,
+    "i2_non_crime_1": i2_non_crime_1,
+    "i2_animal_case_3": i2_animal_case_3,
+    "i2_assault_4": i2_assault_4,
+    "i2_fraud_3": i2_fraud_3,
+    "undefined": i2_other_2
 };
 
 // Capitalize first letter function
@@ -230,14 +191,17 @@ var draw_markers = function(data) {
 
         // Create points and popups
         var point = L.marker([lat, lon], {
-            icon: icons[cat]
+            icon: icons[data[i]['Icon']]
         });
         var cat_pu = '<b>Category: </b>' + cat;
         var disp_pu = '<b>Disposition: </b>' + capitalizeFirstLetter(data[i]['Disposition'])
         var pu_content = '<p>' + date + '<br />' + cat_pu + '<br />' + disp_pu + '</p>'
-        point.bindPopup(pu_content)
-            .addTo(markersGroup);
-        //console.log(data[i]);
+        try { 
+            point.bindPopup(pu_content)
+                .addTo(markersGroup);
+        } catch {
+            console.log(data[i]);
+        }
     };
 }
 
@@ -299,6 +263,15 @@ function initializePage() {
 }
 initializePage();
 
+// get equivalences function
+var get_equivalence = function(search_obj, in_obj, return_var) {
+    if (search_obj['Category'] in in_obj) {
+        return in_obj[search_obj['Category']][return_var];
+    } else {
+        return 'undefined';
+    };
+};
+
 //-------------------------
 // Build view
 //-------------------------
@@ -306,242 +279,251 @@ initializePage();
 // Add data
 d3.csv("/data/test_data_2.csv", function(data) {
     d3.csv("/data/n_latest.csv", function(data_nxl) {
+        d3.csv("/data/category_grouping.csv", function(data_cats) {
 
-        // Parse data and create data arrays
-        data.forEach(function(d) {
-            d['DateTime'] = moment(d['Date'], "M/D/YYYY HH:mm").utcOffset(-480);
-            d['LatLngArr'] = parseLatLng(d['LatLng']);
-        })
-        data_nxl.forEach(function(d) {
-            d['DateTime'] = moment(d['Date']).utcOffset(-480);
-        })
-        data_filtered_1 = data;
-        data_filtered_2 = data;
+            // Parse categories table
+            cats_equiv = {};
+            data_cats.forEach(function(d) {
+                row = {}
+                key = d['category'] 
+                value = {}
+                value['category_correct'] = d['category_correct'] 
+                value['risk'] = d['risk']
+                value['super_category'] = d['super_category']
+                value['icon'] = 'i2_' + d['super_category'] + '_' + d['risk'] 
+                cats_equiv[key] = value
+            })
 
-        // Draw markers
-        draw_markers(data);
-        draw_nix_markers(data_nxl);
+            // Parse data and create data arrays
+            data.forEach(function(d) {
+                d['DateTime'] = moment(d['Date'], "M/D/YYYY HH:mm").utcOffset(-480);
+                d['LatLngArr'] = parseLatLng(d['LatLng']);
+                d['Risk'] = get_equivalence(d, cats_equiv, 'risk') 
+                d['Icon'] = get_equivalence(d, cats_equiv, 'icon') 
+                d['SuperCategory'] = get_equivalence(d, cats_equiv, 'super_category') 
+                d['Category'] = get_equivalence(d, cats_equiv, 'category_correct') 
+            })
 
+            data_nxl.forEach(function(d) {
+                d['DateTime'] = moment(d['Date']).utcOffset(-480);
+            })
+            data_filtered_1 = data;
+            data_filtered_2 = data;
 
-        // Filter function
-        var category_filter = false;
-        var start_date_filter = false;
-        var end_date_filter = false;
-        var filter_data = function(value, type) {
-            if (map.hasLayer(markersGroup)) {
-                markersGroup.clearLayers();
-            };
-            // Set filter values
-            if (type == 'category') {
-                category_filter = value;
-            }
-            if (type == 'date') {
-                start_date_filter = value[0];
-                end_date_filter = value[1];
-            }
-            // Filter category
-            data_filtered_1 = [];
-            if (category_filter == "All" || !category_filter) {
-                data_filtered_1 = data;
-            } else {
-                for (var i = 0; i < data.length; i++) {
-                    if (data[i]['Category'] == value) data_filtered_1.push(data[i]);
-                };
-            };
-            // Filter date
-            if (start_date_filter) {
-                data_filtered_2 = [];
-                for (var i = 0; i < data_filtered_1.length; i++) {
-                    var record = data_filtered_1[i];
-                    if (start_date_filter <= record['DateTime'] && record['DateTime'] <= end_date_filter) {
-                        data_filtered_2.push(record);
-                    };
-                };
-                // Add filtered markers
-                draw_markers(data_filtered_2);
-            } else {
-                // Add filtered markers
-                console.log(data_filtered_1);
-                draw_markers(data_filtered_1);
-            };
+            // Draw datasets to console
+            console.log('Daily crime log:')
+            console.log(data)            
+            console.log('Categories equivalences:')
+            console.log(cats_equiv)
+            console.log('Nixle:')
+            console.log(data_nxl)
 
-        };
+            // Draw markers
+            draw_markers(data);
+            draw_nix_markers(data_nxl);
 
-        //--------------
-        // Date filter
-        //--------------
-
-        // Get date range
-        var min_date = moment();
-        var max_date = moment().subtract(100, 'years');
-        for (var i = 0; i < data.length; i++) {
-            var date = data[i]['DateTime'];
-            if (date < min_date) min_date = date;
-            if (date > max_date) max_date = date;
-        }
-        console.log("Min date = " + min_date + " Max date: " + max_date);
-
-        // Add input menu
-        d3.select('#divfilter')
-            .append('p')
-            .text("Date/Time")
-            .attr('align', 'left')
-        d3.select('#divfilter')
-            .append('input')
-            .attr('class', 'form-control')
-            .attr('type', 'text')
-            .attr('align', 'right')
-            .attr('name', 'datetimes')
-            .attr('id', 'datetimes')
-
-
-        $('#datetimes').daterangepicker({
-            ranges: {
-                'All dates': [moment().subtract(5, 'years', moment())],
-                'Today': [moment(), moment().add(1, 'days')],
-                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                'This Month': [moment().startOf('month'), moment().endOf('month')],
-                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
-                'This year': [moment().startOf('year'), moment()]
-            },
-
-            "alwaysShowCalendars": true,
-            "timePicker": true,
-            "timePicker24Hour": true,
-            "timePickerIncrement": 15,
-            "startDate": moment().subtract(6, 'days'),
-            "endDate": moment(),
-        }, function(start, end, label) {
-            console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
-            filter_data([start, end], 'date');
-        });
-
-        //--------------
-        // Crime filter
-        //--------------
-
-        // Get unique crime categories
-        var categories = ['All'];
-        for (var i = 0; i < data.length; i++) {
-            var category = data[i]['Category'];
-            if (categories.indexOf(category) < 0) {
-                categories.push(category);
-            };
-        };
-        //console.log("Categories:");
-        //console.log(categories);
-
-        // Add crime category menu
-        d3.select("#divfilter")
-            .append("p")
-            .text("Category")
-            .attr("align", "left")
-            .append("select")
-            .attr("id", "crimeSelector")
-            .attr('class', 'form-control')
-            .selectAll("option")
-            .data(categories)
-            .enter()
-            .append("option")
-            .attr("class", "cat_option")
-            .text(d => capitalizeFirstLetter(d))
-            .attr("value", d => d)
-            .attr("color", "black");
-
-        // Filter data based on crime category
-        var filter_cat_val = "All";
-        var filter_cat = function() {
-            filter_cat_val = d3.select(this).property('value');
-            console.log("Category selected: " + filter_cat_val);
-            filter_data(filter_cat_val, 'category');
-        };
-        d3.select('#crimeSelector')
-            .on("change", filter_cat);
-
-        var timeSeries = hist();
-
-        timeSeries.callback(function(bounds) {
-            //console.log(moment(bounds[0]));
-            $('#datetimes').data('daterangepicker').setStartDate(bounds[0]);
-            $('#datetimes').data('daterangepicker').setEndDate(bounds[1]);
-            filter_data([bounds[0], bounds[1]], 'date');
-        });
-
-        timeSeries.data(data);
-        timeSeries.plot();
-
-
-        //--------------
-        // Heatmap 
-        //--------------
-
-
-
-
-        var show_heatmap = function(_) {
-
-            if (!document.getElementById('btn_heatmap_inp').checked) {
-
-                hm_points = data_filtered_2.map(d => d['LatLngArr']);
-
-                heat = L.heatLayer(hm_points);
-                heat.addTo(map);
-
-            } else {
-                heat.remove();
-            }
-
-
-        }
-
-
-
-        var show_points = function(_) {
-
-            if (!document.getElementById('btn_points_inp').checked) {
-
-                draw_markers(data_filtered_2);
-
-
-            } else {
-
+            // Filter function
+            var category_filter = false;
+            var start_date_filter = false;
+            var end_date_filter = false;
+            var filter_data = function(value, type) {
                 if (map.hasLayer(markersGroup)) {
                     markersGroup.clearLayers();
+                };
+                // Set filter values
+                if (type == 'category') {
+                    category_filter = value;
                 }
+                if (type == 'date') {
+                    start_date_filter = value[0];
+                    end_date_filter = value[1];
+                }
+                // Filter category
+                data_filtered_1 = [];
+                if (category_filter == "All" || !category_filter) {
+                    data_filtered_1 = data;
+                } else {
+                    for (var i = 0; i < data.length; i++) {
+                        if (data[i]['Category'] == value) data_filtered_1.push(data[i]);
+                    };
+                };
+                // Filter date
+                if (start_date_filter) {
+                    data_filtered_2 = [];
+                    for (var i = 0; i < data_filtered_1.length; i++) {
+                        var record = data_filtered_1[i];
+                        if (start_date_filter <= record['DateTime'] && record['DateTime'] <= end_date_filter) {
+                            data_filtered_2.push(record);
+                        };
+                    };
+                    // Add filtered markers
+                    draw_markers(data_filtered_2);
+                } else {
+                    // Add filtered markers
+                    console.log(data_filtered_1);
+                    draw_markers(data_filtered_1);
+                };
 
+            };
+
+            //--------------
+            // Date filter
+            //--------------
+
+            // Get date range
+            var min_date = moment();
+            var max_date = moment().subtract(100, 'years');
+            for (var i = 0; i < data.length; i++) {
+                var date = data[i]['DateTime'];
+                if (date < min_date) min_date = date;
+                if (date > max_date) max_date = date;
+            }
+            console.log("Min date = " + min_date + " Max date: " + max_date);
+
+            // Add input menu
+            d3.select('#divfilter')
+                .append('p')
+                .text("Date/Time")
+                .attr('align', 'left')
+            d3.select('#divfilter')
+                .append('input')
+                .attr('class', 'form-control')
+                .attr('type', 'text')
+                .attr('align', 'right')
+                .attr('name', 'datetimes')
+                .attr('id', 'datetimes')
+
+
+            $('#datetimes').daterangepicker({
+                ranges: {
+                    'All dates': [moment().subtract(5, 'years', moment())],
+                    'Today': [moment(), moment().add(1, 'days')],
+                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                    'This Month': [moment().startOf('month'), moment().endOf('month')],
+                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+                    'This year': [moment().startOf('year'), moment()]
+                },
+
+                "alwaysShowCalendars": true,
+                "timePicker": true,
+                "timePicker24Hour": true,
+                "timePickerIncrement": 15,
+                "startDate": moment().subtract(6, 'days'),
+                "endDate": moment(),
+            }, function(start, end, label) {
+                console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+                filter_data([start, end], 'date');
+            });
+
+            //--------------
+            // Crime filter
+            //--------------
+
+            // Get unique crime categories
+            var categories = ['All'];
+            for (var i = 0; i < data.length; i++) {
+                var category = data[i]['Category'];
+                if (categories.indexOf(category) < 0) {
+                    categories.push(category);
+                };
+            };
+            //console.log("Categories:");
+            //console.log(categories);
+
+            // Add crime category menu
+            d3.select("#divfilter")
+                .append("p")
+                .text("Category")
+                .attr("align", "left")
+                .append("select")
+                .attr("id", "crimeSelector")
+                .attr('class', 'form-control')
+                .selectAll("option")
+                .data(categories)
+                .enter()
+                .append("option")
+                .attr("class", "cat_option")
+                .text(d => capitalizeFirstLetter(d))
+                .attr("value", d => d)
+                .attr("color", "black");
+
+            // Filter data based on crime category
+            var filter_cat_val = "All";
+            var filter_cat = function() {
+                filter_cat_val = d3.select(this).property('value');
+                console.log("Category selected: " + filter_cat_val);
+                filter_data(filter_cat_val, 'category');
+            };
+            d3.select('#crimeSelector')
+                .on("change", filter_cat);
+
+            var timeSeries = hist();
+
+            timeSeries.callback(function(bounds) {
+                //console.log(moment(bounds[0]));
+                $('#datetimes').data('daterangepicker').setStartDate(bounds[0]);
+                $('#datetimes').data('daterangepicker').setEndDate(bounds[1]);
+                filter_data([bounds[0], bounds[1]], 'date');
+            });
+
+            timeSeries.data(data);
+            timeSeries.plot();
+
+
+            //--------------
+            // Heatmap 
+            //--------------
+
+            var show_heatmap = function(_) {
+                if (!document.getElementById('btn_heatmap_inp').checked) {
+                    hm_points = data_filtered_2.map(d => d['LatLngArr']);
+                    heat = L.heatLayer(hm_points);
+                    heat.addTo(map);
+                } else {
+                    heat.remove();
+                }
+            }
+
+            var show_points = function(_) {
+                if (!document.getElementById('btn_points_inp').checked) {
+                    draw_markers(data_filtered_2);
+                } else {
+
+                    if (map.hasLayer(markersGroup)) {
+                        markersGroup.clearLayers();
+                    }
+
+
+                }
 
             }
 
-        }
+            var show_warn = function(_) {
 
-        var show_warn = function(_) {
+                if (!document.getElementById('btn_warn_inp').checked) {
 
-            if (!document.getElementById('btn_warn_inp').checked) {
+                    draw_nix_markers(data_nxl);
 
-                draw_nix_markers(data_nxl);
+                } else {
 
-            } else {
+                    if (map.hasLayer(markersGroup2)) {
+                        markersGroup2.clearLayers();
+                    }
 
-                if (map.hasLayer(markersGroup2)) {
-                    markersGroup2.clearLayers();
                 }
 
             }
 
-        }
-
-
-
-        d3.select('#btn_heatmap')
-            .on('click', show_heatmap);
-        d3.select('#btn_points')
-            .on('click', show_points);
-        d3.select('#btn_warn')
-            .on('click', show_warn);
+            d3.select('#btn_heatmap')
+                .on('click', show_heatmap);
+            d3.select('#btn_points')
+                .on('click', show_points);
+            d3.select('#btn_warn')
+                .on('click', show_warn);
+        })
     })
-
 });
 
 
