@@ -326,6 +326,8 @@ d3.csv("/data/test_data_2.csv", function(data) {
             var category_filter = false;
             var start_date_filter = false;
             var end_date_filter = false;
+            var data_filtered_1 = []
+            var data_filtered_2 = [] 
             var filter_data = function(value, type) {
                 if (map.hasLayer(markersGroup)) {
                     markersGroup.clearLayers();
@@ -347,6 +349,7 @@ d3.csv("/data/test_data_2.csv", function(data) {
                         if (data[i]['Category'] == value) data_filtered_1.push(data[i]);
                     };
                 };
+                data_filtered_2 = data_filtered_1;
                 // Filter date
                 if (start_date_filter) {
                     data_filtered_2 = [];
@@ -356,14 +359,8 @@ d3.csv("/data/test_data_2.csv", function(data) {
                             data_filtered_2.push(record);
                         };
                     };
-                    // Add filtered markers
-                    draw_markers(data_filtered_2);
-                } else {
-                    // Add filtered markers
-                    console.log(data_filtered_1);
-                    draw_markers(data_filtered_1);
                 };
-
+                draw_markers(data_filtered_2);
             };
 
             //--------------
