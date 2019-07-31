@@ -326,9 +326,8 @@ d3.csv("/data/test_data_2.csv", function(data) {
             var category_filter = false;
             var start_date_filter = false;
             var end_date_filter = false;
-            var data_filtered_1 = []
-            var data_filtered_2 = [] 
             var filter_data = function(value, type) {
+                data_filtered_1 = data; 
                 if (map.hasLayer(markersGroup)) {
                     markersGroup.clearLayers();
                 };
@@ -341,10 +340,11 @@ d3.csv("/data/test_data_2.csv", function(data) {
                     end_date_filter = value[1];
                 }
                 // Filter category
-                data_filtered_1 = [];
+                // data_filtered_1 = [];
                 if (category_filter == "All" || !category_filter) {
                     data_filtered_1 = data;
                 } else {
+                    data_filtered_1 = []
                     for (var i = 0; i < data.length; i++) {
                         if (data[i]['Category'] == value) data_filtered_1.push(data[i]);
                     };
@@ -360,7 +360,9 @@ d3.csv("/data/test_data_2.csv", function(data) {
                         };
                     };
                 };
-                draw_markers(data_filtered_2);
+                if (document.getElementById('btn_points_inp').checked) {
+                    draw_markers(data_filtered_2);
+                }; 
             };
 
             //--------------
@@ -487,6 +489,8 @@ d3.csv("/data/test_data_2.csv", function(data) {
                 if (!document.getElementById('btn_points_inp').checked) {
                     draw_markers(data_filtered_2);
                 } else {
+                    console.log("Entered hide points")
+                    console.log(map.hasLayer(markersGroup))
 
                     if (map.hasLayer(markersGroup)) {
                         markersGroup.clearLayers();
