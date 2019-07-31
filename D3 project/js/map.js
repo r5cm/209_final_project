@@ -208,6 +208,7 @@ var draw_markers = function(data) {
         } catch {
             console.log(data[i]);
         }
+		get_visible_data_summary()
     };
 }
 
@@ -254,7 +255,7 @@ var draw_nix_markers = function(data) {
     }
 
     // Get summary table for the first time.
-    get_visible_data_summary.call()
+    get_visible_data_summary()
 }
 
 // View without data
@@ -388,7 +389,7 @@ d3.csv("./data/test_data_2.csv", function(data) {
             // Add input menu
             d3.select('#divfilter')
                 .append('p')
-                .text("Date/Time")
+                .text("Filter by Date/Hour")
                 .attr('align', 'left')
             d3.select('#divfilter')
                 .append('input')
@@ -500,6 +501,7 @@ d3.csv("./data/test_data_2.csv", function(data) {
 
                     if (map.hasLayer(markersGroup)) {
                         markersGroup.clearLayers();
+						get_visible_data_summary();
                     }
 
 
@@ -517,6 +519,7 @@ d3.csv("./data/test_data_2.csv", function(data) {
 
                     if (map.hasLayer(markersGroup2)) {
                         markersGroup2.clearLayers();
+						get_visible_data_summary();
                     }
 
                 }

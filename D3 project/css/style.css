@@ -67,10 +67,11 @@ table {
 	font-size: calc(0.4em + 0.45vw);
 	margin-left: calc(1em + 0.1vw);
 	margin-right: calc(1em + 0.1vw);
-	width: 80%;
+	width: 90%;
+	overflow: hidden;
 }
 
-tr:nth-child(odd) {
+.tr_text:nth-child(odd) {
     background: #002547;
 }
 
