@@ -4,9 +4,9 @@ var attribution_text = 'Map data &copy; <a href="http://openstreetmap.org">OpenS
 var burglar_url = 'https://github.com/r5cm/209_final_project/blob/master/D3%20project/images/bandit-icon-529521.png?raw=true'
 var gun_url = 'https://github.com/r5cm/209_final_project/blob/master/D3%20project/images/icon_gun.png?raw=true'
 var icons = {
-    "TRAFFIC STOP": "../images/i_traffic_stop.png"
+    "TRAFFIC STOP": "./images/i_traffic_stop.png"
 }
-var nix_url = '/images/warning.png'
+var nix_url = './images/warning.png'
 
 // Icon variables
 var icon_size = [30, 30];
@@ -20,123 +20,123 @@ var nixIcon = L.icon({
     popupAnchor: popup_anchor
 });
 var i2_other_4 = L.icon({
-    iconUrl: "../images/i2_other_4.png",
+    iconUrl: "./images/i2_other_4.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
 
 var i2_other_3 = L.icon({
-    iconUrl: "../images/i2_other_3.png",
+    iconUrl: "./images/i2_other_3.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
 
 var i2_other_2 = L.icon({
-    iconUrl: "../images/i2_other_2.png",
+    iconUrl: "./images/i2_other_2.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
 var i2_property_theft_4 = L.icon({
-    iconUrl: "../images/i2_property_theft_4.png",
+    iconUrl: "./images/i2_property_theft_4.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
 var i2_property_theft_3 = L.icon({
-    iconUrl: "../images/i2_property_theft_3.png",
+    iconUrl: "./images/i2_property_theft_3.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
 var i2_vehicle_3 = L.icon({
-    iconUrl: "../images/i2_vehicle_3.png",
+    iconUrl: "./images/i2_vehicle_3.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
 var i2_vehicle_2 = L.icon({
-    iconUrl: "../images/i2_vehicle_2.png",
+    iconUrl: "./images/i2_vehicle_2.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
 var i2_vehicle_1 = L.icon({
-    iconUrl: "../images/i2_vehicle_1.png",
+    iconUrl: "./images/i2_vehicle_1.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
 var i2_local_state_2 = L.icon({
-    iconUrl: "../images/i2_local_state_2.png",
+    iconUrl: "./images/i2_local_state_2.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
 var i2_sex_offense_4 = L.icon({
-    iconUrl: "../images/i2_sex_offense_4.png",
+    iconUrl: "./images/i2_sex_offense_4.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
 var i2_police_stop_2 = L.icon({
-    iconUrl: "../images/i2_police_stop_2.png",
+    iconUrl: "./images/i2_police_stop_2.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
 var i2_hazard_4 = L.icon({
-    iconUrl: "../images/i2_hazard_4.png",
+    iconUrl: "./images/i2_hazard_4.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
 var i2_hazard_3 = L.icon({
-    iconUrl: "../images/i2_hazard_3.png",
+    iconUrl: "./images/i2_hazard_3.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
 var i2_hazard_2 = L.icon({
-    iconUrl: "../images/i2_hazard_2.png",
+    iconUrl: "./images/i2_hazard_2.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
 var i2_non_crime_2 = L.icon({
-    iconUrl: "../images/i2_non_crime_2.png",
+    iconUrl: "./images/i2_non_crime_2.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
 var i2_non_crime_1 = L.icon({
-    iconUrl: "../images/i2_non_crime_1.png",
+    iconUrl: "./images/i2_non_crime_1.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
 var i2_animal_case_3 = L.icon({
-    iconUrl: "../images/i2_animal_case_3.png",
+    iconUrl: "./images/i2_animal_case_3.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
 var i2_assault_4 = L.icon({
-    iconUrl: "../images/i2_assault_4.png",
+    iconUrl: "./images/i2_assault_4.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
 var i2_fraud_3 = L.icon({
-    iconUrl: "../images/i2_fraud_3.png",
+    iconUrl: "./images/i2_fraud_3.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
 var i2_undefined_3= L.icon({
-    iconUrl: "../images/i2_undefined_3.png",
+    iconUrl: "./images/i2_undefined_3.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
@@ -283,9 +283,9 @@ var get_equivalence = function(search_obj, in_obj, return_var) {
 //-------------------------
 
 // Add data
-d3.csv("/data/test_data_2.csv", function(data) {
-    d3.csv("/data/n_latest.csv", function(data_nxl) {
-        d3.csv("/data/category_grouping.csv", function(data_cats) {
+d3.csv("./data/test_data_2.csv", function(data) {
+    d3.csv("./data/n_latest.csv", function(data_nxl) {
+        d3.csv("./data/category_grouping.csv", function(data_cats) {
 
             // Parse categories table
             cats_equiv = {};
