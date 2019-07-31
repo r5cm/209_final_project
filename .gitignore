@@ -2,3 +2,5 @@
 *config.js
 .gitignore
 *.xlsx
+*test.py
+*D3 project/__pycache__/

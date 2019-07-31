@@ -4,9 +4,9 @@ var attribution_text = 'Map data &copy; <a href="http://openstreetmap.org">OpenS
 var burglar_url = 'https://github.com/r5cm/209_final_project/blob/master/D3%20project/images/bandit-icon-529521.png?raw=true'
 var gun_url = 'https://github.com/r5cm/209_final_project/blob/master/D3%20project/images/icon_gun.png?raw=true'
 var icons = {
-    "TRAFFIC STOP": "./images/i_traffic_stop.png"
+    "TRAFFIC STOP": "static/images/i_traffic_stop.png"
 }
-var nix_url = './images/warning.png'
+var nix_url = 'static/images/warning.png'
 
 // Icon variables
 var icon_size = [30, 30];
@@ -20,123 +20,123 @@ var nixIcon = L.icon({
     popupAnchor: popup_anchor
 });
 var i2_other_4 = L.icon({
-    iconUrl: "./images/i2_other_4.png",
+    iconUrl: "static/images/i2_other_4.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
 
 var i2_other_3 = L.icon({
-    iconUrl: "./images/i2_other_3.png",
+    iconUrl: "static/images/i2_other_3.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
 
 var i2_other_2 = L.icon({
-    iconUrl: "./images/i2_other_2.png",
+    iconUrl: "static/images/i2_other_2.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
 var i2_property_theft_4 = L.icon({
-    iconUrl: "./images/i2_property_theft_4.png",
+    iconUrl: "static/images/i2_property_theft_4.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
 var i2_property_theft_3 = L.icon({
-    iconUrl: "./images/i2_property_theft_3.png",
+    iconUrl: "static/images/i2_property_theft_3.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
 var i2_vehicle_3 = L.icon({
-    iconUrl: "./images/i2_vehicle_3.png",
+    iconUrl: "static/images/i2_vehicle_3.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
 var i2_vehicle_2 = L.icon({
-    iconUrl: "./images/i2_vehicle_2.png",
+    iconUrl: "static/images/i2_vehicle_2.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
 var i2_vehicle_1 = L.icon({
-    iconUrl: "./images/i2_vehicle_1.png",
+    iconUrl: "static/images/i2_vehicle_1.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
 var i2_local_state_2 = L.icon({
-    iconUrl: "./images/i2_local_state_2.png",
+    iconUrl: "static/images/i2_local_state_2.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
 var i2_sex_offense_4 = L.icon({
-    iconUrl: "./images/i2_sex_offense_4.png",
+    iconUrl: "static/images/i2_sex_offense_4.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
 var i2_police_stop_2 = L.icon({
-    iconUrl: "./images/i2_police_stop_2.png",
+    iconUrl: "static/images/i2_police_stop_2.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
 var i2_hazard_4 = L.icon({
-    iconUrl: "./images/i2_hazard_4.png",
+    iconUrl: "static/images/i2_hazard_4.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
 var i2_hazard_3 = L.icon({
-    iconUrl: "./images/i2_hazard_3.png",
+    iconUrl: "static/images/i2_hazard_3.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
 var i2_hazard_2 = L.icon({
-    iconUrl: "./images/i2_hazard_2.png",
+    iconUrl: "static/images/i2_hazard_2.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
 var i2_non_crime_2 = L.icon({
-    iconUrl: "./images/i2_non_crime_2.png",
+    iconUrl: "static/images/i2_non_crime_2.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
 var i2_non_crime_1 = L.icon({
-    iconUrl: "./images/i2_non_crime_1.png",
+    iconUrl: "static/images/i2_non_crime_1.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
 var i2_animal_case_3 = L.icon({
-    iconUrl: "./images/i2_animal_case_3.png",
+    iconUrl: "static/images/i2_animal_case_3.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
 var i2_assault_4 = L.icon({
-    iconUrl: "./images/i2_assault_4.png",
+    iconUrl: "static/images/i2_assault_4.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
 var i2_fraud_3 = L.icon({
-    iconUrl: "./images/i2_fraud_3.png",
+    iconUrl: "static/images/i2_fraud_3.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
 var i2_undefined_3= L.icon({
-    iconUrl: "./images/i2_undefined_3.png",
+    iconUrl: "static/images/i2_undefined_3.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
@@ -284,9 +284,9 @@ var get_equivalence = function(search_obj, in_obj, return_var) {
 //-------------------------
 
 // Add data
-d3.csv("./data/test_data_2.csv", function(data) {
-    d3.csv("./data/n_latest.csv", function(data_nxl) {
-        d3.csv("./data/category_grouping.csv", function(data_cats) {
+d3.csv("./static/data/test_data_2.csv", function(data) {
+    d3.csv("./static/data/n_latest.csv", function(data_nxl) {
+        d3.csv("./static/data/category_grouping.csv", function(data_cats) {
 
             // Parse categories table
             cats_equiv = {};
@@ -576,8 +576,9 @@ var hist = function() {
         d3.select(window).on('resize', refilter_);
 
         // Set geometry.
-        height = parseInt(d3.select('.t_series').style('height')) - 40;
-        width = parseInt(d3.select('.t_series').style('width')) - 20;
+        
+		height = parseInt(d3.select('.t_series').style('height')) - 40; //This one has a bug
+        width = parseInt(d3.select('.t_series').style('width')) - 20; // This one someone starts before the data loads. 
 
 
         //console.log(width);
@@ -720,22 +721,24 @@ var hist = function() {
 
         bins = setup_(bounds);
         axis_();
-
-        bar.data(bins)
-            .attr("transform", function(d) {
-                return "translate(" + x(d.x0) + "," + y(d.length) + ")";
-            })
-            .select("rect")
-            .attr("x", 1)
-            .attr("width", function(d) {
-                return x(d.x1) - x(d.x0) - 1;
-            })
-            .attr("height", function(d) {
-                return height - margin.bottom - y(d.length);
-            })
-            .attr("fill", function(d, i) {
-                return "#FDB515";
-            });
+		try {
+			bar.data(bins)
+				.attr("transform", function(d) {
+					return "translate(" + x(d.x0) + "," + y(d.length) + ")";
+				})
+				.select("rect")
+				.attr("x", 1)
+				.attr("width", function(d) {
+					return x(d.x1) - x(d.x0) - 1;
+				})
+				.attr("height", function(d) {
+					return height - margin.bottom - y(d.length);
+				})
+				.attr("fill", function(d, i) {
+					return "#FDB515";
+				});
+		}catch (e) {
+		}
 
     }
 

@@ -119,7 +119,6 @@ var get_route = function() {
 			promise1.then(function(values) {
 				end_lat = values.lat();
 				end_long = values.lng();
-				console.log(typeof(route))
 				if(typeof(route) === 'undefined') {
 					route = L.Routing.control({
 						waypoints:[L.latLng(start_lat,start_long)

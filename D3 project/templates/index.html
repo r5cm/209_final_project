@@ -4,23 +4,23 @@
     <meta charset="utf-8">
     <title>Berkeley Security Advice</title>	
     <!-- css -->
-  	<link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
+  	<link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
     <!-- Leaflet -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
   crossorigin=""/>
-	<link rel="stylesheet" href="css/leaflet-routing-machine.css" />
-    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+	<link rel="stylesheet" href="/static/css/leaflet-routing-machine.css" />
+    <script type="text/javascript" src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
   integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
   crossorigin=""></script>
-    <script src="./js/leaflet-heat.js"></script>
+    <script type="text/javascript" src="/static/js/leaflet-heat.js"></script>
     <!-- Others -->
-    <script src="js/jquery-1.11.0.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/d3.v4.js"></script>    
-	<script src="js/summary_table.js"></script>
-	<script type='text/javascript' src='js/config.js'></script>
+    <script src="/static/js/jquery-1.11.0.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/d3.v4.js"></script>    
+	<script src="/static/js/summary_table.js"></script>
+	<script type='text/javascript' src='../static/js/config.js'></script>
 	
 	<!-- jQuery UI library -->
 	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
@@ -47,7 +47,7 @@
     <div class="grid">
 
       <header>
-        <img src="images/Seal.png" class="seal_responsive">
+        <img src="/static/images/Seal.png" class="seal_responsive">
 		UC Berkeley Security Advice
         <div class="latest_warning" id="latest_warning"></div>
       </header>
@@ -74,15 +74,15 @@
 
       <div class="map" id="divmap">
       </div>
-      <script src="js/map.js"></script>
+      <script type="text/javascript" src="/static/js/map.js"></script>
 	  
-      <script src="js/leaflet-routing-machine.js"></script>
+	  <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
       <div id="address_box">
 		<input id="start-input" class="address_input" placeholder="Start point" autocomplete=off>
 		<input id="end-input" class="address_input" placeholder="End point" autocomplete=off>
 		<button type="button" id="get-geometry" onclick="get_route()">Go!</button>
       </div>
-	  <script src="js/address_box.js"></script>
+	  <script type="text/javascript" src="static/js/address_box.js"></script>
 	  
       <div class="t_series" id="t_series"></div>
 	  </div> 
