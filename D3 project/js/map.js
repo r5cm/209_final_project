@@ -135,6 +135,12 @@ var i2_fraud_3 = L.icon({
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
+var i2_undefined_3= L.icon({
+    iconUrl: "../images/i2_undefined_3.png",
+    iconSize: icon_size,
+    iconAnchor: icon_anchor,
+    popupAnchor: popup_anchor
+});
 
 var icons = {
     "i2_other_4": i2_other_4,
@@ -156,7 +162,7 @@ var icons = {
     "i2_animal_case_3": i2_animal_case_3,
     "i2_assault_4": i2_assault_4,
     "i2_fraud_3": i2_fraud_3,
-    "undefined": i2_other_2
+    "undefined": i2_undefined_3
 };
 
 // Capitalize first letter function
