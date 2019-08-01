@@ -171,10 +171,12 @@ svg {
 .btn {
     background-color : grey;
     border: 0px;
+    font-size: calc(0.5em + 0.25vw);
+    padding: 4px 8px 4px 8px;
 }   
 
 .btn-group {
-    padding: 10px 10px 10px 10px;
+    padding: 8px 6px 8px 10px;
 }
 
 .latest_warning {
