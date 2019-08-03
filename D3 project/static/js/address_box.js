@@ -2,13 +2,13 @@
 
 var GeocoderState = function() {
 	this.address = '';
-	// this.bounds = null;
+	this.bounds = null;
 	this.country = 'US';
 	this.loc = null;
 	
 	GeocoderState.prototype.reset = function() {
 		this.query = '';
-		// this.bounds = null;
+		this.bounds = null;
 		this.country = 'US';
 	};
 	
@@ -23,10 +23,13 @@ var GeocoderState = function() {
 		var request = {};
 		request.address = this.address;
 		request.region = this.country;
-		// if (this.bounds) {
-			// request.bounds = this.bounds.getSouthWest().toUrlValue(6) + ',' +
-                      // this.bounds.getNorthEast().toUrlValue(6));
-		// };
+		if (this.bounds) {
+			var sw = new google.maps.LatLng(this.bounds.getSouthWest().lat,this.bounds.getSouthWest().lng)
+			var ne = new google.maps.LatLng(this.bounds.getNorthEast().lat,this.bounds.getNorthEast().lng)
+			var b = new google.maps.LatLngBounds(sw,ne);
+			request.bounds = b
+			console.log(request)
+		};
 		return request;
 	};
 	
@@ -89,7 +92,7 @@ var GeocoderTool = function() {
 	GeocoderTool.prototype.updateStateFromSearchControl = function(id) {
 		state.reset();
 		state.address = document.getElementById(id).value;
-		// state.bounds = map.getBounds();
+		state.bounds = map.getBounds();
 		this.geocodeState();
 		promise = new Promise(function(resolve,reject) {
 			var wait = setInterval(function() {
@@ -134,6 +137,8 @@ var get_route = function() {
 		});
 	};
 };
+
+
 
 const node0 = document.getElementById('start-input');
 

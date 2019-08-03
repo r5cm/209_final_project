@@ -41,9 +41,9 @@ function get_visible_data_summary(){
 	var ordered_tuples = Object.keys(dict).map(function(key){
 		return [key,dict[key]]
 	});
-	//console.log(ordered_tuples)
-	ordered_tuples.sort((a,b) => a[1] < b [1]);
-	
+
+	ordered_tuples.sort((a,b) => b [1] - a[1]);
+	// console.log(ordered_tuples)
 	var html = "<table><caption>Most frequent events in this area</caption><tr class='tr_text'>";
 	for(var i = 0; i < Math.min(ordered_tuples.length,10); i++){
 		html += "<td>" + ordered_tuples[i][0] + '<td class="count">' + ordered_tuples[i][1] + "</td></tr><tr class='tr_text'>";
