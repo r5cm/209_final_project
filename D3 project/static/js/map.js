@@ -299,7 +299,6 @@ var filter_data = function(data, value, type) {
     };
     if (heatmap_active) {
         heat.remove();    
-        console.log("test heat")
     };
 
     // Set filter values
@@ -483,7 +482,7 @@ $(document).ready(function(){
                     "endDate": moment(),
                 }, function(start, end, label) {
                     console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
-                    filter_data([start, end], 'date');
+                    filter_data(data, [start, end], 'date');
                 });
 
                 //--------------
