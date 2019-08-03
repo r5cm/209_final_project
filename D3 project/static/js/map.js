@@ -284,259 +284,262 @@ var get_equivalence = function(search_obj, in_obj, return_var) {
 //-------------------------
 
 // Add data
-d3.csv("./static/data/test_data_2.csv", function(data) {
-    d3.csv("./static/data/n_latest.csv", function(data_nxl) {
-        d3.csv("./static/data/category_grouping.csv", function(data_cats) {
 
-            // Parse categories table
-            cats_equiv = {};
-            data_cats.forEach(function(d) {
-                row = {}
-                key = d['category'] 
-                value = {}
-                value['category_correct'] = d['category_correct'] 
-                value['risk'] = d['risk']
-                value['super_category'] = d['super_category']
-                value['icon'] = 'i2_' + d['super_category'] + '_' + d['risk'] 
-                cats_equiv[key] = value
-            })
+$(document).ready(function(){
 
-            // Parse data and create data arrays
-            data.forEach(function(d) {
-                d['DateTime'] = moment(d['Date'], "M/D/YYYY HH:mm").utcOffset(-480);
-                d['LatLngArr'] = parseLatLng(d['LatLng']);
-                d['Risk'] = get_equivalence(d, cats_equiv, 'risk') 
-                d['Icon'] = get_equivalence(d, cats_equiv, 'icon') 
-                d['SuperCategory'] = get_equivalence(d, cats_equiv, 'super_category') 
-                d['Category'] = get_equivalence(d, cats_equiv, 'category_correct') 
-            })
+    d3.csv("./static/data/test_data_2.csv", function(data) {
+        d3.csv("./static/data/n_latest.csv", function(data_nxl) {
+            d3.csv("./static/data/category_grouping.csv", function(data_cats) {
 
-            data_nxl.forEach(function(d) {
-                d['DateTime'] = moment(d['Date']).utcOffset(-480);
-            })
-            data_filtered_1 = data;
-            data_filtered_2 = data;
+                // Parse categories table
+                cats_equiv = {};
+                data_cats.forEach(function(d) {
+                    row = {}
+                    key = d['category'] 
+                    value = {}
+                    value['category_correct'] = d['category_correct'] 
+                    value['risk'] = d['risk']
+                    value['super_category'] = d['super_category']
+                    value['icon'] = 'i2_' + d['super_category'] + '_' + d['risk'] 
+                    cats_equiv[key] = value
+                })
 
-            // Draw datasets to console
-            console.log('Daily crime log:')
-            console.log(data)            
-            console.log('Categories equivalences:')
-            console.log(cats_equiv)
-            console.log('Nixle:')
-            console.log(data_nxl)
+                // Parse data and create data arrays
+                data.forEach(function(d) {
+                    d['DateTime'] = moment(d['Date'], "M/D/YYYY HH:mm").utcOffset(-480);
+                    d['LatLngArr'] = parseLatLng(d['LatLng']);
+                    d['Risk'] = get_equivalence(d, cats_equiv, 'risk') 
+                    d['Icon'] = get_equivalence(d, cats_equiv, 'icon') 
+                    d['SuperCategory'] = get_equivalence(d, cats_equiv, 'super_category') 
+                    d['Category'] = get_equivalence(d, cats_equiv, 'category_correct') 
+                })
 
-            // Draw markers
-            draw_markers(data);
-            draw_nix_markers(data_nxl);
+                data_nxl.forEach(function(d) {
+                    d['DateTime'] = moment(d['date'], "YYYY-MM-DD HH:mm:ss").utcOffset(-480);
+                })
+                data_filtered_1 = data;
+                data_filtered_2 = data;
 
-            // Filter function
-            var category_filter = false;
-            var start_date_filter = false;
-            var end_date_filter = false;
-            var filter_data = function(value, type) {
-                data_filtered_1 = data; 
-                if (map.hasLayer(markersGroup)) {
-                    markersGroup.clearLayers();
-                };
-                // Set filter values
-                if (type == 'category') {
-                    category_filter = value;
-                }
-                if (type == 'date') {
-                    start_date_filter = value[0];
-                    end_date_filter = value[1];
-                }
-                // Filter category
-                // data_filtered_1 = [];
-                if (category_filter == "All" || !category_filter) {
-                    data_filtered_1 = data;
-                } else {
-                    data_filtered_1 = []
-                    for (var i = 0; i < data.length; i++) {
-                        if (data[i]['Category'] == value) data_filtered_1.push(data[i]);
-                    };
-                };
-                data_filtered_2 = data_filtered_1;
-                // Filter date
-                if (start_date_filter) {
-                    data_filtered_2 = [];
-                    for (var i = 0; i < data_filtered_1.length; i++) {
-                        var record = data_filtered_1[i];
-                        if (start_date_filter <= record['DateTime'] && record['DateTime'] <= end_date_filter) {
-                            data_filtered_2.push(record);
-                        };
-                    };
-                };
-                if (document.getElementById('btn_points_inp').checked) {
-                    draw_markers(data_filtered_2);
-                }; 
-            };
+                // Draw datasets to console
+                console.log('Daily crime log:')
+                console.log(data)            
+                console.log('Categories equivalences:')
+                console.log(cats_equiv)
+                console.log('Nixle:')
+                console.log(data_nxl)
 
-            //--------------
-            // Date filter
-            //--------------
+                // Draw markers
+                draw_markers(data);
+                draw_nix_markers(data_nxl);
 
-            // Get date range
-            var min_date = moment();
-            var max_date = moment().subtract(100, 'years');
-            for (var i = 0; i < data.length; i++) {
-                var date = data[i]['DateTime'];
-                if (date < min_date) min_date = date;
-                if (date > max_date) max_date = date;
-            }
-            console.log("Min date = " + min_date + " Max date: " + max_date);
-
-            // Add input menu
-            d3.select('#divfilter')
-                .append('p')
-                .text("Filter by Date/Hour")
-                .attr('align', 'left')
-            d3.select('#divfilter')
-                .append('input')
-                .attr('class', 'form-control')
-                .attr('type', 'text')
-                .attr('align', 'right')
-                .attr('name', 'datetimes')
-                .attr('id', 'datetimes')
-
-
-            $('#datetimes').daterangepicker({
-                ranges: {
-                    'All dates': [moment().subtract(5, 'years', moment())],
-                    'Today': [moment(), moment().add(1, 'days')],
-                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                    'This Month': [moment().startOf('month'), moment().endOf('month')],
-                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
-                    'This year': [moment().startOf('year'), moment()]
-                },
-
-                "alwaysShowCalendars": true,
-                "timePicker": true,
-                "timePicker24Hour": true,
-                "timePickerIncrement": 15,
-                "startDate": moment().subtract(6, 'days'),
-                "endDate": moment(),
-            }, function(start, end, label) {
-                console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
-                filter_data([start, end], 'date');
-            });
-
-            //--------------
-            // Crime filter
-            //--------------
-
-            // Get unique crime categories
-            var categories = ['All'];
-            for (var i = 0; i < data.length; i++) {
-                var category = data[i]['Category'];
-                if (categories.indexOf(category) < 0) {
-                    categories.push(category);
-                };
-            };
-            //console.log("Categories:");
-            //console.log(categories);
-
-            // Add crime category menu
-            d3.select("#divfilter")
-                .append("p")
-                .text("Category")
-                .attr("align", "left")
-                .append("select")
-                .attr("id", "crimeSelector")
-                .attr('class', 'form-control')
-                .selectAll("option")
-                .data(categories)
-                .enter()
-                .append("option")
-                .attr("class", "cat_option")
-                .text(d => capitalizeFirstLetter(d))
-                .attr("value", d => d)
-                .attr("color", "black");
-
-            // Filter data based on crime category
-            var filter_cat_val = "All";
-            var filter_cat = function() {
-                filter_cat_val = d3.select(this).property('value');
-                console.log("Category selected: " + filter_cat_val);
-                filter_data(filter_cat_val, 'category');
-            };
-            d3.select('#crimeSelector')
-                .on("change", filter_cat);
-
-            var timeSeries = hist();
-
-            timeSeries.callback(function(bounds) {
-                //console.log(moment(bounds[0]));
-                $('#datetimes').data('daterangepicker').setStartDate(bounds[0]);
-                $('#datetimes').data('daterangepicker').setEndDate(bounds[1]);
-                filter_data([bounds[0], bounds[1]], 'date');
-            });
-
-            timeSeries.data(data);
-            timeSeries.plot();
-
-
-            //--------------
-            // Heatmap 
-            //--------------
-
-            var show_heatmap = function(_) {
-                if (!document.getElementById('btn_heatmap_inp').checked) {
-                    hm_points = data_filtered_2.map(d => d['LatLngArr']);
-                    heat = L.heatLayer(hm_points);
-                    heat.addTo(map);
-                } else {
-                    heat.remove();
-                }
-            }
-
-            var show_points = function(_) {
-                if (!document.getElementById('btn_points_inp').checked) {
-                    draw_markers(data_filtered_2);
-                } else {
-                    console.log("Entered hide points")
-                    console.log(map.hasLayer(markersGroup))
-
+                // Filter function
+                var category_filter = false;
+                var start_date_filter = false;
+                var end_date_filter = false;
+                var filter_data = function(value, type) {
+                    data_filtered_1 = data; 
                     if (map.hasLayer(markersGroup)) {
                         markersGroup.clearLayers();
-						get_visible_data_summary();
+                    };
+                    // Set filter values
+                    if (type == 'category') {
+                        category_filter = value;
                     }
+                    if (type == 'date') {
+                        start_date_filter = value[0];
+                        end_date_filter = value[1];
+                    }
+                    // Filter category
+                    // data_filtered_1 = [];
+                    if (category_filter == "All" || !category_filter) {
+                        data_filtered_1 = data;
+                    } else {
+                        data_filtered_1 = []
+                        for (var i = 0; i < data.length; i++) {
+                            if (data[i]['Category'] == value) data_filtered_1.push(data[i]);
+                        };
+                    };
+                    data_filtered_2 = data_filtered_1;
+                    // Filter date
+                    if (start_date_filter) {
+                        data_filtered_2 = [];
+                        for (var i = 0; i < data_filtered_1.length; i++) {
+                            var record = data_filtered_1[i];
+                            if (start_date_filter <= record['DateTime'] && record['DateTime'] <= end_date_filter) {
+                                data_filtered_2.push(record);
+                            };
+                        };
+                    };
+                    if (document.getElementById('btn_points_inp').checked) {
+                        draw_markers(data_filtered_2);
+                    }; 
+                };
 
+                //--------------
+                // Date filter
+                //--------------
+
+                // Get date range
+                var min_date = moment();
+                var max_date = moment().subtract(100, 'years');
+                for (var i = 0; i < data.length; i++) {
+                    var date = data[i]['DateTime'];
+                    if (date < min_date) min_date = date;
+                    if (date > max_date) max_date = date;
+                }
+                console.log("Min date = " + min_date + " Max date: " + max_date);
+
+                // Add input menu
+                d3.select('#divfilter')
+                    .append('p')
+                    .text("Filter by Date/Hour")
+                    .attr('align', 'left')
+                d3.select('#divfilter')
+                    .append('input')
+                    .attr('class', 'form-control')
+                    .attr('type', 'text')
+                    .attr('align', 'right')
+                    .attr('name', 'datetimes')
+                    .attr('id', 'datetimes')
+
+
+                $('#datetimes').daterangepicker({
+                    ranges: {
+                        'All dates': [moment().subtract(5, 'years', moment())],
+                        'Today': [moment(), moment().add(1, 'days')],
+                        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                        'This Month': [moment().startOf('month'), moment().endOf('month')],
+                        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+                        'This year': [moment().startOf('year'), moment()]
+                    },
+
+                    "alwaysShowCalendars": true,
+                    "timePicker": true,
+                    "timePicker24Hour": true,
+                    "timePickerIncrement": 15,
+                    "startDate": moment().subtract(6, 'days'),
+                    "endDate": moment(),
+                }, function(start, end, label) {
+                    console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+                    filter_data([start, end], 'date');
+                });
+
+                //--------------
+                // Crime filter
+                //--------------
+
+                // Get unique crime categories
+                var categories = ['All'];
+                for (var i = 0; i < data.length; i++) {
+                    var category = data[i]['Category'];
+                    if (categories.indexOf(category) < 0) {
+                        categories.push(category);
+                    };
+                };
+                //console.log("Categories:");
+                //console.log(categories);
+
+                // Add crime category menu
+                d3.select("#divfilter")
+                    .append("p")
+                    .text("Category")
+                    .attr("align", "left")
+                    .append("select")
+                    .attr("id", "crimeSelector")
+                    .attr('class', 'form-control')
+                    .selectAll("option")
+                    .data(categories)
+                    .enter()
+                    .append("option")
+                    .attr("class", "cat_option")
+                    .text(d => capitalizeFirstLetter(d))
+                    .attr("value", d => d)
+                    .attr("color", "black");
+
+                // Filter data based on crime category
+                var filter_cat_val = "All";
+                var filter_cat = function() {
+                    filter_cat_val = d3.select(this).property('value');
+                    console.log("Category selected: " + filter_cat_val);
+                    filter_data(filter_cat_val, 'category');
+                };
+                d3.select('#crimeSelector')
+                    .on("change", filter_cat);
+
+                var timeSeries = hist();
+
+                timeSeries.callback(function(bounds) {
+                    //console.log(moment(bounds[0]));
+                    $('#datetimes').data('daterangepicker').setStartDate(bounds[0]);
+                    $('#datetimes').data('daterangepicker').setEndDate(bounds[1]);
+                    filter_data([bounds[0], bounds[1]], 'date');
+                });
+
+                timeSeries.data(data);
+                timeSeries.plot();
+
+
+                //--------------
+                // Heatmap 
+                //--------------
+
+                var show_heatmap = function(_) {
+                    if (!document.getElementById('btn_heatmap_inp').checked) {
+                        hm_points = data_filtered_2.map(d => d['LatLngArr']);
+                        heat = L.heatLayer(hm_points);
+                        heat.addTo(map);
+                    } else {
+                        heat.remove();
+                    }
+                }
+
+                var show_points = function(_) {
+                    if (!document.getElementById('btn_points_inp').checked) {
+                        draw_markers(data_filtered_2);
+                    } else {
+                        console.log("Entered hide points")
+                        console.log(map.hasLayer(markersGroup))
+
+                        if (map.hasLayer(markersGroup)) {
+                            markersGroup.clearLayers();
+						    get_visible_data_summary();
+                        }
+
+
+                    }
 
                 }
 
-            }
+                var show_warn = function(_) {
 
-            var show_warn = function(_) {
+                    if (!document.getElementById('btn_warn_inp').checked) {
 
-                if (!document.getElementById('btn_warn_inp').checked) {
+                        draw_nix_markers(data_nxl);
 
-                    draw_nix_markers(data_nxl);
+                    } else {
 
-                } else {
+                        if (map.hasLayer(markersGroup2)) {
+                            markersGroup2.clearLayers();
+						    get_visible_data_summary();
+                        }
 
-                    if (map.hasLayer(markersGroup2)) {
-                        markersGroup2.clearLayers();
-						get_visible_data_summary();
                     }
 
                 }
 
-            }
-
-            d3.select('#btn_heatmap')
-                .on('click', show_heatmap);
-            d3.select('#btn_points')
-                .on('click', show_points);
-            d3.select('#btn_warn')
-                .on('click', show_warn);
+                d3.select('#btn_heatmap')
+                    .on('click', show_heatmap);
+                d3.select('#btn_points')
+                    .on('click', show_points);
+                d3.select('#btn_warn')
+                    .on('click', show_warn);
+            })
         })
-    })
+    });
+
 });
-
-
 
 var hist = function() {
 
