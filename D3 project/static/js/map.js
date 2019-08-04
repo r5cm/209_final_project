@@ -258,6 +258,12 @@ var draw_nix_markers = function(data) {
     get_visible_data_summary()
 }
 
+var draw_heatmap = function(data) {
+    hm_points = data.map(d => d['LatLngArr']);
+    heat = L.heatLayer(hm_points);
+    heat.addTo(map);
+};
+
 // View without data
 function initializePage() {
     map = L.map("divmap").setView([37.8782683, -122.259196], 13);
@@ -276,6 +282,59 @@ var get_equivalence = function(search_obj, in_obj, return_var) {
         return in_obj[search_obj['Category']][return_var];
     } else {
         return 'undefined';
+    };
+};
+     
+var category_filter = false;
+var start_date_filter = false;
+var end_date_filter = false;
+var heatmap_active = false
+
+var filter_data = function(data, value, type) {
+    data_filtered_1 = data; 
+
+    // Remove existing layers
+    if (map.hasLayer(markersGroup)) {
+        markersGroup.clearLayers();
+    };
+    if (heatmap_active) {
+        heat.remove();    
+    };
+
+    // Set filter values
+    if (type == 'category') {
+        category_filter = value;
+    }
+    if (type == 'date') {
+        start_date_filter = value[0];
+        end_date_filter = value[1];
+    }
+
+    // Filter category
+    if (category_filter == "All" || !category_filter) {
+        data_filtered_1 = data;
+    } else {
+        data_filtered_1 = []
+        for (var i = 0; i < data.length; i++) {
+            if (data[i]['Category'] == value) data_filtered_1.push(data[i]);
+        };
+    };
+    data_filtered_2 = data_filtered_1;
+    // Filter date
+    if (start_date_filter) {
+        data_filtered_2 = [];
+        for (var i = 0; i < data_filtered_1.length; i++) {
+            var record = data_filtered_1[i];
+            if (start_date_filter <= record['DateTime'] && record['DateTime'] <= end_date_filter) {
+                data_filtered_2.push(record);
+            };
+        };
+    };
+    if (document.getElementById('btn_points_inp').checked) {
+        draw_markers(data_filtered_2);
+    }; 
+    if (document.getElementById('btn_heatmap_inp').checked) {
+        draw_heatmap(data_filtered_2);
     };
 };
 
@@ -333,47 +392,47 @@ $(document).ready(function(){
                 draw_nix_markers(data_nxl);
 
                 // Filter function
-                var category_filter = false;
-                var start_date_filter = false;
-                var end_date_filter = false;
-                var filter_data = function(value, type) {
-                    data_filtered_1 = data; 
-                    if (map.hasLayer(markersGroup)) {
-                        markersGroup.clearLayers();
-                    };
-                    // Set filter values
-                    if (type == 'category') {
-                        category_filter = value;
-                    }
-                    if (type == 'date') {
-                        start_date_filter = value[0];
-                        end_date_filter = value[1];
-                    }
-                    // Filter category
-                    // data_filtered_1 = [];
-                    if (category_filter == "All" || !category_filter) {
-                        data_filtered_1 = data;
-                    } else {
-                        data_filtered_1 = []
-                        for (var i = 0; i < data.length; i++) {
-                            if (data[i]['Category'] == value) data_filtered_1.push(data[i]);
-                        };
-                    };
-                    data_filtered_2 = data_filtered_1;
-                    // Filter date
-                    if (start_date_filter) {
-                        data_filtered_2 = [];
-                        for (var i = 0; i < data_filtered_1.length; i++) {
-                            var record = data_filtered_1[i];
-                            if (start_date_filter <= record['DateTime'] && record['DateTime'] <= end_date_filter) {
-                                data_filtered_2.push(record);
-                            };
-                        };
-                    };
-                    if (document.getElementById('btn_points_inp').checked) {
-                        draw_markers(data_filtered_2);
-                    }; 
-                };
+                // var category_filter = false;
+                // var start_date_filter = false;
+                // var end_date_filter = false;
+                // var filter_data = function(value, type) {
+                //     data_filtered_1 = data; 
+                //     if (map.hasLayer(markersGroup)) {
+                //         markersGroup.clearLayers();
+                //     };
+                //     // Set filter values
+                //     if (type == 'category') {
+                //         category_filter = value;
+                //     }
+                //     if (type == 'date') {
+                //         start_date_filter = value[0];
+                //         end_date_filter = value[1];
+                //     }
+                //     // Filter category
+                //     // data_filtered_1 = [];
+                //     if (category_filter == "All" || !category_filter) {
+                //         data_filtered_1 = data;
+                //     } else {
+                //         data_filtered_1 = []
+                //         for (var i = 0; i < data.length; i++) {
+                //             if (data[i]['Category'] == value) data_filtered_1.push(data[i]);
+                //         };
+                //     };
+                //     data_filtered_2 = data_filtered_1;
+                //     // Filter date
+                //     if (start_date_filter) {
+                //         data_filtered_2 = [];
+                //         for (var i = 0; i < data_filtered_1.length; i++) {
+                //             var record = data_filtered_1[i];
+                //             if (start_date_filter <= record['DateTime'] && record['DateTime'] <= end_date_filter) {
+                //                 data_filtered_2.push(record);
+                //             };
+                //         };
+                //     };
+                //     if (document.getElementById('btn_points_inp').checked) {
+                //         draw_markers(data_filtered_2);
+                //     }; 
+                // };
 
                 //--------------
                 // Date filter
@@ -423,7 +482,7 @@ $(document).ready(function(){
                     "endDate": moment(),
                 }, function(start, end, label) {
                     console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
-                    filter_data([start, end], 'date');
+                    filter_data(data, [start, end], 'date');
                 });
 
                 //--------------
@@ -438,8 +497,6 @@ $(document).ready(function(){
                         categories.push(category);
                     };
                 };
-                //console.log("Categories:");
-                //console.log(categories);
 
                 // Add crime category menu
                 d3.select("#divfilter")
@@ -463,7 +520,7 @@ $(document).ready(function(){
                 var filter_cat = function() {
                     filter_cat_val = d3.select(this).property('value');
                     console.log("Category selected: " + filter_cat_val);
-                    filter_data(filter_cat_val, 'category');
+                    filter_data(data, filter_cat_val, 'category');
                 };
                 d3.select('#crimeSelector')
                     .on("change", filter_cat);
@@ -471,7 +528,6 @@ $(document).ready(function(){
                 var timeSeries = hist();
 
                 timeSeries.callback(function(bounds) {
-                    //console.log(moment(bounds[0]));
                     $('#datetimes').data('daterangepicker').setStartDate(bounds[0]);
                     $('#datetimes').data('daterangepicker').setEndDate(bounds[1]);
                     filter_data([bounds[0], bounds[1]], 'date');
@@ -487,10 +543,13 @@ $(document).ready(function(){
 
                 var show_heatmap = function(_) {
                     if (!document.getElementById('btn_heatmap_inp').checked) {
-                        hm_points = data_filtered_2.map(d => d['LatLngArr']);
-                        heat = L.heatLayer(hm_points);
-                        heat.addTo(map);
+                        heatmap_active = true;
+                        // hm_points = data_filtered_2.map(d => d['LatLngArr']);
+                        // heat = L.heatLayer(hm_points);
+                        // heat.addTo(map);
+                       draw_heatmap(data_filtered_2);
                     } else {
+                        heatmap_active = false; 
                         heat.remove();
                     }
                 }
@@ -499,17 +558,11 @@ $(document).ready(function(){
                     if (!document.getElementById('btn_points_inp').checked) {
                         draw_markers(data_filtered_2);
                     } else {
-                        console.log("Entered hide points")
-                        console.log(map.hasLayer(markersGroup))
-
                         if (map.hasLayer(markersGroup)) {
                             markersGroup.clearLayers();
 						    get_visible_data_summary();
                         }
-
-
                     }
-
                 }
 
                 var show_warn = function(_) {
