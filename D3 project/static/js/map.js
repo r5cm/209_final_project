@@ -765,6 +765,23 @@ var hist = function() {
                 return "#FDB515";
             });
 
+        bar.append("text")
+            .attr("class", "below")
+            .attr("x", function(d) {
+                return (x(d.x1) - x(d.x0) - 1)/2 - 5;
+            })
+            .attr("dy", function(d) {
+                    return height - margin.bottom -  y(d.length) - 5;
+                })
+            .attr("text-anchor", "left")
+            .text(function(d) { 
+                    if(d.length > 0) {
+                        return moment(d.x0).format("ddd").substring(0,1);
+                    }
+                })
+            .style("fill", "#000000");
+
+
         hist.append("g")
             .attr("class", "brush")
             .call(brush);
