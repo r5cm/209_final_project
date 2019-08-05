@@ -79,9 +79,24 @@
 	  
 	  <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
       <div id="address_box">
-		<input id="start-input" class="address_input form-control" placeholder="Start point" autocomplete=on>
-		<input id="end-input" class="address_input form-control" placeholder="End point" autocomplete=on>
-		<button type="button" id="get-geometry" class="address_input form-control" onclick="get_route()">Go!</button>
+		<input id="start-input" class="address_input form-control" placeholder="Enter location..." autocomplete=on>
+		<input id="end-input" class="address_input form-control" placeholder="" disabled="true" autocomplete=on>
+        <div id="buttons_box">
+        <form id="search_btn" class="btn-group btn-group-toggle" data-toggle="buttons">
+          <label class="btn-address btn btn-primary active" id="btn_search" onclick="search_enable()">
+            <input type="radio" name="controlSearchType" id="btn_search_inp" value="MRR" checked>Search<br>
+          </label>
+          <label class="btn-address btn btn-primary" id="btn_route" onclick="route_enable()">
+            <input type="radio" name="controlRouteType" id="btn_route_inp" value="ZAZ" checked>Route<br>
+          </label>
+        </form>
+
+        <form id="go_btn" class="btn-group" data-toggle="buttons">
+            <button class="btn-address btn btn-primary" type="button" id="btn_go" onclick="get_route()">Go!</button>
+            <button class="btn-address btn btn-primary" type="button" id="btn_clear" disabled="true" onclick="clear_route()">Clear</button>
+        </form>
+        </div>
+
       </div>
 	  <script type="text/javascript" src="static/js/address_box.js"></script>
 	  

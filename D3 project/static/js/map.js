@@ -794,8 +794,7 @@ var hist = function() {
                     if(d.length > 0) {
                         return moment(d.x0).format("ddd").substring(0,1);
                     }
-                })
-            .style("fill", "#000000");
+                });
 
 
         hist.append("g")

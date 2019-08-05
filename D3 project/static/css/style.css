@@ -62,12 +62,8 @@ header {
     width: 100%;
 }
 
-#get-geometry {
-	background-color: #E09E19;
-	font-size: 1em;
-	color: #003262;
-	font-weight: bold;
-}
+
+
 
 caption {
 	font-size: calc(0.7em + 0.4vw);
@@ -110,11 +106,17 @@ td {
 	border-bottom: 0.05em solid white;
 }
 
-.address_input {
-	width: 90%;
-	color: #000;
-	margin: 8px;
+#buttons_box {
+    display: flex;
+    width: 100%;
 }
+
+.address_input {
+	color: #000;
+	margin: 10px 10px 5px 10px;
+    width: calc(100% - 17px);
+}
+
 
 button {
 	color: #003262;
@@ -136,6 +138,7 @@ rect.bar:hover {
 
 .bar_day {
 
+    fill: #000;
     font-size: calc(0.4em + 0.4vw);
 
 }
@@ -200,8 +203,45 @@ svg {
     padding: 4px 8px 4px 8px;
 }   
 
+.btn-address {
+    font-size: calc(0.6em + 0.3vw);
+    margin: 0px;
+}
+
+
 .btn-group {
     padding: 8px 6px 8px 10px;
+}
+
+#go_btn {
+    flex-grow: 1;
+}
+
+#btn_go {
+	background-color: #E09E19;
+	color: #FFF;
+    width: 50%;
+}
+
+
+#btn_clear {
+	background-color: #E09E19;
+	color: #FFF;
+    width: 50%;
+}
+
+#btn_clear:hover {
+  background-color: #FDB515;
+}
+
+#btn_clear:disabled {
+	background-color: grey;
+	color: #FFF;
+    width: 50%;
+}
+
+#btn_go:hover {
+  background-color: #FDB515;
 }
 
 .latest_warning {

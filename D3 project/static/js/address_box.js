@@ -112,33 +112,85 @@ var waitForQueryOutput = function (id) {
 	return promise 
 };
 	
+var yellowIcon = new L.Icon({
+  iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-yellow.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
+
+L.Marker.prototype.options.icon = yellowIcon;
+
 var get_route = function() {
-	if (document.getElementById('start-input').value.length > 0 && document.getElementById('end-input').value.length > 0) {
+	if (document.getElementById('start-input').value.length > 0) {
 		promise0 = waitForQueryOutput('start-input');
 		promise0.then(function(value) {
 			start_lat = value.lat();
 			start_long = value.lng();
-			promise1 = waitForQueryOutput('end-input');
-			promise1.then(function(values) {
-				end_lat = values.lat();
-				end_long = values.lng();
-				if(typeof(route) === 'undefined') {
-					route = L.Routing.control({
-						waypoints:[L.latLng(start_lat,start_long)
-						,L.latLng(end_lat,end_long)],
-						fitSelectedRoutes: true
-					});
-					route.addTo(map);
-					route.hide();
-				}else{
-					route.setWaypoints([L.latLng(start_lat,start_long),L.latLng(end_lat,end_long)]);
-				};
-			});
-		});
-	};
-};
+
+            // Routing
+            if(document.getElementById('end-input').value.length > 0) {
+
+    			promise1 = waitForQueryOutput('end-input');
+	    		promise1.then(function(values) {
+	    			end_lat = values.lat();
+	    			end_long = values.lng();
+	    			if(typeof(route) === 'undefined') {
+	    				route = L.Routing.control({
+	    					waypoints:[L.latLng(start_lat,start_long)
+	    					,L.latLng(end_lat,end_long)],
+	    					fitSelectedRoutes: true, icon: yellowIcon
+	    				}); 
+	    				route.addTo(map);
+	    				route.hide();
+                        document.getElementById('btn_clear').disabled = false;
+	       			} 
+                    else{ 
+    					L.setWaypoints([L.latLng(start_lat,start_long),L.latLng(end_lat,end_long)]);
+    				}
+    			});
+		    }
+
+            // Searching
+            else {
+                L.marker(L.latLng(start_lat,start_long)).addTo(map);       
+                map.flyTo(L.latLng(start_lat,start_long), 16);         
+            }
 
 
+	    });
+    }
+}
+
+
+function search_enable() {
+
+    document.getElementById('end-input').value = '';
+    document.getElementById('end-input').disabled = true;
+    document.getElementById('end-input').placeholder = "";
+    document.getElementById('start-input').placeholder = "Enter location...";
+
+}
+
+function route_enable() {
+
+    document.getElementById('end-input').disabled = false;
+    document.getElementById('end-input').placeholder = "Enter end point...";
+    document.getElementById('start-input').placeholder = "Enter start point...";
+
+}
+
+function clear_route() {
+
+    document.getElementById('start-input').value = '';
+    document.getElementById('end-input').value = '';
+    map.removeControl(route);
+
+    document.getElementById('btn_clear').disabled = true;
+
+}
 
 const node0 = document.getElementById('start-input');
 
