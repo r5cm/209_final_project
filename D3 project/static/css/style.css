@@ -134,6 +134,12 @@ rect.bar:hover {
   fill: #E09E19;
 }
 
+.bar_day {
+
+    font-size: calc(0.4em + 0.4vw);
+
+}
+
 svg {
   width:auto;
   height: auto;
@@ -176,6 +182,10 @@ svg {
     color: white;
     stroke: white;
     font-family: Georgia;
+}
+
+.axis_label {
+    font-size: calc(0.4em + 0.35vw);
 }
 
 

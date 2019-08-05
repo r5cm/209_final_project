@@ -598,7 +598,7 @@ var hist = function() {
 
     // Initialise data structures.s
     var margin = {
-        "left": 20,
+        "left": 35,
         "top": 5,
         "bottom": 30,
         "right": 20
@@ -666,6 +666,8 @@ var hist = function() {
             return d.DateTime;
         });
 
+
+
         var dayBins = d3.timeDays(d3.timeDay.offset(dayExtent[0], -1),
             d3.timeDay.offset(dayExtent[1], 1));
 
@@ -673,9 +675,10 @@ var hist = function() {
 
         var histogram = d3.histogram()
             .value(function(d) {
-                return d.DateTime;
+                return d.DateTime.toDate();
             })
             .thresholds(dayBins);
+
 
         var bins, use_data;
 
@@ -691,8 +694,6 @@ var hist = function() {
 
 
         bins = histogram(use_data);
-
-        //console.log(bins);
 
         y.domain([0, d3.max(bins, function(d) {
             return d.length;
@@ -715,6 +716,20 @@ var hist = function() {
             .attr("class", "axis")
             .attr("transform", "translate(0," + String(height - margin.bottom) + ")")
             .call(d3.axisBottom(x));
+
+        hist.append("g")
+            .attr("class", "axis")
+            .attr("transform", "translate(0,0)")
+            .call(d3.axisLeft(y).ticks(2));
+
+        hist.append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 10 - margin.left)
+            .attr("x", 0 - ((height - margin.bottom) / 2))
+            .attr("dy", 0)
+            .attr("class", "axis_label axis")
+            .style("text-anchor", "middle")
+            .text("Cases/Day");
 
         // Define the brush.
         brush = d3.brushX()
@@ -751,6 +766,7 @@ var hist = function() {
             .attr("transform", function(d) {
                 return "translate(" + x(d.x0) + "," + y(d.length) + ")";
             });
+
         bar.append("rect")
             .attr("x", 1)
             .attr("class", "bar")
@@ -766,14 +782,14 @@ var hist = function() {
             });
 
         bar.append("text")
-            .attr("class", "below")
+            .attr("class", "bar_day")
             .attr("x", function(d) {
-                return (x(d.x1) - x(d.x0) - 1)/2 - 5;
+                return (x(d.x1) - x(d.x0) - 1)/2;
             })
             .attr("dy", function(d) {
                     return height - margin.bottom -  y(d.length) - 5;
                 })
-            .attr("text-anchor", "left")
+            .attr("text-anchor", "middle")
             .text(function(d) { 
                     if(d.length > 0) {
                         return moment(d.x0).format("ddd").substring(0,1);
