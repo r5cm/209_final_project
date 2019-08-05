@@ -633,7 +633,7 @@ var hist = function() {
 
         // Set geometry.
         
-		height = parseInt(d3.select('.t_series').style('height')) - 40; //This one has a bug
+		height = parseInt(d3.select('.t_series').style('height')) - 20; //This one has a bug
         width = parseInt(d3.select('.t_series').style('width')) - 20; // This one someone starts before the data loads. 
 
 
@@ -825,6 +825,23 @@ var hist = function() {
 				.attr("fill", function(d, i) {
 					return "#FDB515";
 				});
+                
+
+
+            bar.data(bins).select("text")
+            .attr("class", "bar_day")
+            .attr("x", function(d) {
+                return (x(d.x1) - x(d.x0) - 1)/2;
+            })
+            .attr("dy", function(d) {
+                    return height - margin.bottom -  y(d.length) - 5;
+                })
+            .attr("text-anchor", "middle")
+            .text(function(d) { 
+                    if(d.length > 0) { 
+                        return moment(d.x0).format("ddd").substring(0,1);
+                    }
+                });
 		}catch (e) {
 		}
 
