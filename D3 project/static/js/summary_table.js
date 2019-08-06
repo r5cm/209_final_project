@@ -2,7 +2,6 @@
 
 invalid_entries = ['UPDATE:']
 
-
 function get_visible_data_summary(){
 	var visible_data = [];
 	map.eachLayer(function(layer) {
@@ -27,16 +26,19 @@ function get_visible_data_summary(){
 			}
 		}
 	});
+	create_table(visible_data);
+}
+
+function create_table(d) {
 	var dict = {}, prev;
-	visible_data.sort();
-	//console.log(visible_data);
-	for(var i = 0; i < visible_data.length; i++){
-		if(visible_data[i] !== prev){
-			dict[visible_data[i]] = 1;
+	d.sort();
+	for(var i = 0; i < d.length; i++){
+		if(d[i] !== prev){
+			dict[d[i]] = 1;
 		} else {
-			dict[visible_data[i]]++;
+			dict[d[i]]++;
 		}
-		prev = visible_data[i];
+		prev = d[i];
 	}
 	var ordered_tuples = Object.keys(dict).map(function(key){
 		return [key,dict[key]]
@@ -52,3 +54,11 @@ function get_visible_data_summary(){
 	
 	document.getElementById("summary").innerHTML = html
 }
+
+function tabulate_data(data) {
+	var cats = [];
+	for(var i = 0; i < data.length; i++){
+		cats.push(capitalizeFirstLetter(data[i].Category))
+	};
+	create_table(cats)
+};

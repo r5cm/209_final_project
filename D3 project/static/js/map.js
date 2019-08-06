@@ -259,6 +259,7 @@ var draw_nix_markers = function(data) {
 }
 
 var draw_heatmap = function(data) {
+	tabulate_data(data)
     hm_points = data.map(d => d['LatLngArr']);
     heat = L.heatLayer(hm_points);
     heat.addTo(map);
@@ -547,7 +548,8 @@ $(document).ready(function(){
                         // hm_points = data_filtered_2.map(d => d['LatLngArr']);
                         // heat = L.heatLayer(hm_points);
                         // heat.addTo(map);
-                       draw_heatmap(data_filtered_2);
+						tabulate_data(data_filtered_2);
+                        draw_heatmap(data_filtered_2);
                     } else {
                         heatmap_active = false; 
                         heat.remove();
@@ -857,9 +859,6 @@ var hist = function() {
     return public;
 
 }
-
-
-
 
 map.on("zoomend", get_visible_data_summary)
 map.on("moveend", get_visible_data_summary)
