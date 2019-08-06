@@ -1,6 +1,7 @@
 *desktop.ini
 *config.js
-.gitignore
+./.gitignore
 *.xlsx
 *test.py
 *D3 project/__pycache__/
+Usability test findings.gdoc

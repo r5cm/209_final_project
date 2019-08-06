@@ -13,156 +13,163 @@ var icon_size = [30, 30];
 var icon_anchor = [15, 30];
 var popup_anchor = [-3, -30]
 
-var nixIcon = L.icon({
-    iconUrl: nix_url,
+// var nixIcon = L.icon({
+//     iconUrl: nix_url,
+//     iconSize: icon_size,
+//     iconAnchor: icon_anchor,
+//     popupAnchor: popup_anchor
+// });
+var animal_case_2 = L.icon({
+    iconUrl: "static/images/i3_animal_case_2.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
-var i2_other_4 = L.icon({
-    iconUrl: "static/images/i2_other_4.png",
+var animal_case_4 = L.icon({
+    iconUrl: "static/images/i3_animal_case_4.png",
+    iconSize: icon_size,
+    iconAnchor: icon_anchor,
+    popupAnchor: popup_anchor
+});
+var assault_3 = L.icon({
+    iconUrl: "static/images/i3_assault_3.png",
+    iconSize: icon_size,
+    iconAnchor: icon_anchor,
+    popupAnchor: popup_anchor
+});
+var assault_4 = L.icon({
+    iconUrl: "static/images/i3_assault_4.png",
+    iconSize: icon_size,
+    iconAnchor: icon_anchor,
+    popupAnchor: popup_anchor
+});
+var counterfeiting_fraud_1 = L.icon({
+    iconUrl: "static/images/i3_counterfeiting_fraud_1.png",
+    iconSize: icon_size,
+    iconAnchor: icon_anchor,
+    popupAnchor: popup_anchor
+});
+var homicide_4 = L.icon({
+    iconUrl: "static/images/i3_homicide_4.png",
+    iconSize: icon_size,
+    iconAnchor: icon_anchor,
+    popupAnchor: popup_anchor
+});
+var others_1 = L.icon({
+    iconUrl: "static/images/i3_others_1.png",
+    iconSize: icon_size,
+    iconAnchor: icon_anchor,
+    popupAnchor: popup_anchor
+});
+var others_2 = L.icon({
+    iconUrl: "static/images/i3_others_2.png",
+    iconSize: icon_size,
+    iconAnchor: icon_anchor,
+    popupAnchor: popup_anchor
+});
+var others_3 = L.icon({
+    iconUrl: "static/images/i3_others_3.png",
+    iconSize: icon_size,
+    iconAnchor: icon_anchor,
+    popupAnchor: popup_anchor
+});
+var others_4 = L.icon({
+    iconUrl: "static/images/i3_others_4.png",
+    iconSize: icon_size,
+    iconAnchor: icon_anchor,
+    popupAnchor: popup_anchor
+});
+var property_damage_2 = L.icon({
+    iconUrl: "static/images/i3_property_damage_2.png",
+    iconSize: icon_size,
+    iconAnchor: icon_anchor,
+    popupAnchor: popup_anchor
+});
+var property_damage_3 = L.icon({
+    iconUrl: "static/images/i3_property_damage_3.png",
+    iconSize: icon_size,
+    iconAnchor: icon_anchor,
+    popupAnchor: popup_anchor
+});
+var robbery_theft_2 = L.icon({
+    iconUrl: "static/images/i3_robbery_theft_2.png",
+    iconSize: icon_size,
+    iconAnchor: icon_anchor,
+    popupAnchor: popup_anchor
+});
+var robbery_theft_3 = L.icon({
+    iconUrl: "static/images/i3_robbery_theft_3.png",
+    iconSize: icon_size,
+    iconAnchor: icon_anchor,
+    popupAnchor: popup_anchor
+});
+var robbery_theft_4 = L.icon({
+    iconUrl: "static/images/i3_robbery_theft_4.png",
+    iconSize: icon_size,
+    iconAnchor: icon_anchor,
+    popupAnchor: popup_anchor
+});
+var sexual_offense_3 = L.icon({
+    iconUrl: "static/images/i3_sexual_offense_3.png",
+    iconSize: icon_size,
+    iconAnchor: icon_anchor,
+    popupAnchor: popup_anchor
+});
+var sexual_offense_4 = L.icon({
+    iconUrl: "static/images/i3_sexual_offense_4.png",
+    iconSize: icon_size,
+    iconAnchor: icon_anchor,
+    popupAnchor: popup_anchor
+});
+var suspicious_event_2 = L.icon({
+    iconUrl: "static/images/i3_suspicious_event_2.png",
+    iconSize: icon_size,
+    iconAnchor: icon_anchor,
+    popupAnchor: popup_anchor
+});
+var undefined_1 = L.icon({
+    iconUrl: "static/images/i3_undefined_1.png",
+    iconSize: icon_size,
+    iconAnchor: icon_anchor,
+    popupAnchor: popup_anchor
+});
+var undefined_2 = L.icon({
+    iconUrl: "static/images/i3_undefined_2.png",
+    iconSize: icon_size,
+    iconAnchor: icon_anchor,
+    popupAnchor: popup_anchor
+});
+var undefined_3 = L.icon({
+    iconUrl: "static/images/i3_undefined_3.png",
     iconSize: icon_size,
     iconAnchor: icon_anchor,
     popupAnchor: popup_anchor
 });
 
-var i2_other_3 = L.icon({
-    iconUrl: "static/images/i2_other_3.png",
-    iconSize: icon_size,
-    iconAnchor: icon_anchor,
-    popupAnchor: popup_anchor
-});
 
-var i2_other_2 = L.icon({
-    iconUrl: "static/images/i2_other_2.png",
-    iconSize: icon_size,
-    iconAnchor: icon_anchor,
-    popupAnchor: popup_anchor
-});
-var i2_property_theft_4 = L.icon({
-    iconUrl: "static/images/i2_property_theft_4.png",
-    iconSize: icon_size,
-    iconAnchor: icon_anchor,
-    popupAnchor: popup_anchor
-});
-var i2_property_theft_3 = L.icon({
-    iconUrl: "static/images/i2_property_theft_3.png",
-    iconSize: icon_size,
-    iconAnchor: icon_anchor,
-    popupAnchor: popup_anchor
-});
-var i2_vehicle_3 = L.icon({
-    iconUrl: "static/images/i2_vehicle_3.png",
-    iconSize: icon_size,
-    iconAnchor: icon_anchor,
-    popupAnchor: popup_anchor
-});
-var i2_vehicle_2 = L.icon({
-    iconUrl: "static/images/i2_vehicle_2.png",
-    iconSize: icon_size,
-    iconAnchor: icon_anchor,
-    popupAnchor: popup_anchor
-});
-var i2_vehicle_1 = L.icon({
-    iconUrl: "static/images/i2_vehicle_1.png",
-    iconSize: icon_size,
-    iconAnchor: icon_anchor,
-    popupAnchor: popup_anchor
-});
-var i2_local_state_2 = L.icon({
-    iconUrl: "static/images/i2_local_state_2.png",
-    iconSize: icon_size,
-    iconAnchor: icon_anchor,
-    popupAnchor: popup_anchor
-});
-var i2_sex_offense_4 = L.icon({
-    iconUrl: "static/images/i2_sex_offense_4.png",
-    iconSize: icon_size,
-    iconAnchor: icon_anchor,
-    popupAnchor: popup_anchor
-});
-var i2_police_stop_2 = L.icon({
-    iconUrl: "static/images/i2_police_stop_2.png",
-    iconSize: icon_size,
-    iconAnchor: icon_anchor,
-    popupAnchor: popup_anchor
-});
-var i2_hazard_4 = L.icon({
-    iconUrl: "static/images/i2_hazard_4.png",
-    iconSize: icon_size,
-    iconAnchor: icon_anchor,
-    popupAnchor: popup_anchor
-});
-var i2_hazard_3 = L.icon({
-    iconUrl: "static/images/i2_hazard_3.png",
-    iconSize: icon_size,
-    iconAnchor: icon_anchor,
-    popupAnchor: popup_anchor
-});
-var i2_hazard_2 = L.icon({
-    iconUrl: "static/images/i2_hazard_2.png",
-    iconSize: icon_size,
-    iconAnchor: icon_anchor,
-    popupAnchor: popup_anchor
-});
-var i2_non_crime_2 = L.icon({
-    iconUrl: "static/images/i2_non_crime_2.png",
-    iconSize: icon_size,
-    iconAnchor: icon_anchor,
-    popupAnchor: popup_anchor
-});
-var i2_non_crime_1 = L.icon({
-    iconUrl: "static/images/i2_non_crime_1.png",
-    iconSize: icon_size,
-    iconAnchor: icon_anchor,
-    popupAnchor: popup_anchor
-});
-var i2_animal_case_3 = L.icon({
-    iconUrl: "static/images/i2_animal_case_3.png",
-    iconSize: icon_size,
-    iconAnchor: icon_anchor,
-    popupAnchor: popup_anchor
-});
-var i2_assault_4 = L.icon({
-    iconUrl: "static/images/i2_assault_4.png",
-    iconSize: icon_size,
-    iconAnchor: icon_anchor,
-    popupAnchor: popup_anchor
-});
-var i2_fraud_3 = L.icon({
-    iconUrl: "static/images/i2_fraud_3.png",
-    iconSize: icon_size,
-    iconAnchor: icon_anchor,
-    popupAnchor: popup_anchor
-});
-var i2_undefined_3= L.icon({
-    iconUrl: "static/images/i2_undefined_3.png",
-    iconSize: icon_size,
-    iconAnchor: icon_anchor,
-    popupAnchor: popup_anchor
-});
 
 var icons = {
-    "i2_other_4": i2_other_4,
-    "i2_other_3": i2_other_3,
-    "i2_other_2": i2_other_2,
-    "i2_property_damage_theft_4": i2_property_theft_4,
-    "i2_property_damage_theft_3": i2_property_theft_3,
-    "i2_vehicle_3": i2_vehicle_3, 
-    "i2_vehicle_2": i2_vehicle_2, 
-    "i2_vehicle_1": i2_vehicle_1, 
-    "i2_local_state_law_2": i2_local_state_2,
-    "i2_sex_offense_4": i2_sex_offense_4,
-    "i2_police_stop_2": i2_police_stop_2,
-    "i2_hazard_4": i2_hazard_4,
-    "i2_hazard_3": i2_hazard_3,
-    "i2_hazard_2": i2_hazard_2,
-    "i2_non_crime_2": i2_non_crime_2,
-    "i2_non_crime_1": i2_non_crime_1,
-    "i2_animal_case_3": i2_animal_case_3,
-    "i2_assault_4": i2_assault_4,
-    "i2_fraud_3": i2_fraud_3,
-    "undefined": i2_undefined_3
+    'i3_animal_case_2': animal_case_2,
+    'i3_animal_case_4': animal_case_4,
+    'i3_assault_3': assault_3,
+    'i3_assault_4': assault_4,
+    'i3_counterfeiting_fraud_1': counterfeiting_fraud_1,
+    'i3_homicide_4': homicide_4,
+    'i3_others_1': others_1,
+    'i3_others_2': others_2,
+    'i3_others_3': others_3,
+    'i3_others_4': others_4,
+    'i3_property_damage_2': property_damage_2,
+    'i3_property_damage_3': property_damage_3,
+    'i3_robbery_theft_2': robbery_theft_2,
+    'i3_robbery_theft_3': robbery_theft_3,
+    'i3_robbery_theft_4': robbery_theft_4,
+    'i3_sexual_offense_3': sexual_offense_3,
+    'i3_sexual_offense_4': sexual_offense_4,
+    'i3_suspicious_event_2': suspicious_event_2,
+    'i3_undefined_1': undefined_1,
+    'i3_undefined_2': undefined_2,
+    'i3_undefined_3': undefined_3    
 };
 
 // Capitalize first letter function
@@ -189,19 +196,26 @@ var draw_markers = function(data) {
     markersGroup = L.layerGroup().addTo(map);
     for (var i = 0; i < data.length; i++) {
         // Get vars
-        var coords = data[i]['LatLng'].replace('(', '').replace(')', '').split(', ');
+        var coords = data[i]['LatLngArr'];
         var lat = parseFloat(coords[0]);
         var lon = parseFloat(coords[1]);
         var date = '<b>Date: </b>' + data[i]['DateTime'].format("DD-MM-YYYY");
+        var super_cat = capitalizeFirstLetter(data[i]['SuperCategory'])
         var cat = capitalizeFirstLetter(data[i]['Category']);
 
         // Create points and popups
         var point = L.marker([lat, lon], {
             icon: icons[data[i]['Icon']]
         });
-        var cat_pu = '<b>Category: </b>' + cat;
-        var disp_pu = '<b>Disposition: </b>' + capitalizeFirstLetter(data[i]['Disposition'])
-        var pu_content = '<p>' + date + '<br />' + cat_pu + '<br />' + disp_pu + '</p>'
+        var supercat_pu = '<b>Category: </b>' + super_cat;
+        var cat_pu = '<b>Details: </b>' + cat;
+        if (data[i]['source'] == 'nixle') {
+            var link = 'https://local.nixle.com/' + data[i]['link'];
+            var pu_content = '<p>' + date + '<br />' + supercat_pu + '<br />' + cat_pu + '</p><a target"_blank" href="' + link + '">Read more...</a>'
+            
+        } else {
+            var pu_content = '<p>' + date + '<br />' + supercat_pu + '<br />' + cat_pu + '</p>' 
+        }
         try { 
             point.bindPopup(pu_content)
                 .addTo(markersGroup);
@@ -212,51 +226,51 @@ var draw_markers = function(data) {
     };
 }
 
-// Draw Nix markers function
-var draw_nix_markers = function(data) {
-    markersGroup2 = L.layerGroup().addTo(map);
-    for (var i = 0; i < data.length; i++) {
-        // Get vars
-        var coords = data[i]['latlng'].replace('(', '').replace(')', '').split(', ');
-        var lat = parseFloat(coords[0]);
-        var lon = parseFloat(coords[1]);
-        var date = '<b>Date: </b>' + data[i]['DateTime'].format("DD-MM-YYYY HH:MM")
+// // Draw Nix markers function
+// var draw_nix_markers = function(data) {
+//     markersGroup2 = L.layerGroup().addTo(map);
+//     for (var i = 0; i < data.length; i++) {
+//         // Get vars
+//         var coords = data[i]['latlng'].replace('(', '').replace(')', '').split(', ');
+//         var lat = parseFloat(coords[0]);
+//         var lon = parseFloat(coords[1]);
+//         var date = '<b>Date: </b>' + data[i]['DateTime'].format("DD-MM-YYYY HH:MM")
 
-        var point = L.marker([lat, lon], {
-            icon: nixIcon
-        });
+//         var point = L.marker([lat, lon], {
+//             icon: nixIcon
+//         });
 
-        //Create popup
-        var cat = data[i]['priority'] + ': ' + data[i]['headline']
+//         //Create popup
+//         var cat = data[i]['priority'] + ': ' + data[i]['headline']
 
-        if (data[i]['title'] == 'False') {
-            data[i]['title'] = '';
-        }
-        if (data[i]['address'] == 'False') {
-            data[i]['address'] = '';
-        }
+//         if (data[i]['title'] == 'False') {
+//             data[i]['title'] = '';
+//         }
+//         if (data[i]['address'] == 'False') {
+//             data[i]['address'] = '';
+//         }
 
-        disp = data[i]['title'] + '<br />' + data[i]['address'];
+//         disp = data[i]['title'] + '<br />' + data[i]['address'];
 
-        link = 'https://local.nixle.com/' + data[i]['link'];
+//         link = 'https://local.nixle.com/' + data[i]['link'];
 
-        var pu_content = '<p>' + date + '<br /><b>' + cat + '</b><br />' + disp + '</p><a target="_blank" href="' + link + '">Read more...</a>'
-        point.bindPopup(pu_content)
-            .addTo(markersGroup2);
+//         var pu_content = '<p>' + date + '<br /><b>' + cat + '</b><br />' + disp + '</p><a target="_blank" href="' + link + '">Read more...</a>'
+//         point.bindPopup(pu_content)
+//             .addTo(markersGroup2);
 
-        if (i == 0) {
+//         if (i == 0) {
 
-            header_content = '<p><b>' + data[i]['DateTime'].format("DD-MM-YYYY HH:MM") + '&nbsp;&nbsp;' + cat + '</b><br />' +
-                data[i]['title'] + ",&nbsp;" + data[i]['address'] + '<br /><a target="_blank" href="' + link + '">Read more...</a></p>';
-            document.getElementById("latest_warning").innerHTML = header_content;
+//             header_content = '<p><b>' + data[i]['DateTime'].format("DD-MM-YYYY HH:MM") + '&nbsp;&nbsp;' + cat + '</b><br />' +
+//                 data[i]['title'] + ",&nbsp;" + data[i]['address'] + '<br /><a target="_blank" href="' + link + '">Read more...</a></p>';
+//             document.getElementById("latest_warning").innerHTML = header_content;
 
-        }
+//         }
 
-    }
+//     }
 
-    // Get summary table for the first time.
-    get_visible_data_summary()
-}
+//     // Get summary table for the first time.
+//     get_visible_data_summary()
+// }
 
 var draw_heatmap = function(data) {
 	tabulate_data(data)
@@ -279,8 +293,8 @@ initializePage();
 
 // get equivalences function
 var get_equivalence = function(search_obj, in_obj, return_var) {
-    if (search_obj['Category'] in in_obj) {
-        return in_obj[search_obj['Category']][return_var];
+    if (search_obj['Category_raw'] in in_obj) {
+        return in_obj[search_obj['Category_raw']][return_var];
     } else {
         return 'undefined';
     };
@@ -351,12 +365,15 @@ var filter_data = function(data, value, type) {
 
 $(document).ready(function(){
 
-    d3.csv("./static/data/test_data_2.csv", function(data) {
+    d3.csv("./static/data/test_data_2.csv", function(data_daily) {
         d3.csv("./static/data/n_latest.csv", function(data_nxl) {
-            d3.csv("./static/data/category_grouping.csv", function(data_cats) {
+            d3.csv("./static/data/category_grouping_2.csv", function(data_cats) {
+
+                data = []
 
                 // Parse categories table
                 cats_equiv = {};
+                risk_categories = [];
                 data_cats.forEach(function(d) {
                     row = {}
                     key = d['category'] 
@@ -364,37 +381,58 @@ $(document).ready(function(){
                     value['category_correct'] = d['category_correct'] 
                     value['risk'] = d['risk']
                     value['super_category'] = d['super_category']
-                    value['icon'] = 'i2_' + d['super_category'] + '_' + d['risk'] 
+                    value['icon'] = d['icon']
                     cats_equiv[key] = value
+                    if (d['has_risk'] == 1) risk_categories.push(d['category'])
                 })
+                console.log('Risk categories:');
+                console.log(risk_categories);
 
                 // Parse data and create data arrays
-                data.forEach(function(d) {
-                    d['DateTime'] = moment(d['Date'], "M/D/YYYY HH:mm").utcOffset(-480);
-                    d['LatLngArr'] = parseLatLng(d['LatLng']);
-                    d['Risk'] = get_equivalence(d, cats_equiv, 'risk') 
-                    d['Icon'] = get_equivalence(d, cats_equiv, 'icon') 
-                    d['SuperCategory'] = get_equivalence(d, cats_equiv, 'super_category') 
-                    d['Category'] = get_equivalence(d, cats_equiv, 'category_correct') 
-                })
+                data_daily.forEach(function(d) {
+                    if (risk_categories.includes(d['Category'])) {
+                        d['source'] = 'daily log';
+                        d['DateTime'] = moment(d['Date'], "M/D/YYYY HH:mm").utcOffset(-480);
+                        d['LatLngArr'] = parseLatLng(d['LatLng']);
+                        d['Category_raw'] = d['Category'];
+                        d['Risk'] = get_equivalence(d, cats_equiv, 'risk') 
+                        d['Icon'] = get_equivalence(d, cats_equiv, 'icon') 
+                        d['SuperCategory'] = get_equivalence(d, cats_equiv, 'super_category') 
+                        d['Category'] = get_equivalence(d, cats_equiv, 'category_correct') 
+                        data.push(d)
+                    };
+                });
 
                 data_nxl.forEach(function(d) {
-                    d['DateTime'] = moment(d['date'], "YYYY-MM-DD HH:mm:ss").utcOffset(-480);
-                })
+                    if (risk_categories.includes(d['title'])) {
+                        d['source'] = 'nixle';
+                        d['DateTime'] = moment(d['date'], "YYYY-MM-DD HH:mm:ss").utcOffset(-480);
+                        d['LatLngArr'] = parseLatLng(d['latlng']);
+                        d['Category_raw'] = d['title']
+                        d['Risk'] = get_equivalence(d, cats_equiv, 'risk') 
+                        d['Icon'] = get_equivalence(d, cats_equiv, 'icon') 
+                        d['SuperCategory'] = get_equivalence(d, cats_equiv, 'super_category') 
+                        d['Category'] = get_equivalence(d, cats_equiv, 'category_correct') 
+                        data.push(d);
+                    };
+                });
                 data_filtered_1 = data;
                 data_filtered_2 = data;
 
                 // Draw datasets to console
                 console.log('Daily crime log:')
-                console.log(data)            
+                console.log(data_daily)            
                 console.log('Categories equivalences:')
                 console.log(cats_equiv)
                 console.log('Nixle:')
                 console.log(data_nxl)
+                console.log("Unified data")
+                console.log(data);
+                
 
                 // Draw markers
                 draw_markers(data);
-                draw_nix_markers(data_nxl);
+                // draw_nix_markers(data_nxl);
 
                 // Filter function
                 // var category_filter = false;
