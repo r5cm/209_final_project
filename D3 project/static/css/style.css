@@ -179,13 +179,16 @@ svg {
 	opacity: 0.7;
 }
 
-.axis {
+.tick text{
+    fill: white;
     color: white;
-    stroke: white;
+    stroke: none;
     font-family: Georgia;
 }
 
 .axis_label {
+    fill: white;
+    stroke: none;
     font-size: calc(0.4em + 0.35vw);
 }
 
