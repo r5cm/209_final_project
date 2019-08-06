@@ -320,6 +320,7 @@ var filter_data = function(data, value, type) {
             if (data[i]['Category'] == value) data_filtered_1.push(data[i]);
         };
     };
+
     data_filtered_2 = data_filtered_1;
     // Filter date
     if (start_date_filter) {
@@ -337,6 +338,9 @@ var filter_data = function(data, value, type) {
     if (document.getElementById('btn_heatmap_inp').checked) {
         draw_heatmap(data_filtered_2);
     };
+    
+    return data_filtered_1;
+
 };
 
 //-------------------------
@@ -484,6 +488,7 @@ $(document).ready(function(){
                 }, function(start, end, label) {
                     console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
                     filter_data(data, [start, end], 'date');
+                    timeSeries.set_brush(start, end);
                 });
 
                 //--------------
@@ -520,8 +525,9 @@ $(document).ready(function(){
                 var filter_cat_val = "All";
                 var filter_cat = function() {
                     filter_cat_val = d3.select(this).property('value');
-                    console.log("Category selected: " + filter_cat_val);
-                    filter_data(data, filter_cat_val, 'category');
+                    console.log("Category selected: " + filter_cat_val);    
+                    timeSeries.plot(filter_data(data, filter_cat_val, 'category'));
+        
                 };
                 d3.select('#crimeSelector')
                     .on("change", filter_cat);
@@ -531,7 +537,7 @@ $(document).ready(function(){
                 timeSeries.callback(function(bounds) {
                     $('#datetimes').data('daterangepicker').setStartDate(bounds[0]);
                     $('#datetimes').data('daterangepicker').setEndDate(bounds[1]);
-                    filter_data([bounds[0], bounds[1]], 'date');
+                    filter_data(data, [bounds[0], bounds[1]], 'date');
                 });
 
                 timeSeries.data(data);
@@ -689,9 +695,10 @@ var hist = function() {
             use_data = data;
         } else {
             var bounds = _;
-            use_data = data.filter(function(d) {
-                return (d.dt < bounds[1] && d.dt > bounds[0]);
-            });
+            //use_data = data.filter(function(d) {
+            //    return (d.dt < bounds[1] && d.dt > bounds[0]);
+            //});
+            use_data = bounds;
         }
 
 
@@ -701,6 +708,11 @@ var hist = function() {
             return d.length;
         })]);
 
+        // Make sure bars are full width.
+        bins[0].x0 = new Date(bins[0].x0.getFullYear(), bins[0].x0.getMonth(), bins[0].x0.getDate());
+        bins[bins.length - 1].x1 = new Date(bins[bins.length - 1].x1.getFullYear(), bins[bins.length - 1].x0.getMonth(), bins[bins.length - 1].x0.getDate(), 23, 59, 59);
+
+
         return bins;
 
     }
@@ -709,14 +721,11 @@ var hist = function() {
     var axis_ = function() {
 
         hist.selectAll(".axis").remove();
-
-        //hist.append("g")
-        //    .attr("class", "axis")
-        //    .call(d3.axisLeft(y));
+        hist.selectAll(".bar").remove();
 
         hist.append("g")
-            .attr("class", "axis")
             .attr("transform", "translate(0," + String(height - margin.bottom) + ")")
+            .attr("class", "axis")
             .call(d3.axisBottom(x));
 
         hist.append("g")
@@ -755,9 +764,9 @@ var hist = function() {
     }
 
     // Initialise the bar chart and plot data.
-    var plot_ = function() {
+    var plot_ = function(_) {
 
-        bins = setup_();
+        bins = setup_(_);
         axis_();
 
         bar = hist.selectAll(".bar")
@@ -808,9 +817,12 @@ var hist = function() {
 
     // Update the histogram to use filtered data.
     var refilter_ = function(bounds) {
-
+/*
         bins = setup_(bounds);
         axis_();
+
+
+
 		try {
 			bar.data(bins)
 				.attr("transform", function(d) {
@@ -845,15 +857,26 @@ var hist = function() {
                     }
                 });
 		}catch (e) {
-		}
+		}*/
 
     }
+
+    var set_brush_ = function(start, end) {
+
+        hist.select(".brush").call(brush.move, [
+            x(start),
+            x(end),
+          ]);
+
+    }
+
 
     var public = {
         "plot": plot_,
         "data": data_,
         "refilter": refilter_,
-        "callback": callback_
+        "callback": callback_,
+        "set_brush": set_brush_
     };
 
     return public;
