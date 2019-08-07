@@ -299,6 +299,119 @@ var get_equivalence = function(search_obj, in_obj, return_var) {
         return 'undefined';
     };
 };
+
+// var super_category_filter = false;
+// var category_filter = false;
+// var date_filter = false;
+// var start_date_filter = false;
+// var end_date_filter = false;
+// var heatmap_active = false
+
+// var filter_data = function(data, value, type) {
+//     // Remove existing layers
+//     if (map.hasLayer(markersGroup)) {
+//         markersGroup.clearLayers();
+//     };
+//     if (heatmap_active) {
+//         heat.remove();    
+//     };
+
+//     // Set filter values
+//     if (type == 'super_category') super_category_filter = value;
+//     if (type == 'category') category_filter = value;
+
+//     if (type == 'date') {
+//         start_date_filter = value[0];
+//         end_date_filter = value[1];
+//         date_filter = true;
+//     };
+//     console.log("Passed value: " + value);
+//     console.log("filter value:" + category_filter);
+    
+//     data_filtered_2 = []
+
+//     // super category
+//     if (super_category_filter && !category_filter && !date_filter) {
+//         for (var i = 0; i < data.length(); i++) {
+//             meet_sc = data[i]['SuperCategory'] == super_category_filter;
+//             if (meet_sc) {
+//                 data_filtered_2.push(data[i])
+//             }
+//         }
+//     }
+//     // super category + category
+//     if (super_category_filter && category_filter && !date_filter) {
+//         for (var i = 0; i < data.length(); i++) {
+//             meet_sc = data[i]['SuperCategory'] == super_category_filter;
+//             meet_c = data[i]['Category'] == category_filter;
+//             if (meet_sc && meet_c) {
+//                 data_filtered_2.push(data[i])
+//             }
+//         }
+//     }
+//     // super category + category + date
+//     if (super_category_filter && category_filter && date_filter) {
+//         for (var i = 0; i < data.length(); i++) {
+//             meet_sc = data[i]['SuperCategory'] == super_category_filter;
+//             meet_c = data[i]['Category'] == category_filter;
+//             meet_sd = data[i]['DateTime'] >= start_date_filter;
+//             meet_ed = data[i]['DateTime'] <= end_date_filter;
+//             if (meet_sc && meet_c && meet_sd && meet_ed) {
+//                 data_filtered_2.push(data[i])
+//             }
+//         }
+//     }
+//     // super category + date
+//     if (super_category_filter && !category_filter && date_filter) {
+//         for (var i = 0; i < data.length(); i++) {
+//             meet_sc = data[i]['SuperCategory'] == super_category_filter;
+//             meet_sd = data[i]['DateTime'] >= start_date_filter;
+//             meet_ed = data[i]['DateTime'] <= end_date_filter;
+//             if (meet_sc && meet_sd && meet_ed) {
+//                 data_filtered_2.push(data[i])
+//             }
+//         }
+//     }
+//     // Date
+//     if (!super_category_filter && !category_filter && date_filter) {
+//         for (var i = 0; i < data.length(); i++) {
+//             meet_sd = data[i]['DateTime'] >= start_date_filter;
+//             meet_ed = data[i]['DateTime'] <= end_date_filter;
+//             if (meet_sd && meet_ed) {
+//                 data_filtered_2.push(data[i])
+//             }
+//         }
+//     }
+//     // category + date
+//     if (!super_category_filter && category_filter && date_filter) {
+//         for (var i = 0; i < data.length(); i++) {
+//             meet_c = data[i]['Category'] == category_filter;
+//             meet_sd = data[i]['DateTime'] >= start_date_filter;
+//             meet_ed = data[i]['DateTime'] <= end_date_filter;
+//             if (meet_c && meet_sd && meet_ed) {
+//                 data_filtered_2.push(data[i])
+//             }
+//         }
+//     }
+//     // Category
+//     if (!super_category_filter && category_filter && !date_filter) {
+//         for (var i = 0; i < data.length; i++) {
+//             meet_c = data[i]['Category'] == category_filter;
+//             if (meet_c) {
+//                 data_filtered_2.push(data[i])
+//             }
+//         }
+//     }
+
+//     if (document.getElementById('btn_points_inp').checked) {
+//         draw_markers(data_filtered_2);
+//     }; 
+//     if (document.getElementById('btn_heatmap_inp').checked) {
+//         draw_heatmap(data_filtered_2);
+//     };
+//     console.log(data_filtered_2); 
+//     return data_filtered_2;
+// }
      
 var category_filter = false;
 var start_date_filter = false;
@@ -543,7 +656,14 @@ $(document).ready(function(){
                 // Crime filter
                 //--------------
 
-                // Get unique crime categories
+                // Get unique values 
+                var super_categories = ['All'];
+                for (var i = 0; i < data.length; i++) {
+                    var super_category = data[i]['SuperCategory'];
+                    if (super_categories.indexOf(super_category) < 0) {
+                        super_categories.push(super_category);
+                    };
+                };
                 var categories = ['All'];
                 for (var i = 0; i < data.length; i++) {
                     var category = data[i]['Category'];
@@ -552,13 +672,28 @@ $(document).ready(function(){
                     };
                 };
 
-                // Add crime category menu
+                // Add menus
                 d3.select("#divfilter")
                     .append("p")
                     .text("Category")
                     .attr("align", "left")
                     .append("select")
                     .attr("id", "crimeSelector")
+                    .attr('class', 'form-control')
+                    .selectAll("option")
+                    .data(super_categories)
+                    .enter()
+                    .append("option")
+                    .attr("class", "cat_option")
+                    .text(d => capitalizeFirstLetter(d))
+                    .attr("value", d => d)
+                    .attr("color", "black");
+                d3.select("#divfilter")
+                    .append("p")
+                    .text("Details")
+                    .attr("align", "left")
+                    .append("select")
+                    .attr("id", "categorySelector")
                     .attr('class', 'form-control')
                     .selectAll("option")
                     .data(categories)
@@ -570,15 +705,23 @@ $(document).ready(function(){
                     .attr("color", "black");
 
                 // Filter data based on crime category
-                var filter_cat_val = "All";
+                var filter_supercat_val = "All";
+                var filter_supercat = function() {
+                    filter_supercat_val = d3.select(this).property('value');
+                    console.log("Super category selected: " + filter_supercat_val);    
+                    timeSeries.plot(filter_data(data, filter_supercat_val, 'super_category'));
+                };
+                d3.select('#superCategorySelector')
+                    .on("change", filter_supercat);
+
                 var filter_cat = function() {
                     filter_cat_val = d3.select(this).property('value');
                     console.log("Category selected: " + filter_cat_val);    
                     timeSeries.plot(filter_data(data, filter_cat_val, 'category'));
-        
                 };
-                d3.select('#crimeSelector')
+                d3.select('#categorySelector')
                     .on("change", filter_cat);
+                var filter_supercat_val = "All";
 
                 var timeSeries = hist();
 
@@ -792,8 +935,11 @@ var config = {
         })]);
 
         // Make sure bars are full width.
+        console.log(bins)
+        console.log(bins[0])
         bins[0].x0 = new Date(bins[0].x0.getFullYear(), bins[0].x0.getMonth(), bins[0].x0.getDate());
         bins[bins.length - 1].x1 = new Date(bins[bins.length - 1].x1.getFullYear(), bins[bins.length - 1].x0.getMonth(), bins[bins.length - 1].x0.getDate(), 23, 59, 59);
+        console.log(bins[0])
 
 
         return bins;
