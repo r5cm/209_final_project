@@ -200,12 +200,11 @@ svg {
 .btn {
     background-color : grey;
     border: 0px;
-    font-size: calc(0.5em + 0.25vw);
+    font-size: calc(0.6em + 0.3vw);
     padding: 4px 8px 4px 8px;
 }   
 
 .btn-address {
-    font-size: calc(0.6em + 0.3vw);
     margin: 0px;
 }
 

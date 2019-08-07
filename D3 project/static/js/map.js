@@ -615,29 +615,13 @@ $(document).ready(function(){
                     }
                 }
 
-                var show_warn = function(_) {
 
-                    if (!document.getElementById('btn_warn_inp').checked) {
-
-                        draw_nix_markers(data_nxl);
-
-                    } else {
-
-                        if (map.hasLayer(markersGroup2)) {
-                            markersGroup2.clearLayers();
-						    get_visible_data_summary();
-                        }
-
-                    }
-
-                }
 
                 d3.select('#btn_heatmap')
                     .on('click', show_heatmap);
                 d3.select('#btn_points')
                     .on('click', show_points);
-                d3.select('#btn_warn')
-                    .on('click', show_warn);
+
             })
         })
     });
