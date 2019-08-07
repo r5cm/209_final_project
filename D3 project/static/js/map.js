@@ -353,7 +353,7 @@ var filter_data = function(data, value, type) {
         draw_heatmap(data_filtered_2);
     };
     
-    return data_filtered_1;
+    return data_filtered_2;
 
 };
 
@@ -525,8 +525,10 @@ $(document).ready(function(){
                     "endDate": moment(),
                 }, function(start, end, label) {
                     console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
-                    filter_data(data, [start, end], 'date');
-                    timeSeries.set_brush(start, end);
+                    timeSeries.data(filter_data(data, [start, end], 'date'));
+                    timeSeries.plot();
+                    //timeSeries.set_brush(start, end);
+                    
                 });
 
                 //--------------
@@ -575,7 +577,9 @@ $(document).ready(function(){
                 timeSeries.callback(function(bounds) {
                     $('#datetimes').data('daterangepicker').setStartDate(bounds[0]);
                     $('#datetimes').data('daterangepicker').setEndDate(bounds[1]);
-                    filter_data(data, [bounds[0], bounds[1]], 'date');
+                    timeSeries.data(filter_data(data, [bounds[0], bounds[1]], 'date'));
+                    timeSeries.plot();
+                    timeSeries.set_brush();
                 });
 
                 timeSeries.data(data);
@@ -760,6 +764,7 @@ var hist = function() {
 
         hist.selectAll(".axis").remove();
         hist.selectAll(".bar").remove();
+        hist.selectAll(".brush").remove();
 
         hist.append("g")
             .attr("transform", "translate(0," + String(height - margin.bottom) + ")")
@@ -791,8 +796,10 @@ var hist = function() {
                 if (d3.event.selection) {
                     start = d3.event.selection[0];
                     end = d3.event.selection[1];
-                    // Convert bounds back to DateTime.
-                    callback([x.invert(start), x.invert(end)]);
+                    if(start > 0 && end > 0) {
+                        // Convert bounds back to DateTime.
+                        callback([x.invert(start), x.invert(end)]);
+                    }
                 } else {
                     callback();
                 }
@@ -830,21 +837,24 @@ var hist = function() {
                 return "#FDB515";
             });
 
-        bar.append("text")
-            .attr("class", "bar_day")
-            .attr("x", function(d) {
-                return (x(d.x1) - x(d.x0) - 1)/2;
-            })
-            .attr("dy", function(d) {
-                    return height - margin.bottom -  y(d.length) - 5;
-                })
-            .attr("text-anchor", "middle")
-            .text(function(d) { 
-                    if(d.length > 0) {
-                        return moment(d.x0).format("ddd").substring(0,1);
-                    }
-                });
+        if(x(bins[0].x1) - x(bins[0].x0) > 12) {
 
+            bar.append("text")
+                .attr("class", "bar_day")
+                .attr("x", function(d) {
+                    return (x(d.x1) - x(d.x0) - 1)/2;
+                })
+                .attr("dy", function(d) {
+                        return height - margin.bottom -  y(d.length) - 5;
+                    })
+                .attr("text-anchor", "middle")
+                .text(function(d) { 
+                        if(d.length > 0) {
+                            return moment(d.x0).format("ddd").substring(0,1);
+                        }
+                    });
+
+        }
 
         hist.append("g")
             .attr("class", "brush")
@@ -899,12 +909,12 @@ var hist = function() {
 
     }
 
-    var set_brush_ = function(start, end) {
+    var set_brush_ = function(_) {
 
-        hist.select(".brush").call(brush.move, [
-            x(start),
-            x(end),
-          ]);
+            hist.select_all(".brush").call(brush.move, [
+                x(start),
+                x(end),
+            ]);
 
     }
 
