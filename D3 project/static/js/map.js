@@ -300,126 +300,13 @@ var get_equivalence = function(search_obj, in_obj, return_var) {
     };
 };
 
-// var super_category_filter = false;
-// var category_filter = false;
-// var date_filter = false;
-// var start_date_filter = false;
-// var end_date_filter = false;
-// var heatmap_active = false
-
-// var filter_data = function(data, value, type) {
-//     // Remove existing layers
-//     if (map.hasLayer(markersGroup)) {
-//         markersGroup.clearLayers();
-//     };
-//     if (heatmap_active) {
-//         heat.remove();    
-//     };
-
-//     // Set filter values
-//     if (type == 'super_category') super_category_filter = value;
-//     if (type == 'category') category_filter = value;
-
-//     if (type == 'date') {
-//         start_date_filter = value[0];
-//         end_date_filter = value[1];
-//         date_filter = true;
-//     };
-//     console.log("Passed value: " + value);
-//     console.log("filter value:" + category_filter);
-    
-//     data_filtered_2 = []
-
-//     // super category
-//     if (super_category_filter && !category_filter && !date_filter) {
-//         for (var i = 0; i < data.length(); i++) {
-//             meet_sc = data[i]['SuperCategory'] == super_category_filter;
-//             if (meet_sc) {
-//                 data_filtered_2.push(data[i])
-//             }
-//         }
-//     }
-//     // super category + category
-//     if (super_category_filter && category_filter && !date_filter) {
-//         for (var i = 0; i < data.length(); i++) {
-//             meet_sc = data[i]['SuperCategory'] == super_category_filter;
-//             meet_c = data[i]['Category'] == category_filter;
-//             if (meet_sc && meet_c) {
-//                 data_filtered_2.push(data[i])
-//             }
-//         }
-//     }
-//     // super category + category + date
-//     if (super_category_filter && category_filter && date_filter) {
-//         for (var i = 0; i < data.length(); i++) {
-//             meet_sc = data[i]['SuperCategory'] == super_category_filter;
-//             meet_c = data[i]['Category'] == category_filter;
-//             meet_sd = data[i]['DateTime'] >= start_date_filter;
-//             meet_ed = data[i]['DateTime'] <= end_date_filter;
-//             if (meet_sc && meet_c && meet_sd && meet_ed) {
-//                 data_filtered_2.push(data[i])
-//             }
-//         }
-//     }
-//     // super category + date
-//     if (super_category_filter && !category_filter && date_filter) {
-//         for (var i = 0; i < data.length(); i++) {
-//             meet_sc = data[i]['SuperCategory'] == super_category_filter;
-//             meet_sd = data[i]['DateTime'] >= start_date_filter;
-//             meet_ed = data[i]['DateTime'] <= end_date_filter;
-//             if (meet_sc && meet_sd && meet_ed) {
-//                 data_filtered_2.push(data[i])
-//             }
-//         }
-//     }
-//     // Date
-//     if (!super_category_filter && !category_filter && date_filter) {
-//         for (var i = 0; i < data.length(); i++) {
-//             meet_sd = data[i]['DateTime'] >= start_date_filter;
-//             meet_ed = data[i]['DateTime'] <= end_date_filter;
-//             if (meet_sd && meet_ed) {
-//                 data_filtered_2.push(data[i])
-//             }
-//         }
-//     }
-//     // category + date
-//     if (!super_category_filter && category_filter && date_filter) {
-//         for (var i = 0; i < data.length(); i++) {
-//             meet_c = data[i]['Category'] == category_filter;
-//             meet_sd = data[i]['DateTime'] >= start_date_filter;
-//             meet_ed = data[i]['DateTime'] <= end_date_filter;
-//             if (meet_c && meet_sd && meet_ed) {
-//                 data_filtered_2.push(data[i])
-//             }
-//         }
-//     }
-//     // Category
-//     if (!super_category_filter && category_filter && !date_filter) {
-//         for (var i = 0; i < data.length; i++) {
-//             meet_c = data[i]['Category'] == category_filter;
-//             if (meet_c) {
-//                 data_filtered_2.push(data[i])
-//             }
-//         }
-//     }
-
-//     if (document.getElementById('btn_points_inp').checked) {
-//         draw_markers(data_filtered_2);
-//     }; 
-//     if (document.getElementById('btn_heatmap_inp').checked) {
-//         draw_heatmap(data_filtered_2);
-//     };
-//     console.log(data_filtered_2); 
-//     return data_filtered_2;
-// }
-     
+var super_category_filter = false;
 var category_filter = false;
 var start_date_filter = false;
 var end_date_filter = false;
 var heatmap_active = false
 
 var filter_data = function(data, value, type) {
-    data_filtered_1 = data; 
 
     // Remove existing layers
     if (map.hasLayer(markersGroup)) {
@@ -430,6 +317,9 @@ var filter_data = function(data, value, type) {
     };
 
     // Set filter values
+    if (type == 'super_category') {
+        super_category_filter = value;
+    }
     if (type == 'category') {
         category_filter = value;
     }
@@ -438,14 +328,32 @@ var filter_data = function(data, value, type) {
         end_date_filter = value[1];
     }
 
-    // Filter category
-    if (category_filter == "All" || !category_filter) {
-        data_filtered_1 = data;
-    } else {
-        data_filtered_1 = []
+    // Declare data containers
+    var data_filtered_0 = [];
+    var data_filtered_1 = []; 
+    var data_filtered_2 = [];
+
+    // Filter super-category
+    if (super_category_filter != "All" && super_category_filter) {
         for (var i = 0; i < data.length; i++) {
-            if (data[i]['Category'] == value) data_filtered_1.push(data[i]);
+            if (data[i]['SuperCategory'] == super_category_filter) {
+               data_filtered_0.push(data[i]) 
+            }
+        }
+    } else {
+        data_filtered_0 = data; 
+    }
+
+    // Filter category
+    if (category_filter != "All" && category_filter) {
+        data_filtered_1 = []
+        for (var i = 0; i < data_filtered_0.length; i++) {
+            if (data_filtered_0[i]['Category'] == category_filter) {
+                data_filtered_1.push(data_filtered_0[i]);
+            };
         };
+    } else {
+        data_filtered_1 = data_filtered_0;
     };
 
     data_filtered_2 = data_filtered_1;
@@ -459,6 +367,8 @@ var filter_data = function(data, value, type) {
             };
         };
     };
+
+    // Draw markers
     if (document.getElementById('btn_points_inp').checked) {
         draw_markers(data_filtered_2);
     }; 
@@ -678,7 +588,7 @@ $(document).ready(function(){
                     .text("Category")
                     .attr("align", "left")
                     .append("select")
-                    .attr("id", "crimeSelector")
+                    .attr("id", "superCategorySelector")
                     .attr('class', 'form-control')
                     .selectAll("option")
                     .data(super_categories)
@@ -693,7 +603,7 @@ $(document).ready(function(){
                     .text("Details")
                     .attr("align", "left")
                     .append("select")
-                    .attr("id", "categorySelector")
+                    .attr("id", "crimeSelector")
                     .attr('class', 'form-control')
                     .selectAll("option")
                     .data(categories)
@@ -719,7 +629,7 @@ $(document).ready(function(){
                     console.log("Category selected: " + filter_cat_val);    
                     timeSeries.plot(filter_data(data, filter_cat_val, 'category'));
                 };
-                d3.select('#categorySelector')
+                d3.select('#crimeSelector')
                     .on("change", filter_cat);
                 var filter_supercat_val = "All";
 
@@ -935,11 +845,8 @@ var config = {
         })]);
 
         // Make sure bars are full width.
-        console.log(bins)
-        console.log(bins[0])
         bins[0].x0 = new Date(bins[0].x0.getFullYear(), bins[0].x0.getMonth(), bins[0].x0.getDate());
         bins[bins.length - 1].x1 = new Date(bins[bins.length - 1].x1.getFullYear(), bins[bins.length - 1].x0.getMonth(), bins[bins.length - 1].x0.getDate(), 23, 59, 59);
-        console.log(bins[0])
 
 
         return bins;
