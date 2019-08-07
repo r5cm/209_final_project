@@ -8,17 +8,17 @@
     <link  rel="stylesheet" type="text/css" href="./static/css/style.css">
     <!-- Leaflet -->
     <link  rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
-
   crossorigin=""/>
 	<link  rel="stylesheet" type="text/css" href="./static/css/leaflet-routing-machine.css" />
     <script type="text/javascript" src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
-
   crossorigin=""></script>
+
     <script type="text/javascript" src="./static/js/leaflet-heat.js"></script>
     <!-- Others -->
     <script src="./static/js/jquery-1.11.0.min.js"></script>
     <script src="./static/js/bootstrap.min.js"></script>
     <script src="./static/js/d3.v4.js"></script>    
+    <script src="./static/js/radar-chart.js"></script>
 	<script src="./static/js/summary_table.js"></script>
 	<script type='text/javascript' src='./static/js/config.js'></script>
 	
@@ -68,7 +68,10 @@
       </div>
 
       <div id="summary">
+
       </div>
+
+<div id="radarchart"></div>
 
       <div class="map" id="divmap">
       </div>
@@ -97,7 +100,8 @@
       </div>
 	  <script type="text/javascript" src="static/js/address_box.js"></script>
 	  
-      <div class="t_series" id="t_series"></div>
+      <div class="t_series" id="t_series">      <div id="radar_div">
+      </div></div>
 	  </div> 
     	
   </body>

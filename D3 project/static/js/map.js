@@ -663,6 +663,54 @@ var hist = function() {
         return that;
     }
 
+var rdata = [
+ [
+      {"area": "12am", "value": 13, "show": false}, 
+      {"area": "11pm", "value": 10, "show": false}, 
+      {"area": "10pm", "value": 11, "show": false}, 
+      {"area": "9pm", "value": 13, "show": true}, 
+      {"area": "8pm", "value": 5, "show": false}, 
+      {"area": "7pm", "value": 8, "show": false}, 
+      {"area": "6pm", "value": 6, "show": true}, 
+      {"area": "5pm", "value": 5, "show": false}, 
+      {"area": "4pm", "value": 2, "show": false}, 
+      {"area": "3pm", "value": 3, "show": true}, 
+      {"area": "2pm", "value": 5, "show": false}, 
+      {"area": "1pm", "value": 4, "show": false}, 
+      {"area": "12pm", "value": 13, "show": false},
+      {"area": "11am", "value": 5, "show": false}, 
+      {"area": "10am", "value": 2, "show": false}, 
+      {"area": "9am", "value": 13, "show": true}, 
+      {"area": "8am", "value": 5, "show": false}, 
+      {"area": "7am", "value": 7, "show": false}, 
+      {"area": "6am", "value": 13, "show": true}, 
+      {"area": "5am", "value": 10, "show": false}, 
+      {"area": "4am", "value": 11, "show": false},
+      {"area": "3am", "value": 13, "show": true}, 
+      {"area": "2am", "value": 5, "show": false}, 
+      {"area": "1am", "value": 2, "show": false}, 
+    ]
+
+
+];
+
+
+
+// Config for the Radar chart
+var config = {
+    w: 170,
+    h: 170,
+    maxValue: 20,
+    levels: 2,
+    ExtraWidthX: 60,
+    ExtraWidthY: 10,
+    factorLegend: 0.45,
+    TranslateX: 30,
+    TranslateY: 10,
+    radius: 2,
+    color: d3.scaleOrdinal().range(["#E09E19", "#E09E19"])
+}
+
     var hist, brush;
 
     var x, width;
@@ -686,6 +734,7 @@ var hist = function() {
 
         y = d3.scaleLinear()
             .range([height - margin.bottom, 0]);
+
 
 
         if (hist) {
@@ -851,6 +900,8 @@ var hist = function() {
         hist.append("g")
             .attr("class", "brush")
             .call(brush);
+
+    RadarChart.draw("#radarchart", rdata, config);
 
     }
 
