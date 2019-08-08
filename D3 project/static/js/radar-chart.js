@@ -71,6 +71,7 @@ var RadarChart = {
     var radius = cfg.factor*Math.min(cfg.w/2, cfg.h/2);
     var Format = d3.format('%');
     d3.select(id).select("svg").remove();
+    d3.select(".radar-toolTip").remove();
 
     var g = d3.select(id)
         .append("svg")
@@ -216,10 +217,9 @@ var tooltip = d3.select("body").append("div").attr("class", "radar-toolTip");
       .style("stroke-width", "2px")
       .style("stroke", cfg.color(series)).style("fill-opacity", .9)
       .on('mouseover', function (d){
-        console.log(d.area)
             tooltip
-              .style("left", d3.event.pageX - 40 + "px")
-              .style("top", d3.event.pageY - 80 + "px")
+              .style("left", d3.event.pageX - 35 + "px")
+              .style("top", d3.event.pageY - 65 + "px")
               .style("display", "inline-block")
       				.html((d.area) + "<br><span>" + (d.value) + "</span>");
             })

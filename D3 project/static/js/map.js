@@ -737,13 +737,17 @@ $(document).ready(function(){
 
 });
 
+
+
 var hist = function() {
+
+d3.select(window).on("resize.t_series", function() { plot_(); });
 
     // Initialise data structures.s
     var margin = {
         "left": 35,
         "top": 5,
-        "bottom": 30,
+        "bottom": 25,
         "right": 20
     };
 
@@ -764,55 +768,54 @@ var hist = function() {
         return that;
     }
 
-var rdata = [
- [
-      {"area": "12am", "value": 13, "show": false}, 
-      {"area": "11pm", "value": 10, "show": false}, 
-      {"area": "10pm", "value": 11, "show": false}, 
-      {"area": "9pm", "value": 13, "show": true}, 
-      {"area": "8pm", "value": 5, "show": false}, 
-      {"area": "7pm", "value": 8, "show": false}, 
-      {"area": "6pm", "value": 6, "show": true}, 
-      {"area": "5pm", "value": 5, "show": false}, 
-      {"area": "4pm", "value": 2, "show": false}, 
-      {"area": "3pm", "value": 3, "show": true}, 
-      {"area": "2pm", "value": 5, "show": false}, 
-      {"area": "1pm", "value": 4, "show": false}, 
-      {"area": "12pm", "value": 13, "show": false},
-      {"area": "11am", "value": 5, "show": false}, 
-      {"area": "10am", "value": 2, "show": false}, 
-      {"area": "9am", "value": 13, "show": true}, 
-      {"area": "8am", "value": 5, "show": false}, 
-      {"area": "7am", "value": 7, "show": false}, 
-      {"area": "6am", "value": 13, "show": true}, 
-      {"area": "5am", "value": 10, "show": false}, 
-      {"area": "4am", "value": 11, "show": false},
-      {"area": "3am", "value": 13, "show": true}, 
-      {"area": "2am", "value": 5, "show": false}, 
-      {"area": "1am", "value": 2, "show": false}, 
-    ]
+    // Placeholder data for radar chart
+    var rdata = [
+     [
+          {"hour": 0, "area": "12am", "value": 0, "show": false}, 
+          {"hour": 23, "area": "11pm", "value": 0, "show": false}, 
+          {"hour": 22, "area": "10pm", "value": 0, "show": false}, 
+          {"hour": 21, "area": "9pm", "value": 0, "show": true}, 
+          {"hour": 20, "area": "8pm", "value": 0, "show": false}, 
+          {"hour": 19, "area": "7pm", "value": 0, "show": false}, 
+          {"hour": 18, "area": "6pm", "value": 0, "show": true}, 
+          {"hour": 17, "area": "5pm", "value": 0, "show": false}, 
+          {"hour": 16, "area": "4pm", "value": 0, "show": false}, 
+          {"hour": 15, "area": "3pm", "value": 0, "show": true}, 
+          {"hour": 14, "area": "2pm", "value": 0, "show": false}, 
+          {"hour": 13, "area": "1pm", "value": 0, "show": false}, 
+          {"hour": 12, "area": "12pm", "value": 0, "show": false},
+          {"hour": 11, "area": "11am", "value": 0, "show": false}, 
+          {"hour": 10, "area": "10am", "value": 0, "show": false}, 
+          {"hour": 9, "area": "9am", "value": 0, "show": true}, 
+          {"hour": 8, "area": "8am", "value": 0, "show": false}, 
+          {"hour": 7, "area": "7am", "value": 0, "show": false}, 
+          {"hour": 6, "area": "6am", "value": 0, "show": true}, 
+          {"hour": 5, "area": "5am", "value": 0, "show": false}, 
+          {"hour": 4, "area": "4am", "value": 0, "show": false},
+          {"hour": 3, "area": "3am", "value": 0, "show": true}, 
+          {"hour": 5, "area": "2am", "value": 0, "show": false}, 
+          {"hour": 1, "area": "1am", "value": 0, "show": false}, 
+        ]
+    ];
 
 
-];
 
+    // Config for the Radar chart
+    var config = {
+        w: 170,
+        h: 170,
+        maxValue: 20,
+        levels: 2,
+        ExtraWidthX: 60,
+        ExtraWidthY: 10,
+        factorLegend: 0.45,
+        TranslateX: 30,
+        TranslateY: 10,
+        radius: 2,
+        color: d3.scaleOrdinal().range(["#E09E19", "#E09E19"])
+    }
 
-
-// Config for the Radar chart
-var config = {
-    w: 170,
-    h: 170,
-    maxValue: 20,
-    levels: 2,
-    ExtraWidthX: 60,
-    ExtraWidthY: 10,
-    factorLegend: 0.45,
-    TranslateX: 30,
-    TranslateY: 10,
-    radius: 2,
-    color: d3.scaleOrdinal().range(["#E09E19", "#E09E19"])
-}
-
-    var hist, brush;
+    var svg, hist, brush;
 
     var x, width;
     var y, height;
@@ -820,15 +823,10 @@ var config = {
     // Create the binned histogram data and configure scales. 
     var setup_ = function(_) {
 
-        d3.select(window).on('resize', refilter_);
-
         // Set geometry.
         
-		height = parseInt(d3.select('.t_series').style('height')) - 20; //This one has a bug
-        width = parseInt(d3.select('.t_series').style('width')) - 20; // This one someone starts before the data loads. 
-
-
-        //console.log(width);
+		height = document.getElementById("t_series").offsetHeight - 15; 
+        width = document.getElementById("t_series").offsetWidth - 10; 
 
         x = d3.scaleTime()
             .range([0, width - margin.left - margin.right]);
@@ -836,23 +834,24 @@ var config = {
         y = d3.scaleLinear()
             .range([height - margin.bottom, 0]);
 
-
-
         if (hist) {
-            d3.select(hist.node().parentNode).style("width", width);
-            d3.select(hist.node().parentNode).style("height", height);
+            svg.attr("width", width)
+                .attr("height", height);
+
+            hist.remove();
+
         } else {
 
             // Create canvas and scales.
-            hist = d3.select(".t_series")
+            svg = d3.select(".t_series")
                 .append("svg")
-                .attr("class", "viz")
+                .attr("class", "bar_chart")
                 .attr("width", width)
-                .attr("height", height)
-                .append("g")
-                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
+                .attr("height", height)         
         }
+
+        hist = svg.append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
         var dayExtent = d3.extent(data, function(d) {
             return d.DateTime;
@@ -863,6 +862,13 @@ var config = {
         var dayBins = d3.timeDays(d3.timeDay.offset(dayExtent[0], -1),
             d3.timeDay.offset(dayExtent[1], 1));
 
+        var hourBins = [];
+
+        for(i = 0; i <= 24; i++) {
+            hourBins.push(i);
+        }
+
+
         x.domain(d3.extent(dayBins));
 
         var histogram = d3.histogram()
@@ -871,22 +877,25 @@ var config = {
             })
             .thresholds(dayBins);
 
+        var hourHistogram = d3.histogram().
+            value(function(d) {
+                return d.DateTime.hour() + d.DateTime.minute()/60;
+            })
+            .thresholds(hourBins);
 
-        var bins, use_data;
+        var bins, use_data, hourBins;
 
         // Filter if argument supplied.
         if (!arguments.length || (!_)) {
             use_data = data;
         } else {
             var bounds = _;
-            //use_data = data.filter(function(d) {
-            //    return (d.dt < bounds[1] && d.dt > bounds[0]);
-            //});
             use_data = bounds;
         }
 
 
         bins = histogram(use_data);
+        hourBins = hourHistogram(use_data);
 
         y.domain([0, d3.max(bins, function(d) {
             return d.length;
@@ -897,7 +906,7 @@ var config = {
         bins[bins.length - 1].x1 = new Date(bins[bins.length - 1].x1.getFullYear(), bins[bins.length - 1].x0.getMonth(), bins[bins.length - 1].x0.getDate(), 23, 59, 59);
 
 
-        return bins;
+        return [bins, hourBins];
 
     }
 
@@ -953,7 +962,9 @@ var config = {
     // Initialise the bar chart and plot data.
     var plot_ = function(_) {
 
-        bins = setup_(_);
+        var setup = setup_(_);
+        var bins = setup[0];
+        var hourBins = setup[1];
         axis_();
 
         bar = hist.selectAll(".bar")
@@ -1002,56 +1013,21 @@ var config = {
             .attr("class", "brush")
             .call(brush);
 
+    var maxHourCount = 0
+
+    $.each(rdata[0], function(i, obj) {
+        obj.value = hourBins[obj.hour].length;
+        if(obj.value > maxHourCount) { maxHourCount = obj.value; }
+    });
+
+    config.maxValue = Math.round(maxHourCount * 1.1);
+
     RadarChart.draw("#radarchart", rdata, config);
 
     }
 
 
-    // Update the histogram to use filtered data.
-    var refilter_ = function(bounds) {
-/*
-        bins = setup_(bounds);
-        axis_();
 
-
-
-		try {
-			bar.data(bins)
-				.attr("transform", function(d) {
-					return "translate(" + x(d.x0) + "," + y(d.length) + ")";
-				})
-				.select("rect")
-				.attr("x", 1)
-				.attr("width", function(d) {
-					return x(d.x1) - x(d.x0) - 1;
-				})
-				.attr("height", function(d) {
-					return height - margin.bottom - y(d.length);
-				})
-				.attr("fill", function(d, i) {
-					return "#FDB515";
-				});
-                
-
-
-            bar.data(bins).select("text")
-            .attr("class", "bar_day")
-            .attr("x", function(d) {
-                return (x(d.x1) - x(d.x0) - 1)/2;
-            })
-            .attr("dy", function(d) {
-                    return height - margin.bottom -  y(d.length) - 5;
-                })
-            .attr("text-anchor", "middle")
-            .text(function(d) { 
-                    if(d.length > 0) { 
-                        return moment(d.x0).format("ddd").substring(0,1);
-                    }
-                });
-		}catch (e) {
-		}*/
-
-    }
 
     var set_brush_ = function(_) {
 
@@ -1066,7 +1042,6 @@ var config = {
     var public = {
         "plot": plot_,
         "data": data_,
-        "refilter": refilter_,
         "callback": callback_,
         "set_brush": set_brush_
     };

@@ -6,7 +6,7 @@ body {
 .grid {
 	display: grid;
 	grid-template-columns: 15% 18% 1fr 1fr;
-	grid-template-rows: 17% 1fr 3fr 1fr 1fr;
+	grid-template-rows: 17% 1fr 3fr 1fr 160px;
 	width: 100vw;
 	height: 100vh; 
 }
@@ -29,7 +29,8 @@ header {
 
 .filter, #summary, .map, #address_box, .t_series, #lat_wrapper, #radarchart {
   background: #003262; /* #ed5, #0072b9 */ 
-  padding: 0.5em;
+  padding: 0.4em;
+  padding-bottom: 0px;
   color: #fff;
   font-family: Georgia;
 }
@@ -55,26 +56,27 @@ header {
 #summary {
 	grid-column: 1;
 	grid-row: 3;
+    padding-top: 0px;
 }
 
 .form-control {
 	font-size: calc(0.6em + 0.5vh);
     width: 100%;
     height: calc(0.7em + 1.5vw);
+    margin: 8px;
 }
 
 caption {
 	font-size: calc(0.7em + 0.4vw);
 	font-weight: bold;
 	color: #ed5;
+    padding: 4px 4px 4px 4px;
 }
 
 table {
 	text-align: left;
 	font-size: calc(0.4em + 0.45vw);
-	margin-left: calc(1em + 0.1vw);
-	margin-right: calc(1em + 0.1vw);
-	width: 90%;
+	width: 100%;
 	overflow: hidden;
 }
 
@@ -128,6 +130,7 @@ button {
 .t_series {
 	grid-row: 5 / 6;
 	grid-column: 2 / 5;
+    padding-bottom: 0;
 }
 
 rect.bar:hover {
@@ -142,8 +145,8 @@ rect.bar:hover {
 }
 
 svg {
-  width:auto;
-  height: auto;
+//  width:auto;
+//  height: auto;
 }
 
 #map {
@@ -189,7 +192,7 @@ svg {
 .axis_label {
     fill: white;
     stroke: none;
-    font-size: calc(0.4em + 0.35vw);
+    font-size: 12px;
 }
 
 
@@ -267,12 +270,15 @@ svg {
 	grid-row: 4 / 6;
     overflow: hide;
     padding: 0;
+    padding-bottom: 20px;
+    position: relative;
 }
 
 .radar-chart {
     position: absolute;
-    bottom: 1%;
+    bottom: 20px;
 }
+
 
 .radar-axis {
 	font: 15px Georgia;
@@ -294,8 +300,8 @@ svg {
 
 .radar-toolTip {
   pointer-events: none;
-	position: absolute;
-    display: none;
+  position: absolute;
+  display: none;
   min-width: 50px;
   height: auto;
   background: none repeat scroll 0 0 #ffffff;
@@ -305,6 +311,7 @@ svg {
   line-height: 1.3;
   color: #5B6770;
   box-shadow: 0px 3px 9px rgba(0, 0, 0, .15);
+  font-size: calc(0.4em + 0.45vw);
 }
 .radar-toolTip:after {
   content: "";
@@ -319,6 +326,6 @@ svg {
   margin-left: -12px;
 }  
 .radar-toolTip span {
-	font-weight: 500;
+  font-weight: 500;
   color: #081F2C;
 }

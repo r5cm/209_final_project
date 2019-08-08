@@ -46,7 +46,7 @@ function create_table(d) {
 
 	ordered_tuples.sort((a,b) => b [1] - a[1]);
 	// console.log(ordered_tuples)
-	var html = "<table id='summary_table'><caption>Most frequent events in this area</caption><tbody style='cursor:pointer'><tr class='tr_text'>";
+	var html = "<table id='summary_table'><caption>Frequent events:</caption><tbody style='cursor:pointer'><tr class='tr_text'>";
 	for(var i = 0; i < Math.min(ordered_tuples.length,10); i++){
 		html += "<td>" + ordered_tuples[i][0] + '<td class="count">' + ordered_tuples[i][1] + "</td></tr><tr class='tr_text'>";
 	}
