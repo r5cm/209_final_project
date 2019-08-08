@@ -46,13 +46,20 @@ function create_table(d) {
 
 	ordered_tuples.sort((a,b) => b [1] - a[1]);
 	// console.log(ordered_tuples)
-	var html = "<table><caption>Most frequent events in this area</caption><tr class='tr_text'>";
+	var html = "<table id='summary_table'><caption>Most frequent events in this area</caption><tbody style='cursor:pointer'><tr class='tr_text'>";
 	for(var i = 0; i < Math.min(ordered_tuples.length,10); i++){
 		html += "<td>" + ordered_tuples[i][0] + '<td class="count">' + ordered_tuples[i][1] + "</td></tr><tr class='tr_text'>";
 	}
-	html += "</tr></table>";
+	html += "</tr></tbody></table>";
 	
 	document.getElementById("summary").innerHTML = html
+
+	onRowClick("summary_table", function (row){
+		var value = row.getElementsByTagName("td")[0].innerHTML;
+		d3.select('#superCategorySelector').property('value',value);
+		var event = new Event('change')
+		document.getElementById('superCategorySelector').dispatchEvent(event)
+	});
 }
 
 function tabulate_data(data) {
@@ -62,3 +69,17 @@ function tabulate_data(data) {
 	};
 	create_table(cats)
 };
+
+function onRowClick(tableId, callback) {
+    var table = document.getElementById(tableId),
+		rows = table.getElementsByTagName("tr"),
+        i;
+    for (i = 0; i < rows.length; i++) {
+        table.rows[i].onclick = function (row) {
+            return function () {
+                callback(row);
+            };
+        }(table.rows[i]);
+    }
+};
+

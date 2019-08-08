@@ -616,13 +616,15 @@ $(document).ready(function(){
 
                 // Filter data based on crime category
                 var filter_supercat_val = "All";
-                var filter_supercat = function() {
+				var	filter_supercat = function() {
                     filter_supercat_val = d3.select(this).property('value');
                     console.log("Super category selected: " + filter_supercat_val);    
                     timeSeries.plot(filter_data(data, filter_supercat_val, 'super_category'));
                 };
-                d3.select('#superCategorySelector')
-                    .on("change", filter_supercat);
+                //d3.select('#superCategorySelector')
+                //    .on("change", filter_supercat);
+
+				document.getElementById('superCategorySelector').addEventListener("change",filter_supercat)
 
                 var filter_cat = function() {
                     filter_cat_val = d3.select(this).property('value');
