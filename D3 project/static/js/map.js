@@ -419,50 +419,6 @@ $(document).ready(function() {
 
                 // Draw markers
                 draw_markers(data);
-                // draw_nix_markers(data_nxl);
-
-                // Filter function
-                // var category_filter = false;
-                // var start_date_filter = false;
-                // var end_date_filter = false;
-                // var filter_data = function(value, type) {
-                //     data_filtered_1 = data; 
-                //     if (map.hasLayer(markersGroup)) {
-                //         markersGroup.clearLayers();
-                //     };
-                //     // Set filter values
-                //     if (type == 'category') {
-                //         category_filter = value;
-                //     }
-                //     if (type == 'date') {
-                //         start_date_filter = value[0];
-                //         end_date_filter = value[1];
-                //     }
-                //     // Filter category
-                //     // data_filtered_1 = [];
-                //     if (category_filter == "All" || !category_filter) {
-                //         data_filtered_1 = data;
-                //     } else {
-                //         data_filtered_1 = []
-                //         for (var i = 0; i < data.length; i++) {
-                //             if (data[i]['Category'] == value) data_filtered_1.push(data[i]);
-                //         };
-                //     };
-                //     data_filtered_2 = data_filtered_1;
-                //     // Filter date
-                //     if (start_date_filter) {
-                //         data_filtered_2 = [];
-                //         for (var i = 0; i < data_filtered_1.length; i++) {
-                //             var record = data_filtered_1[i];
-                //             if (start_date_filter <= record['DateTime'] && record['DateTime'] <= end_date_filter) {
-                //                 data_filtered_2.push(record);
-                //             };
-                //         };
-                //     };
-                //     if (document.getElementById('btn_points_inp').checked) {
-                //         draw_markers(data_filtered_2);
-                //     }; 
-                // };
 
                 //--------------
                 // Date filter
