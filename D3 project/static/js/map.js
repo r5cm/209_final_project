@@ -591,34 +591,80 @@ $(document).ready(function(){
                     .attr("id", "superCategorySelector")
                     .attr('class', 'form-control')
                     .selectAll("option")
-                    .data(super_categories)
+                    .data(super_categories.sort())
                     .enter()
                     .append("option")
                     .attr("class", "cat_option")
                     .text(d => capitalizeFirstLetter(d))
                     .attr("value", d => d)
                     .attr("color", "black");
-                d3.select("#divfilter")
-                    .append("p")
-                    .text("Details")
-                    .attr("align", "left")
-                    .append("select")
-                    .attr("id", "crimeSelector")
-                    .attr('class', 'form-control')
-                    .selectAll("option")
-                    .data(categories)
-                    .enter()
-                    .append("option")
-                    .attr("class", "cat_option")
-                    .text(d => capitalizeFirstLetter(d))
-                    .attr("value", d => d)
-                    .attr("color", "black");
+                // d3.select("#divfilter")
+                //     .append("p")
+                //     .text("Details")
+                //     .attr("align", "left")
+                //     .append("select")
+                //     .attr("id", "crimeSelector")
+                //     .attr('class', 'form-control')
+                //     .selectAll("option")
+                //     .data(categories.sort())
+                //     .enter()
+                //     .append("option")
+                //     .attr("class", "cat_option")
+                //     .text(d => capitalizeFirstLetter(d))
+                //     .attr("value", d => d)
+                //     .attr("color", "black");
+                var categories_menu = d3.select("#divfilter")
+                                        .append("P")
+                                        .text("Details")
+                                        .attr("align", "left")
+                                        .append("select")
+                                        .attr("id", "crimeSelector")
+                                        .attr("class", "form-control")
+                
+                var cat_options = d3.select("#crimeSelector")
+                                    .selectAll("option")
+                                    .data(categories)
+                                    .enter()
+                                    .append("option")
+                                    .attr("class", "cat_option")
+                                    .text(d => capitalizeFirstLetter(d))
+                                    .attr("value", d => d)
+                                    .attr("color", "black");
 
                 // Filter data based on crime category
                 var filter_supercat_val = "All";
 				var	filter_supercat = function() {
                     filter_supercat_val = d3.select(this).property('value');
                     console.log("Super category selected: " + filter_supercat_val);    
+
+                    if (this.value == 'All') {
+                        cats = categories;
+                    } else {
+                        // Filter options in details menu
+                        var cats = ['All'];
+                        for (var i = 0; i < data_filtered_2.length; i++) {
+                            category = data_filtered_2[i]['Category'];
+                            if (data_filtered_2[i]['SuperCategory'] == filter_supercat_val && !cats.includes(category)) {
+                                cats.push(data[i]['Category']);
+                            }
+                        }
+                        console.log(cats);
+                    };
+                    // Update category options
+                    var cat_options = d3.select("#crimeSelector")
+                        .selectAll("option") 
+                        .data(cats)
+
+                    cat_options.exit().remove();
+
+                    cat_options.enter()
+                        .append("option")
+                        .merge(cat_options)
+                        .attr("class", "cat_option")
+                        .text(d => capitalizeFirstLetter(d))
+                        .attr("value", d => d)
+                        .attr("color", "black");
+
                     timeSeries.plot(filter_data(data, filter_supercat_val, 'super_category'));
                 };
                 //d3.select('#superCategorySelector')
