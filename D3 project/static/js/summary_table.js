@@ -44,11 +44,24 @@ function create_table(d) {
 		return [key,dict[key]]
 	});
 
+    var tableWidth = document.getElementById("summary").offsetWidth;
+
 	ordered_tuples.sort((a,b) => b [1] - a[1]);
-	// console.log(ordered_tuples)
+
+    var factor = 1;
+
+    if(ordered_tuples.length) {
+       factor = (tableWidth/2)/ordered_tuples[0][1];
+    }
+
 	var html = "<table id='summary_table'><caption>Frequent events:</caption><tbody style='cursor:pointer'><tr class='tr_text'>";
 	for(var i = 0; i < Math.min(ordered_tuples.length,10); i++){
-		html += "<td>" + ordered_tuples[i][0] + '<td class="count">' + ordered_tuples[i][1] + "</td></tr><tr class='tr_text'>";
+
+        var bar = ordered_tuples[i][1]*factor;
+        if(bar < 10) { bar = 10; }
+
+		html += "<td>" + ordered_tuples[i][0] + '<td class="count"><div class="summary_bar" style="width: ' 
+                + bar + 'px">' + ordered_tuples[i][1] + "</div></td></tr><tr class='tr_text'>";
 	}
 	html += "</tr></tbody></table>";
 	

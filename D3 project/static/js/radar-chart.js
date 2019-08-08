@@ -1,3 +1,11 @@
+/*
+
+RadarChart modified from: https://bl.ocks.org/alandunning/4c36eb1abdb248de34c64f5672afd857
+Responsivefy modified from: https://brendansudol.com/writing/responsive-d3
+
+*/
+
+
 function responsivefy(svg) {
     // get container + svg aspect ratio
     var container = d3.select(svg.node().parentNode),

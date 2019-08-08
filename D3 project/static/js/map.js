@@ -226,51 +226,7 @@ var draw_markers = function(data) {
     };
 }
 
-// // Draw Nix markers function
-// var draw_nix_markers = function(data) {
-//     markersGroup2 = L.layerGroup().addTo(map);
-//     for (var i = 0; i < data.length; i++) {
-//         // Get vars
-//         var coords = data[i]['latlng'].replace('(', '').replace(')', '').split(', ');
-//         var lat = parseFloat(coords[0]);
-//         var lon = parseFloat(coords[1]);
-//         var date = '<b>Date: </b>' + data[i]['DateTime'].format("DD-MM-YYYY HH:MM")
 
-//         var point = L.marker([lat, lon], {
-//             icon: nixIcon
-//         });
-
-//         //Create popup
-//         var cat = data[i]['priority'] + ': ' + data[i]['headline']
-
-//         if (data[i]['title'] == 'False') {
-//             data[i]['title'] = '';
-//         }
-//         if (data[i]['address'] == 'False') {
-//             data[i]['address'] = '';
-//         }
-
-//         disp = data[i]['title'] + '<br />' + data[i]['address'];
-
-//         link = 'https://local.nixle.com/' + data[i]['link'];
-
-//         var pu_content = '<p>' + date + '<br /><b>' + cat + '</b><br />' + disp + '</p><a target="_blank" href="' + link + '">Read more...</a>'
-//         point.bindPopup(pu_content)
-//             .addTo(markersGroup2);
-
-//         if (i == 0) {
-
-//             header_content = '<p><b>' + data[i]['DateTime'].format("DD-MM-YYYY HH:MM") + '&nbsp;&nbsp;' + cat + '</b><br />' +
-//                 data[i]['title'] + ",&nbsp;" + data[i]['address'] + '<br /><a target="_blank" href="' + link + '">Read more...</a></p>';
-//             document.getElementById("latest_warning").innerHTML = header_content;
-
-//         }
-
-//     }
-
-//     // Get summary table for the first time.
-//     get_visible_data_summary()
-// }
 
 var draw_heatmap = function(data) {
 	tabulate_data(data)
@@ -825,8 +781,8 @@ d3.select(window).on("resize.t_series", function() { plot_(); });
 
         // Set geometry.
         
-		height = document.getElementById("t_series").offsetHeight - 15; 
-        width = document.getElementById("t_series").offsetWidth - 10; 
+		height = document.getElementById("t_series").offsetHeight - 20; 
+        width = document.getElementById("t_series").offsetWidth - 15; 
 
         x = d3.scaleTime()
             .range([0, width - margin.left - margin.right]);
@@ -977,7 +933,12 @@ d3.select(window).on("resize.t_series", function() { plot_(); });
             });
 
         bar.append("rect")
+            .attr("y",  height - margin.bottom)
+            .attr("height", 0)
+            .transition()
+            .duration(500)
             .attr("x", 1)
+            .attr("y", 0)
             .attr("class", "bar")
             .attr("width", function(d) {
                 return x(d.x1) - x(d.x0) - 1;
