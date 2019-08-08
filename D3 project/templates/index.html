@@ -1,155 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
-    <title>Berkeley Security Advice</title>	
+    <title>Berkeley Security Advice</title>
     <!-- css -->
-  	<link rel="stylesheet" type="text/css" href="./static/css/bootstrap.min.css">
-    <link  rel="stylesheet" type="text/css" href="./static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="./static/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./static/css/style.css">
     <!-- Leaflet -->
-    <link  rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
-  crossorigin=""/>
-	<link  rel="stylesheet" type="text/css" href="./static/css/leaflet-routing-machine.css" />
-    <script type="text/javascript" src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
-  crossorigin=""></script>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" crossorigin="" />
+    <link rel="stylesheet" type="text/css" href="./static/css/leaflet-routing-machine.css" />
+    <script type="text/javascript" src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" crossorigin=""></script>
 
     <script type="text/javascript" src="./static/js/leaflet-heat.js"></script>
     <!-- Others -->
     <script src="./static/js/jquery-1.11.0.min.js"></script>
     <script src="./static/js/bootstrap.min.js"></script>
-    <script src="./static/js/d3.v4.js"></script>    
+    <script src="./static/js/d3.v4.js"></script>
     <script src="./static/js/radar-chart.js"></script>
-	<script type='text/javascript' src='./static/js/config.js'></script>
-	
-	<!-- jQuery UI library -->
-	<link  rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> 
+    <script type='text/javascript' src='./static/js/config.js'></script>
 
-	<!-- Google javascript api -->
-	<script async defer id=javascript_maps_google></script>
-	<script>
-		var k = config.key_bsa;
-		url0 = 'https://maps.googleapis.com/maps/api/js?key=' + k;
-		document.getElementById('javascript_maps_google').src = url0;
+    <!-- jQuery UI library -->
+    <link rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
-	</script>
+    <!-- Google javascript api -->
+    <script async defer id=javascript_maps_google></script>
+    <script>
+        var k = config.key_bsa;
+        url0 = 'https://maps.googleapis.com/maps/api/js?key=' + k;
+        document.getElementById('javascript_maps_google').src = url0;
+    </script>
 
-	
     <!-- Date range picker -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <link  rel="stylesheet" type="text/css" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-  
-  </head>
-  <body>
+    <link rel="stylesheet" type="text/css" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+</head>
+
+<body>
 
     <div class="grid">
 
         <header>
-            <img src="./static/images/Seal.png" class="seal_responsive">
-		    UC Berkeley Go Safe!
+            <img src="./static/images/Seal.png" class="seal_responsive"> UC Berkeley Go Safe!
         </header>
 
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p><b>UC Berkeley Go Safe!</b> brings you a method of analysing trends in security threats around the UC Berkeley Campus. Using this map based tool to view the location of certain types of incidents, investigate the time of day and trends in occurence. Utilise the search tool to locate your destination on campus, or the routing tool to find a proposed route to where you need to go and investigate trends in threats along the way.
+                    <br />
+                    <br /> The data incorporates UCPD Berkeley daily crime reports as well as community notifications. The tools is intended to assist residents of Berkeley and visitors alike plan their routes through and around the campus in a way which maximises safety.
+                    <br />
+                    <br /> This visualisation was created by Sergio Ferro, Thomas Drage, Ramiro Cadavid, for W209, August 2019.
+                </p>
+            </div>
+        </div>
 
+        <script type="text/javascript">
+            // Get the modal
+            var modal = document.getElementById("modal");
 
-    <div id="modal" class="modal">
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <p><b>UC Berkeley Go Safe!</b> brings you a method of analysing trends in security threats around the UC Berkeley Campus. 
-        Using this map based tool to view the location of certain types of incidents, investigate the time of day and trends in
-        occurence. Utilise the search tool to locate your destination on campus, or the routing tool to find a proposed route
-        to where you need to go and investigate trends in threats along the way.
-        <br /><br />
-        The data incorporates UCPD Berkeley daily crime reports as well as community notifications. The tools is intended to assist residents of Berkeley
-        and visitors alike plan their routes through and around the campus in a way which maximises safety.
-        <br /><br />
-        This visualisation was created by Sergio Ferro, Thomas Drage, Ramiro Cadavid, for W209, August 2019.
-        </p>
-      </div>
-    </div>
+            // Get the <span> element that closes the modal
+            var span = document.getElementsByClassName("close")[0];
 
-    <script>
+            // When the user clicks on the button, open the modal 
+            window.onload = function() {
+                modal.style.display = "block";
+            }
 
-        // Get the modal
-        var modal = document.getElementById("modal");
+            // When the user clicks on <span> (x), close the modal
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
 
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        </script>
 
-        // When the user clicks on the button, open the modal 
-        window.onload = function() {
-          modal.style.display = "block";
-        }
+        <div id="lat_wrapper">
+            <div class="latest_warning" id="latest_warning"></div>
+        </div>
 
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-          modal.style.display = "none";
-        }
+        <div class="filter" id="divfilter">
+            Display
+            <br />
 
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-          if (event.target == modal) {
-            modal.style.display = "none";
-          }
-        }
-    </script>
+            <form id="heatmap_btn" class="btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-primary active" id="btn_points">
+                    <input type="checkbox" name="controlHeatmapType" id="btn_points_inp" value="MRR" checked>Icons
+                    <br>
+                </label>
+                <label class="btn btn-primary" id="btn_heatmap">
+                    <input type="checkbox" name="controlHeatmapType" id="btn_heatmap_inp" value="LYL">Heatmap
+                    <br>
+                </label>
+            </form>
 
+        </div>
 
-	  <div id="lat_wrapper">
-		<div class="latest_warning" id="latest_warning"></div>
-	  </div>
-	  
-      <div class="filter" id="divfilter">
-      Display<br />
-
-        <form id="heatmap_btn" class="btn-group btn-group-toggle" data-toggle="buttons">
-          <label class="btn btn-primary active" id="btn_points">
-            <input type="checkbox" name="controlHeatmapType" id="btn_points_inp" value="MRR" checked>Icons<br>
-          </label>
-          <label class="btn btn-primary" id="btn_heatmap">
-            <input type="checkbox" name="controlHeatmapType" id="btn_heatmap_inp" value="LYL">Heatmap<br>
-          </label>
-        </form>
-
-      </div>
-
-      <div id="summary">
-      </div>
-   	  <script src="./static/js/summary_table.js"></script>
+        <div id="summary">
+        </div>
+        <script src="./static/js/summary_table.js"></script>
 
         <div id="radarchart"></div>
 
-
-      <div class="map" id="divmap">
-      </div>
-      <script type="text/javascript" src="./static/js/map.js"></script>
-	  
-	  <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
-      <div id="address_box">
-		<input id="start-input" class="address_input form-control" placeholder="Enter location..." autocomplete=on>
-		<input id="end-input" class="address_input form-control" placeholder="" disabled="true" autocomplete=on>
-        <div id="buttons_box">
-        <form id="search_btn" class="btn-group btn-group-toggle" data-toggle="buttons">
-          <label class="btn-address btn btn-primary active" id="btn_search" onclick="search_enable()">
-            <input type="radio" name="controlSearchType" id="btn_search_inp" value="MRR" checked>Search<br>
-          </label>
-          <label class="btn-address btn btn-primary" id="btn_route" onclick="route_enable()">
-            <input type="radio" name="controlRouteType" id="btn_route_inp" value="ZAZ" checked>Route<br>
-          </label>
-        </form>
-
-        <form id="go_btn" class="btn-group" data-toggle="buttons">
-            <button class="btn-address btn btn-primary" type="button" id="btn_go" onclick="get_route()">Go!</button>
-            <button class="btn-address btn btn-primary" type="button" id="btn_clear" disabled="true" onclick="clear_route()">Clear</button>
-        </form>
+        <div class="map" id="divmap">
         </div>
+        <script type="text/javascript" src="./static/js/map.js"></script>
 
-      </div>
-	  <script type="text/javascript" src="static/js/address_box.js"></script>
-	  
-      <div class="t_series" id="t_series"></div>
-	  </div> 
-    	
-  </body>
+        <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+        <div id="address_box">
+            <input id="start-input" class="address_input form-control" placeholder="Enter location..." autocomplete=on>
+            <input id="end-input" class="address_input form-control" placeholder="" disabled="true" autocomplete=on>
+            <div id="buttons_box">
+                <form id="search_btn" class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn-address btn btn-primary active" id="btn_search" onclick="search_enable()">
+                        <input type="radio" name="controlSearchType" id="btn_search_inp" value="MRR" checked>Search
+                        <br>
+                    </label>
+                    <label class="btn-address btn btn-primary" id="btn_route" onclick="route_enable()">
+                        <input type="radio" name="controlRouteType" id="btn_route_inp" value="ZAZ" checked>Route
+                        <br>
+                    </label>
+                </form>
+
+                <form id="go_btn" class="btn-group" data-toggle="buttons">
+                    <button class="btn-address btn btn-primary" type="button" id="btn_go" onclick="get_route()">Go!</button>
+                    <button class="btn-address btn btn-primary" type="button" id="btn_clear" disabled="true" onclick="clear_route()">Clear</button>
+                </form>
+            </div>
+
+        </div>
+        <script type="text/javascript" src="static/js/address_box.js"></script>
+
+        <div class="t_series" id="t_series"></div>
+    </div>
+
+</body>
+
 </html>

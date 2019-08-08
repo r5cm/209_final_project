@@ -169,7 +169,7 @@ var icons = {
     'i3_suspicious_event_2': suspicious_event_2,
     'i3_undefined_1': undefined_1,
     'i3_undefined_2': undefined_2,
-    'i3_undefined_3': undefined_3    
+    'i3_undefined_3': undefined_3
 };
 
 // Capitalize first letter function
@@ -212,24 +212,24 @@ var draw_markers = function(data) {
         if (data[i]['source'] == 'nixle') {
             var link = 'https://local.nixle.com/' + data[i]['link'];
             var pu_content = '<p>' + date + '<br />' + supercat_pu + '<br />' + cat_pu + '</p><a target"_blank" href="' + link + '">Read more...</a>'
-            
+
         } else {
-            var pu_content = '<p>' + date + '<br />' + supercat_pu + '<br />' + cat_pu + '</p>' 
+            var pu_content = '<p>' + date + '<br />' + supercat_pu + '<br />' + cat_pu + '</p>'
         }
-        try { 
+        try {
             point.bindPopup(pu_content)
                 .addTo(markersGroup);
         } catch {
             console.log(data[i]);
         }
-		get_visible_data_summary()
+        get_visible_data_summary()
     };
 }
 
 
 
 var draw_heatmap = function(data) {
-	tabulate_data(data)
+    tabulate_data(data)
     hm_points = data.map(d => d['LatLngArr']);
     heat = L.heatLayer(hm_points);
     heat.addTo(map);
@@ -269,7 +269,7 @@ var filter_data = function(data, value, type) {
         markersGroup.clearLayers();
     };
     if (heatmap_active) {
-        heat.remove();    
+        heat.remove();
     };
 
     // Set filter values
@@ -286,18 +286,18 @@ var filter_data = function(data, value, type) {
 
     // Declare data containers
     var data_filtered_0 = [];
-    var data_filtered_1 = []; 
+    var data_filtered_1 = [];
     var data_filtered_2 = [];
 
     // Filter super-category
     if (super_category_filter != "All" && super_category_filter) {
         for (var i = 0; i < data.length; i++) {
             if (data[i]['SuperCategory'] == super_category_filter) {
-               data_filtered_0.push(data[i]) 
+                data_filtered_0.push(data[i])
             }
         }
     } else {
-        data_filtered_0 = data; 
+        data_filtered_0 = data;
     }
 
     // Filter category
@@ -327,11 +327,11 @@ var filter_data = function(data, value, type) {
     // Draw markers
     if (document.getElementById('btn_points_inp').checked) {
         draw_markers(data_filtered_2);
-    }; 
+    };
     if (document.getElementById('btn_heatmap_inp').checked) {
         draw_heatmap(data_filtered_2);
     };
-    
+
     return data_filtered_2;
 
 };
@@ -342,15 +342,15 @@ var filter_data = function(data, value, type) {
 
 // Add data
 
-$(document).ready(function(){
+$(document).ready(function() {
 
     d3.csv("./static/data/out_geo.csv", function(data_daily) {
         d3.csv("./static/data/n_latest.csv", function(data_nxl) {
 
-            header_content = '<p><b>' + moment(data_nxl[0]['date'], "YYYY-MM-DD HH:mm:ss").utcOffset(-480).format("DD-MM-YYYY HH:MM") 
-                + '<br />' + data_nxl[0]['priority'] + ': ' + data_nxl[0]['headline'] + '</b><br />' 
-                + data_nxl[0]['title'] + ",&nbsp;" + data_nxl[0]['address'] 
-                + '<br /><a target="_blank" href="' + 'https://local.nixle.com/' + data_nxl[0]['link'] + '">Read more...</a></p>';
+            header_content = '<p><b>' + moment(data_nxl[0]['date'], "YYYY-MM-DD HH:mm:ss").utcOffset(-480).format("DD-MM-YYYY HH:MM") +
+                '<br />' + data_nxl[0]['priority'] + ': ' + data_nxl[0]['headline'] + '</b><br />' +
+                data_nxl[0]['title'] + ",&nbsp;" + data_nxl[0]['address'] +
+                '<br /><a target="_blank" href="' + 'https://local.nixle.com/' + data_nxl[0]['link'] + '">Read more...</a></p>';
             document.getElementById("latest_warning").innerHTML = header_content;
 
 
@@ -363,9 +363,9 @@ $(document).ready(function(){
                 risk_categories = [];
                 data_cats.forEach(function(d) {
                     row = {}
-                    key = d['category'] 
+                    key = d['category']
                     value = {}
-                    value['category_correct'] = d['category_correct'] 
+                    value['category_correct'] = d['category_correct']
                     value['risk'] = d['risk']
                     value['super_category'] = d['super_category']
                     value['icon'] = d['icon']
@@ -382,10 +382,10 @@ $(document).ready(function(){
                         d['DateTime'] = moment(d['Date'], "M/D/YYYY HH:mm").utcOffset(-480);
                         d['LatLngArr'] = parseLatLng(d['LatLng']);
                         d['Category_raw'] = d['Category'];
-                        d['Risk'] = get_equivalence(d, cats_equiv, 'risk') 
-                        d['Icon'] = get_equivalence(d, cats_equiv, 'icon') 
-                        d['SuperCategory'] = get_equivalence(d, cats_equiv, 'super_category') 
-                        d['Category'] = get_equivalence(d, cats_equiv, 'category_correct') 
+                        d['Risk'] = get_equivalence(d, cats_equiv, 'risk')
+                        d['Icon'] = get_equivalence(d, cats_equiv, 'icon')
+                        d['SuperCategory'] = get_equivalence(d, cats_equiv, 'super_category')
+                        d['Category'] = get_equivalence(d, cats_equiv, 'category_correct')
                         data.push(d)
                     };
                 });
@@ -396,10 +396,10 @@ $(document).ready(function(){
                         d['DateTime'] = moment(d['date'], "YYYY-MM-DD HH:mm:ss").utcOffset(-480);
                         d['LatLngArr'] = parseLatLng(d['latlng']);
                         d['Category_raw'] = d['title']
-                        d['Risk'] = get_equivalence(d, cats_equiv, 'risk') 
-                        d['Icon'] = get_equivalence(d, cats_equiv, 'icon') 
-                        d['SuperCategory'] = get_equivalence(d, cats_equiv, 'super_category') 
-                        d['Category'] = get_equivalence(d, cats_equiv, 'category_correct') 
+                        d['Risk'] = get_equivalence(d, cats_equiv, 'risk')
+                        d['Icon'] = get_equivalence(d, cats_equiv, 'icon')
+                        d['SuperCategory'] = get_equivalence(d, cats_equiv, 'super_category')
+                        d['Category'] = get_equivalence(d, cats_equiv, 'category_correct')
                         data.push(d);
                     };
                 });
@@ -408,14 +408,14 @@ $(document).ready(function(){
 
                 // Draw datasets to console
                 console.log('Daily crime log:')
-                console.log(data_daily)            
+                console.log(data_daily)
                 console.log('Categories equivalences:')
                 console.log(cats_equiv)
                 console.log('Nixle:')
                 console.log(data_nxl)
                 console.log("Unified data")
                 console.log(data);
-                
+
 
                 // Draw markers
                 draw_markers(data);
@@ -515,7 +515,7 @@ $(document).ready(function(){
                     timeSeries.data(filter_data(data, [start, end], 'date'));
                     timeSeries.plot();
                     //timeSeries.set_brush(start, end);
-                    
+
                 });
 
                 //--------------
@@ -570,28 +570,28 @@ $(document).ready(function(){
                 //     .attr("value", d => d)
                 //     .attr("color", "black");
                 var categories_menu = d3.select("#divfilter")
-                                        .append("P")
-                                        .text("Details")
-                                        .attr("align", "left")
-                                        .append("select")
-                                        .attr("id", "crimeSelector")
-                                        .attr("class", "form-control")
-                
+                    .append("P")
+                    .text("Details")
+                    .attr("align", "left")
+                    .append("select")
+                    .attr("id", "crimeSelector")
+                    .attr("class", "form-control")
+
                 var cat_options = d3.select("#crimeSelector")
-                                    .selectAll("option")
-                                    .data(categories)
-                                    .enter()
-                                    .append("option")
-                                    .attr("class", "cat_option")
-                                    .text(d => capitalizeFirstLetter(d))
-                                    .attr("value", d => d)
-                                    .attr("color", "black");
+                    .selectAll("option")
+                    .data(categories)
+                    .enter()
+                    .append("option")
+                    .attr("class", "cat_option")
+                    .text(d => capitalizeFirstLetter(d))
+                    .attr("value", d => d)
+                    .attr("color", "black");
 
                 // Filter data based on crime category
                 var filter_supercat_val = "All";
-				var	filter_supercat = function() {
+                var filter_supercat = function() {
                     filter_supercat_val = d3.select(this).property('value');
-                    console.log("Super category selected: " + filter_supercat_val);    
+                    console.log("Super category selected: " + filter_supercat_val);
 
                     if (this.value == 'All') {
                         cats = categories;
@@ -608,7 +608,7 @@ $(document).ready(function(){
                     };
                     // Update category options
                     var cat_options = d3.select("#crimeSelector")
-                        .selectAll("option") 
+                        .selectAll("option")
                         .data(cats)
 
                     cat_options.exit().remove();
@@ -626,11 +626,11 @@ $(document).ready(function(){
                 //d3.select('#superCategorySelector')
                 //    .on("change", filter_supercat);
 
-				document.getElementById('superCategorySelector').addEventListener("change",filter_supercat)
+                document.getElementById('superCategorySelector').addEventListener("change", filter_supercat)
 
                 var filter_cat = function() {
                     filter_cat_val = d3.select(this).property('value');
-                    console.log("Category selected: " + filter_cat_val);    
+                    console.log("Category selected: " + filter_cat_val);
                     timeSeries.plot(filter_data(data, filter_cat_val, 'category'));
                 };
                 d3.select('#crimeSelector')
@@ -661,10 +661,10 @@ $(document).ready(function(){
                         // hm_points = data_filtered_2.map(d => d['LatLngArr']);
                         // heat = L.heatLayer(hm_points);
                         // heat.addTo(map);
-						tabulate_data(data_filtered_2);
+                        tabulate_data(data_filtered_2);
                         draw_heatmap(data_filtered_2);
                     } else {
-                        heatmap_active = false; 
+                        heatmap_active = false;
                         heat.remove();
                     }
                 }
@@ -675,7 +675,7 @@ $(document).ready(function(){
                     } else {
                         if (map.hasLayer(markersGroup)) {
                             markersGroup.clearLayers();
-						    get_visible_data_summary();
+                            get_visible_data_summary();
                         }
                     }
                 }
@@ -697,7 +697,9 @@ $(document).ready(function(){
 
 var hist = function() {
 
-d3.select(window).on("resize.t_series", function() { plot_(); });
+    d3.select(window).on("resize.t_series", function() {
+        plot_();
+    });
 
     // Initialise data structures.s
     var margin = {
@@ -726,31 +728,150 @@ d3.select(window).on("resize.t_series", function() { plot_(); });
 
     // Placeholder data for radar chart
     var rdata = [
-     [
-          {"hour": 0, "area": "12am", "value": 0, "show": false}, 
-          {"hour": 23, "area": "11pm", "value": 0, "show": false}, 
-          {"hour": 22, "area": "10pm", "value": 0, "show": false}, 
-          {"hour": 21, "area": "9pm", "value": 0, "show": true}, 
-          {"hour": 20, "area": "8pm", "value": 0, "show": false}, 
-          {"hour": 19, "area": "7pm", "value": 0, "show": false}, 
-          {"hour": 18, "area": "6pm", "value": 0, "show": true}, 
-          {"hour": 17, "area": "5pm", "value": 0, "show": false}, 
-          {"hour": 16, "area": "4pm", "value": 0, "show": false}, 
-          {"hour": 15, "area": "3pm", "value": 0, "show": true}, 
-          {"hour": 14, "area": "2pm", "value": 0, "show": false}, 
-          {"hour": 13, "area": "1pm", "value": 0, "show": false}, 
-          {"hour": 12, "area": "12pm", "value": 0, "show": false},
-          {"hour": 11, "area": "11am", "value": 0, "show": false}, 
-          {"hour": 10, "area": "10am", "value": 0, "show": false}, 
-          {"hour": 9, "area": "9am", "value": 0, "show": true}, 
-          {"hour": 8, "area": "8am", "value": 0, "show": false}, 
-          {"hour": 7, "area": "7am", "value": 0, "show": false}, 
-          {"hour": 6, "area": "6am", "value": 0, "show": true}, 
-          {"hour": 5, "area": "5am", "value": 0, "show": false}, 
-          {"hour": 4, "area": "4am", "value": 0, "show": false},
-          {"hour": 3, "area": "3am", "value": 0, "show": true}, 
-          {"hour": 5, "area": "2am", "value": 0, "show": false}, 
-          {"hour": 1, "area": "1am", "value": 0, "show": false}, 
+        [{
+                "hour": 0,
+                "area": "12am",
+                "value": 0,
+                "show": false
+            },
+            {
+                "hour": 23,
+                "area": "11pm",
+                "value": 0,
+                "show": false
+            },
+            {
+                "hour": 22,
+                "area": "10pm",
+                "value": 0,
+                "show": false
+            },
+            {
+                "hour": 21,
+                "area": "9pm",
+                "value": 0,
+                "show": true
+            },
+            {
+                "hour": 20,
+                "area": "8pm",
+                "value": 0,
+                "show": false
+            },
+            {
+                "hour": 19,
+                "area": "7pm",
+                "value": 0,
+                "show": false
+            },
+            {
+                "hour": 18,
+                "area": "6pm",
+                "value": 0,
+                "show": true
+            },
+            {
+                "hour": 17,
+                "area": "5pm",
+                "value": 0,
+                "show": false
+            },
+            {
+                "hour": 16,
+                "area": "4pm",
+                "value": 0,
+                "show": false
+            },
+            {
+                "hour": 15,
+                "area": "3pm",
+                "value": 0,
+                "show": true
+            },
+            {
+                "hour": 14,
+                "area": "2pm",
+                "value": 0,
+                "show": false
+            },
+            {
+                "hour": 13,
+                "area": "1pm",
+                "value": 0,
+                "show": false
+            },
+            {
+                "hour": 12,
+                "area": "12pm",
+                "value": 0,
+                "show": false
+            },
+            {
+                "hour": 11,
+                "area": "11am",
+                "value": 0,
+                "show": false
+            },
+            {
+                "hour": 10,
+                "area": "10am",
+                "value": 0,
+                "show": false
+            },
+            {
+                "hour": 9,
+                "area": "9am",
+                "value": 0,
+                "show": true
+            },
+            {
+                "hour": 8,
+                "area": "8am",
+                "value": 0,
+                "show": false
+            },
+            {
+                "hour": 7,
+                "area": "7am",
+                "value": 0,
+                "show": false
+            },
+            {
+                "hour": 6,
+                "area": "6am",
+                "value": 0,
+                "show": true
+            },
+            {
+                "hour": 5,
+                "area": "5am",
+                "value": 0,
+                "show": false
+            },
+            {
+                "hour": 4,
+                "area": "4am",
+                "value": 0,
+                "show": false
+            },
+            {
+                "hour": 3,
+                "area": "3am",
+                "value": 0,
+                "show": true
+            },
+            {
+                "hour": 5,
+                "area": "2am",
+                "value": 0,
+                "show": false
+            },
+            {
+                "hour": 1,
+                "area": "1am",
+                "value": 0,
+                "show": false
+            },
         ]
     ];
 
@@ -780,9 +901,9 @@ d3.select(window).on("resize.t_series", function() { plot_(); });
     var setup_ = function(_) {
 
         // Set geometry.
-        
-		height = document.getElementById("t_series").offsetHeight - 20; 
-        width = document.getElementById("t_series").offsetWidth - 15; 
+
+        height = document.getElementById("t_series").offsetHeight - 20;
+        width = document.getElementById("t_series").offsetWidth - 15;
 
         x = d3.scaleTime()
             .range([0, width - margin.left - margin.right]);
@@ -803,11 +924,11 @@ d3.select(window).on("resize.t_series", function() { plot_(); });
                 .append("svg")
                 .attr("class", "bar_chart")
                 .attr("width", width)
-                .attr("height", height)         
+                .attr("height", height)
         }
 
         hist = svg.append("g")
-                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
         var dayExtent = d3.extent(data, function(d) {
             return d.DateTime;
@@ -820,7 +941,7 @@ d3.select(window).on("resize.t_series", function() { plot_(); });
 
         var hourBins = [];
 
-        for(i = 0; i <= 24; i++) {
+        for (i = 0; i <= 24; i++) {
             hourBins.push(i);
         }
 
@@ -834,8 +955,8 @@ d3.select(window).on("resize.t_series", function() { plot_(); });
             .thresholds(dayBins);
 
         var hourHistogram = d3.histogram().
-            value(function(d) {
-                return d.DateTime.hour() + d.DateTime.minute()/60;
+        value(function(d) {
+                return d.DateTime.hour() + d.DateTime.minute() / 60;
             })
             .thresholds(hourBins);
 
@@ -903,7 +1024,7 @@ d3.select(window).on("resize.t_series", function() { plot_(); });
                 if (d3.event.selection) {
                     start = d3.event.selection[0];
                     end = d3.event.selection[1];
-                    if(start > 0 && end > 0) {
+                    if (start > 0 && end > 0) {
                         // Convert bounds back to DateTime.
                         callback([x.invert(start), x.invert(end)]);
                     }
@@ -933,7 +1054,7 @@ d3.select(window).on("resize.t_series", function() { plot_(); });
             });
 
         bar.append("rect")
-            .attr("y",  height - margin.bottom)
+            .attr("y", height - margin.bottom)
             .attr("height", 0)
             .transition()
             .duration(500)
@@ -951,22 +1072,22 @@ d3.select(window).on("resize.t_series", function() { plot_(); });
                 return "#FDB515";
             });
 
-        if(x(bins[0].x1) - x(bins[0].x0) > 12) {
+        if (x(bins[0].x1) - x(bins[0].x0) > 12) {
 
             bar.append("text")
                 .attr("class", "bar_day")
                 .attr("x", function(d) {
-                    return (x(d.x1) - x(d.x0) - 1)/2;
+                    return (x(d.x1) - x(d.x0) - 1) / 2;
                 })
                 .attr("dy", function(d) {
-                        return height - margin.bottom -  y(d.length) - 5;
-                    })
+                    return height - margin.bottom - y(d.length) - 5;
+                })
                 .attr("text-anchor", "middle")
-                .text(function(d) { 
-                        if(d.length > 0) {
-                            return moment(d.x0).format("ddd").substring(0,1);
-                        }
-                    });
+                .text(function(d) {
+                    if (d.length > 0) {
+                        return moment(d.x0).format("ddd").substring(0, 1);
+                    }
+                });
 
         }
 
@@ -974,16 +1095,18 @@ d3.select(window).on("resize.t_series", function() { plot_(); });
             .attr("class", "brush")
             .call(brush);
 
-    var maxHourCount = 0
+        var maxHourCount = 0
 
-    $.each(rdata[0], function(i, obj) {
-        obj.value = hourBins[obj.hour].length;
-        if(obj.value > maxHourCount) { maxHourCount = obj.value; }
-    });
+        $.each(rdata[0], function(i, obj) {
+            obj.value = hourBins[obj.hour].length;
+            if (obj.value > maxHourCount) {
+                maxHourCount = obj.value;
+            }
+        });
 
-    config.maxValue = Math.round(maxHourCount * 1.1);
+        config.maxValue = Math.round(maxHourCount * 1.1);
 
-    RadarChart.draw("#radarchart", rdata, config);
+        RadarChart.draw("#radarchart", rdata, config);
 
     }
 
@@ -992,10 +1115,10 @@ d3.select(window).on("resize.t_series", function() { plot_(); });
 
     var set_brush_ = function(_) {
 
-            hist.select_all(".brush").call(brush.move, [
-                x(start),
-                x(end),
-            ]);
+        hist.select_all(".brush").call(brush.move, [
+            x(start),
+            x(end),
+        ]);
 
     }
 
