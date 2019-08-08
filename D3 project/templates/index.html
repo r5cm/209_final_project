@@ -31,6 +31,7 @@
 		var k = config.key_bsa;
 		url0 = 'https://maps.googleapis.com/maps/api/js?key=' + k;
 		document.getElementById('javascript_maps_google').src = url0;
+
 	</script>
 
 	
@@ -45,17 +46,63 @@
 
     <div class="grid">
 
-      <header>
-        <img src="./static/images/Seal.png" class="seal_responsive">
-		UC Berkeley Go Safe!
-      </header>
-	  
+        <header>
+            <img src="./static/images/Seal.png" class="seal_responsive">
+		    UC Berkeley Go Safe!
+        </header>
+
+
+
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p><b>UC Berkeley Go Safe!</b> brings you a method of analysing trends in security threats around the UC Berkeley Campus. 
+        Using this map based tool to view the location of certain types of incidents, investigate the time of day and trends in
+        occurence. Utilise the search tool to locate your destination on campus, or the routing tool to find a proposed route
+        to where you need to go and investigate trends in threats along the way.
+        <br /><br />
+        The data incorporates UCPD Berkeley daily crime reports as well as community notifications. The tool is intended to assist residents of Berkeley
+        and visitors alike plan their routes through and around the campus in a way which maximises safety.
+        <br /><br />
+        This visualisation was created by Sergio Ferro, Thomas Drage, Ramiro Cadavid, for W209, August 2019.
+        </p>
+      </div>
+    </div>
+
+    <script>
+
+        // Get the modal
+        var modal = document.getElementById("modal");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks on the button, open the modal 
+        window.onload = function() {
+          modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+          modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        }
+    </script>
+
+
 	  <div id="lat_wrapper">
 		<div class="latest_warning" id="latest_warning"></div>
 	  </div>
 	  
       <div class="filter" id="divfilter">
       Display<br />
+
         <form id="heatmap_btn" class="btn-group btn-group-toggle" data-toggle="buttons">
           <label class="btn btn-primary active" id="btn_points">
             <input type="checkbox" name="controlHeatmapType" id="btn_points_inp" value="MRR" checked>Icons<br>
@@ -64,6 +111,7 @@
             <input type="checkbox" name="controlHeatmapType" id="btn_heatmap_inp" value="LYL">Heatmap<br>
           </label>
         </form>
+
       </div>
 
       <div id="summary">
