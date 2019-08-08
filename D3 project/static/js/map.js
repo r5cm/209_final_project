@@ -249,6 +249,7 @@ function initializePage() {
             id: "mapbox.light"
         })
         .addTo(map);
+    L.control.scale().addTo(map) 
 }
 initializePage();
 
