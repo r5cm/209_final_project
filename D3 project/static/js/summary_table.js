@@ -57,8 +57,8 @@ function create_table(d) {
     for (var i = 0; i < Math.min(ordered_tuples.length, 10); i++) {
 
         var bar = ordered_tuples[i][1] * factor;
-        if (bar < 10) {
-            bar = 10;
+        if (bar < 12) {
+            bar = 12;
         }
 
         html += "<td>" + ordered_tuples[i][0] + '<td class="count"><div class="summary_bar" style="width: ' +

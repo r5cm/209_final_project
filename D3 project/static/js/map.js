@@ -1016,6 +1016,7 @@ var hist = function() {
             .duration(500)
             .attr("x", 1)
             .attr("y", 0)
+            .attr("ry", 2)
             .attr("class", "bar")
             .attr("width", function(d) {
                 return x(d.x1) - x(d.x0) - 1;
