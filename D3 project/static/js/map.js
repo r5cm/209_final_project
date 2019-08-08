@@ -237,7 +237,12 @@ var draw_heatmap = function(data) {
 
 // View without data
 function initializePage() {
-    map = L.map("divmap").setView([37.8782683, -122.259196], 13);
+    map = L.map("divmap", {
+        fullscreenControl: true,
+        fullscreenControlOptions: {
+          position: 'topleft'
+        }
+    }).setView([37.8782683, -122.259196], 13);
     L.tileLayer(map_link, {
             maxZoom: 18,
             attribution: attribution_text,
