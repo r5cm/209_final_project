@@ -344,7 +344,7 @@ var filter_data = function(data, value, type) {
 
 $(document).ready(function(){
 
-    d3.csv("./static/data/test_data_2.csv", function(data_daily) {
+    d3.csv("./static/data/out_geo.csv", function(data_daily) {
         d3.csv("./static/data/n_latest.csv", function(data_nxl) {
 
             header_content = '<p><b>' + moment(data_nxl[0]['date'], "YYYY-MM-DD HH:mm:ss").utcOffset(-480).format("DD-MM-YYYY HH:MM") 
